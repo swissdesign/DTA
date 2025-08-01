@@ -1,1 +1,114 @@
 
+ /**
+ * ✦ Handcrafted CSS for Demo Team Andermatt ✦
+ * --------------------------------------------
+ * Designed by P. Heiniger Design to bring high-performance, 
+ * visually striking, and interactive UI elements to life.
+ * Tailored for the unique style and motion language of 
+ * Demo Team Andermatt.
+ * Not a generic theme—every class is part of a custom system.
+ */
+
+body {
+    background-color: #111111; /* Dark pitch-black background for contrast */
+    color: #F1F1F1;            /* Soft off-white text for high readability */
+    font-family: 'Inter', sans-serif; /* Clean, modern sans-serif font */
+}
+
+/* ✦ Color utility classes */
+.bg-pitch-black { background-color: #111111; }      /* Matches body bg */
+.text-off-white { color: #F1F1F1; }                  /* For consistent light text */
+.text-neon-orange { color: #FF4500; }                /* Signature accent color (orange) */
+.bg-neon-orange { background-color: #FF4500; }       /* Neon orange background */
+.border-neon-orange { border-color: #FF4500; }       /* Border accent utility */
+.outline-neon-orange { outline-color: #FF4500; }     /* For forms or focus rings */
+
+/* ✦ Hero video container that scrolls behind content */
+.hero-video-container {
+    position: sticky;     /* Keeps video pinned at top while scrolling */
+    top: 0;
+    height: 100vh;        /* Full viewport height */
+    width: 100%;
+    overflow: hidden;
+    z-index: -1;          /* Places video *behind* main content */
+}
+
+/* ✦ Centered and responsive hero video */
+.hero-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: auto;
+    height: auto;
+    min-width: 100%;
+    min-height: 100%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;    /* Ensures video fills container nicely */
+}
+
+/* ✦ Content that scrolls above hero video */
+.scroll-content {
+    position: relative;
+    z-index: 1;
+    background-color: transparent;
+}
+
+/* ✦ Section padding for full-width blocks */
+.content-section {
+    background-color: #111111;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+/* ✦ Modal appearance and transition */
+.modal {
+    transition: opacity 0.25s ease; /* Smooth fade in/out */
+}
+.modal-content {
+    transition: transform 0.25s ease; /* Subtle scaling effect */
+}
+
+/* ✦ Crew card image behavior on hover */
+.crew-card-img {
+    transition: opacity 0.3s ease-in-out; /* Smooth image crossfade */
+}
+/* ✦ On hover: fade out serious portrait... */
+.crew-card:hover .crew-card-img.serious {
+    opacity: 0;
+}
+/* ✦ ...and fade in candid image */
+.crew-card:hover .crew-card-img.candid {
+    opacity: 1;
+}
+
+/* ✦ Underline accent after section titles */
+.section-title::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 3px;
+    background-color: #FF4500;
+    margin-top: 0.5rem;
+}
+
+/* ✦ Navigation hover underline animation */
+.nav-link {
+    position: relative;
+    transition: color 0.3s ease; /* Smooth color transition on hover */
+}
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);        /* Start hidden */
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: #FF4500;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+.nav-link:hover::after {
+    transform: scaleX(1);        /* Expand underline on hover */
+    transform-origin: bottom left;
+}
