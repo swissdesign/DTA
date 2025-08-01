@@ -1,1 +1,28 @@
-// simple list for gallery
+// simple list for gallery to update and add with every photo // 
+
+[
+  {
+    "type": "image",
+    "src": "https://placehold.co/600x600/111/FFF?text=DTA+Training",
+    "thumbnail": "https://placehold.co/400x400/111/FFF?text=DTA+Training",
+    "caption": "Early morning training session in Andermatt"
+  },
+  {
+    "type": "video",
+    "src": "https://videos.pexels.com/video-files/857195/857195-hd_1280_720_25fps.mp4",
+    "thumbnail": "https://placehold.co/400x400/111/FFF?text=DTA+Video",
+    "caption": "A clip from our Swiss Snow Happening run"
+  },
+  {
+    "type": "image",
+    "src": "https://placehold.co/600x600/222/FFF?text=Team+Shot",
+    "thumbnail": "https://placehold.co/400x400/222/FFF?text=Team+Shot",
+    "caption": "The crew after a successful competition"
+  },
+  {
+    "type": "image",
+    "src": "https://placehold.co/600x600/333/FFF?text=Andermatt",
+    "thumbnail": "https://placehold.co/400x400/333/FFF?text=Andermatt",
+    "caption": "Home slopes"
+  }
+]
