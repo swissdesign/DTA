@@ -1,28 +1,101 @@
 /**
- * ✦ Handcrafted for Demo Team Andermatt by P. Heiniger Design ✦
+ * ✦ Handcrafted for Demo Team Andermatt by P. Heiniger Design & Gemini ✦
  * --------------------------------------------------------------
- * This JS file was custom-written for the Demo Team Andermatt website.
- * It enables a rich, interactive user experience—featuring crew profiles,
- * media galleries, scroll-synced video, and more. 
- * Every line serves a purpose.
- * Please do not blindly reuse without adapting to your own context.
+ * This JS file powers the interactive experience for skidemo.ch.
+ * It handles multilingual content, dynamic grids, modals, and more,
+ * all while being optimized for a static hosting environment like GitHub Pages.
  */
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
 
-    // ✦ Static data: Team members with bios + images
-    const crewData = [ /* ...crew profiles for modal and grid */ ];
+    let translations = {};
+    let currentLang = 'de'; // Default language
 
-    // ✦ Static data: Sponsor/partner logos and links
-    const partnersData = [ /* ...sponsor display grid */ ];
+    const crewData = {
+        de: [
+            { id: 'heiniger', name: 'Pascal Heiniger', title: 'Der Präsi', bio: 'Unser Steuermann mit einem Masterplan. Pascal führt das Team mit einer Mischung aus Weisheit und der entspannten Lässigkeit eines Mannes, der die Pisten von Andermatt besser kennt als seine Hosentasche.', img_serious: 'https://placehold.co/400x500/333/FFF?text=Pascal+S', img_candid: 'https://placehold.co/400x500/555/FFF?text=Pascal+C' },
+            { id: 'baumann_m', name: 'Marcel Baumann', title: 'Vizepräsi & Marketing-Guru', bio: 'Mit Skistiefeln fest im Schnee und der Marketingkappe immer griffbereit, hat Marcel unsere Marke so gut positioniert, dass selbst die Murmeltiere aufmerksam zusehen.', img_serious: 'https://placehold.co/400x500/333/FFF?text=Marcel+S', img_candid: 'https://placehold.co/400x500/555/FFF?text=Marcel+C' },
+            { id: 'wipfli', name: 'Klara Wipfli', title: 'Team-Mum', bio: 'Klara, unsere Team-Psychologin, hält uns mit ihrer Energie zusammen und sorgt dafür, dass wir nicht nur durch die Pisten, sondern auch durch unsere Probleme pflügen.', img_serious: 'https://placehold.co/400x500/333/FFF?text=Klara+S', img_candid: 'https://placehold.co/400x500/555/FFF?text=Klara+C' },
+            { id: 'baumann_r', name: 'Roger Baumann', title: 'Der Pistenflüsterer', bio: 'Roger, der mit seinen Skiern spricht und Linien in den Schnee zaubert, die Picasso neidisch machen würden. Sein Rennhintergrund bedeutet Geschwindigkeit im Blut.', img_serious: 'https://placehold.co/400x500/333/FFF?text=Roger+S', img_candid: 'https://placehold.co/400x500/555/FFF?text=Roger+C' },
+            { id: 'zavratnik', name: 'Mathias Zavratnik', title: 'Der Finanz-Zauberer', bio: 'Das menschliche Abakus unserer Truppe. Wenn es um Zahlen geht, ist Mathias so zuverlässig wie frischer Pulverschnee im Januar.', img_serious: 'https://placehold.co/400x500/333/FFF?text=Mathias+S', img_candid: 'https://placehold.co/400x500/555/FFF?text=Mathias+C' },
+            { id: 'danioth', name: 'Sales Danioth', title: 'Der Taktgeber', bio: 'Mit einem Gehirn, das schneller tickt als seine Skier, bringt Sales physikalische Präzision in jeden Schwung. Er ist der Beweis, dass man beides haben kann.', img_serious: 'https://placehold.co/400x500/333/FFF?text=Sales+S', img_candid: 'https://placehold.co/400x500/555/FFF?text=Sales+C' },
+            { id: 'risi', name: 'Corsin Risi', title: 'Der Luftakrobat', bio: 'Corsin, unser Freestyle-König, macht die Luft zu seiner Bühne und jeden Sprung zu einer Show. Er bringt uns bei, dass Fliegen nicht nur etwas für Vögel ist.', img_serious: 'https://placehold.co/400x500/333/FFF?text=Corsin+S', img_candid: 'https://placehold.co/400x500/555/FFF?text=Corsin+C' },
+            { id: 'temperli', name: 'Aline Temperli', title: 'Das Naturkind', bio: 'Wenn Aline nicht auf den Pisten anzutreffen ist, sucht sie wahrscheinlich gerade die nächste Herausforderung im Tiefschnee.', img_serious: 'https://placehold.co/400x500/333/FFF?text=Aline+S', img_candid: 'https://placehold.co/400x500/555/FFF?text=Aline+C' },
+        ],
+        en: [
+            { id: 'heiniger', name: 'Pascal Heiniger', title: 'The President', bio: 'Our helmsman with a master plan. Pascal leads the team with a mix of wisdom and the relaxed ease of a man who knows the slopes of Andermatt better than his own pockets.', img_serious: 'https://placehold.co/400x500/333/FFF?text=Pascal+S', img_candid: 'https://placehold.co/400x500/555/FFF?text=Pascal+C' },
+            { id: 'baumann_m', name: 'Marcel Baumann', title: 'Vice President & Marketing Guru', bio: 'With ski boots firmly in the snow and the marketing cap always ready, Marcel has positioned our brand so well that even the marmots pay attention.', img_serious: 'https://placehold.co/400x500/333/FFF?text=Marcel+S', img_candid: 'https://placehold.co/400x500/555/FFF?text=Marcel+C' },
+            { id: 'wipfli', name: 'Klara Wipfli', title: 'Team Mum', bio: 'Klara, our team psychologist, keeps us together with her energy and ensures that we plow through not just the slopes but our problems as well.', img_serious: 'https://placehold.co/400x500/333/FFF?text=Klara+S', img_candid: 'https://placehold.co/400x500/555/FFF?text=Klara+C' },
+            { id: 'baumann_r', name: 'Roger Baumann', title: 'The Trail Whisperer', bio: 'Roger, who talks to his skis and carves lines in the snow that would make Picasso jealous. His racing background means speed in his blood.', img_serious: 'https://placehold.co/400x500/333/FFF?text=Roger+S', img_candid: 'https://placehold.co/400x500/555/FFF?text=Roger+C' },
+            { id: 'zavratnik', name: 'Mathias Zavratnik', title: 'The Finance Wizard', bio: 'The human abacus of our troupe. When it comes to numbers, Mathias is as reliable as fresh powder snow in January.', img_serious: 'https://placehold.co/400x500/333/FFF?text=Mathias+S', img_candid: 'https://placehold.co/400x500/555/FFF?text=Mathias+C' },
+            { id: 'danioth', name: 'Sales Danioth', title: 'The Metronome', bio: 'With a brain that ticks faster than his skis, Sales brings physical precision to every turn. He\'s proof that you can have both.', img_serious: 'https://placehold.co/400x500/333/FFF?text=Sales+S', img_candid: 'https://placehold.co/400x500/555/FFF?text=Sales+C' },
+            { id: 'risi', name: 'Corsin Risi', title: 'The Aerial Acrobat', bio: 'Corsin, our freestyle king, makes the air his stage and every jump a show. He teaches us that flying isn\'t just for birds.', img_serious: 'https://placehold.co/400x500/333/FFF?text=Corsin+S', img_candid: 'https://placehold.co/400x500/555/FFF?text=Corsin+C' },
+            { id: 'temperli', name: 'Aline Temperli', title: 'The Nature Lover', bio: 'If Aline is not found on the slopes, she\'s probably seeking the next challenge in the backcountry.', img_serious: 'https://placehold.co/400x500/333/FFF?text=Aline+S', img_candid: 'https://placehold.co/400x500/555/FFF?text=Aline+C' },
+        ]
+    };
 
-    // ✦ Static data: Blog post HTML paths
-    const journalFiles = ['journal/post1.html', 'journal/post2.html', 'journal/post3.html'];
+    const partnersData = [
+        { name: 'Alp Hittä', logo: 'https://placehold.co/200x100/CCCCCC/000000?text=ALP+HITTÄ', url: '#' },
+        { name: 'Christen Automobile', logo: 'https://placehold.co/200x100/CCCCCC/000000?text=Christen+AG', url: '#' },
+        { name: 'Toko', logo: 'https://placehold.co/200x100/CCCCCC/000000?text=TOKO', url: '#' },
+        { name: 'Swix', logo: 'https://placehold.co/200x100/CCCCCC/000000?text=SWIX', url: '#' },
+        { name: 'Sport Imholz', logo: 'https://placehold.co/200x100/CCCCCC/000000?text=Sport+Imholz', url: '#' },
+    ];
 
-    // ✦ JSON file with media item metadata (images/videos)
-    const mediaManifestUrl = 'assets/media-manifest.json';
+    const journalFiles = ['/journal/post1-saas-fee-recap.html'];
+    const mediaManifestUrl = '/assets/media-manifest.json';
 
-    // ✦ Simulates scroll-based video scrubbing for hero video
+    async function loadTranslations() {
+        try {
+            const response = await fetch('translations.json');
+            if (!response.ok) {
+                console.error('Could not load translations file.');
+                return;
+            }
+            translations = await response.json();
+            translatePage(currentLang);
+        } catch (error) {
+            console.error('Error fetching translations:', error);
+        }
+    }
+
+    function translatePage(lang) {
+        if (!translations[lang]) return;
+        currentLang = lang;
+        document.documentElement.lang = lang;
+
+        document.querySelectorAll('[data-key]').forEach(el => {
+            const key = el.dataset.key;
+            if (translations[lang][key]) {
+                el.innerHTML = translations[lang][key];
+            }
+        });
+
+        document.querySelectorAll('[data-key-placeholder]').forEach(el => {
+            const key = el.dataset.keyPlaceholder;
+            if (translations[lang][key]) {
+                el.placeholder = translations[lang][key];
+            }
+        });
+        
+        initCrewGrid(); // Re-initialize crew grid with translated titles/bios
+        updateLangButtons();
+    }
+
+    function updateLangButtons() {
+        const allLangBtns = document.querySelectorAll('.lang-btn');
+        allLangBtns.forEach(btn => {
+            btn.classList.remove('active');
+            btn.classList.add('border-gray-600', 'text-gray-400');
+        });
+
+        const activeBtns = document.querySelectorAll(`#lang-${currentLang}, #mobile-lang-${currentLang}`);
+        activeBtns.forEach(btn => {
+            btn.classList.add('active');
+            btn.classList.remove('border-gray-600', 'text-gray-400');
+        });
+    }
+
     function initHeroVideoScrub() {
         const video = document.getElementById('hero-video');
         if (!video) return;
@@ -38,7 +111,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // ✦ Adds background & shadow to header on scroll
     function initHeaderScroll() {
         const header = document.getElementById('main-header');
         window.addEventListener('scroll', () => {
@@ -50,7 +122,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // ✦ Toggles mobile menu open/close
     function initMobileMenu() {
         const menuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -58,17 +129,18 @@ document.addEventListener('DOMContentLoaded', function() {
             mobileMenu.classList.toggle('hidden');
         });
         mobileMenu.addEventListener('click', (e) => {
-            if (e.target.tagName === 'A') {
+            if (e.target.tagName === 'A' || e.target.classList.contains('lang-btn')) {
                 mobileMenu.classList.add('hidden');
             }
         });
     }
 
-    // ✦ Dynamically builds grid of team member cards
     function initCrewGrid() {
         const grid = document.getElementById('crew-grid');
         if (!grid) return;
-        crewData.forEach(member => {
+        grid.innerHTML = ''; // Clear existing grid
+        const currentCrewData = crewData[currentLang] || crewData.de;
+        currentCrewData.forEach(member => {
             const memberEl = document.createElement('div');
             memberEl.className = 'crew-card group cursor-pointer';
             memberEl.innerHTML = `
@@ -87,7 +159,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // ✦ Opens modal with detailed crew info
     function openModal(member) {
         const modalContainer = document.getElementById('modal-container');
         const modalBody = document.getElementById('modal-body');
@@ -104,7 +175,6 @@ document.addEventListener('DOMContentLoaded', function() {
         modalContent.classList.remove('scale-95');
     }
 
-    // ✦ Modal open/close logic for crew details
     function initModal() {
         const modalContainer = document.getElementById('modal-container');
         const modalClose = document.getElementById('modal-close');
@@ -123,7 +193,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // ✦ Loads journal posts from HTML snippets and injects into DOM
     async function loadJournal() {
         const grid = document.getElementById('journal-grid');
         const headlinesContainer = document.getElementById('journal-headlines');
@@ -150,7 +219,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        posts.sort((a, b) => new Date(b.date) - new Date(a.date)); // newest first
+        posts.sort((a, b) => new Date(b.date) - new Date(a.date));
 
         grid.innerHTML = posts.map(post => `
             <a href="${post.url}" class="block group bg-black bg-opacity-30 rounded-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2">
@@ -170,7 +239,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('latest-journal-preview').style.opacity = 1;
     }
 
-    // ✦ Loads image & video gallery dynamically from JSON
     async function loadMediaHub() {
         const grid = document.getElementById('media-grid');
         if (!grid) return;
@@ -191,7 +259,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     itemEl.dataset.src = item.src;
 
                     itemEl.innerHTML = `
-                        <img src="${item.type === 'image' ? item.src : item.thumbnail}" alt="${item.caption || ''}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
+                        <img src="${item.thumbnail || item.src}" alt="${item.caption || ''}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
                         <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                             ${item.type === 'video' 
                                 ? '<svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>' 
@@ -204,9 +272,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             };
 
-            renderGrid('all'); // default view
+            renderGrid('all');
 
-            // Filter buttons
             document.getElementById('filter-all').addEventListener('click', () => renderGrid('all'));
             document.getElementById('filter-images').addEventListener('click', () => renderGrid('image'));
             document.getElementById('filter-videos').addEventListener('click', () => renderGrid('video'));
@@ -217,7 +284,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // ✦ Opens lightbox for fullscreen media
     function openLightbox(item) {
         const lightboxContainer = document.getElementById('lightbox-container');
         const lightboxContent = document.getElementById('lightbox-content');
@@ -231,7 +297,6 @@ document.addEventListener('DOMContentLoaded', function() {
         lightboxContainer.classList.remove('opacity-0', 'pointer-events-none');
     }
 
-    // ✦ Lightbox close logic
     function initLightbox() {
         const lightboxContainer = document.getElementById('lightbox-container');
         const lightboxClose = document.getElementById('lightbox-close');
@@ -249,7 +314,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // ✦ Fake sponsorship form handler with "sending" effect
     function initSponsorshipForm() {
         const form = document.getElementById('sponsorship-form');
         const statusEl = document.getElementById('form-status');
@@ -268,7 +332,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // ✦ Displays partner logos in a grid
     function initPartnersGrid() {
         const grid = document.getElementById('partners-grid');
         if (!grid) return;
@@ -279,15 +342,19 @@ document.addEventListener('DOMContentLoaded', function() {
         `).join('');
     }
 
-    // ✦ Main initializers
+    document.getElementById('lang-de').addEventListener('click', () => translatePage('de'));
+    document.getElementById('lang-en').addEventListener('click', () => translatePage('en'));
+    document.getElementById('mobile-lang-de').addEventListener('click', () => translatePage('de'));
+    document.getElementById('mobile-lang-en').addEventListener('click', () => translatePage('en'));
+
     initHeaderScroll();
     initMobileMenu();
     initHeroVideoScrub();
-    initCrewGrid();
     initModal();
     loadJournal();
     loadMediaHub();
     initLightbox();
     initSponsorshipForm();
     initPartnersGrid();
+    await loadTranslations();
 });
