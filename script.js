@@ -66,19 +66,19 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         document.querySelectorAll('[data-key]').forEach(el => {
             const key = el.dataset.key;
-            if (translations[lang][key]) {
+            if (translations[lang] && translations[lang][key]) {
                 el.innerHTML = translations[lang][key];
             }
         });
 
         document.querySelectorAll('[data-key-placeholder]').forEach(el => {
             const key = el.dataset.keyPlaceholder;
-            if (translations[lang][key]) {
+            if (translations[lang] && translations[lang][key]) {
                 el.placeholder = translations[lang][key];
             }
         });
         
-        initCrewGrid(); // Re-initialize crew grid with translated titles/bios
+        initCrewGrid(); 
         updateLangButtons();
     }
 
@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     function initCrewGrid() {
         const grid = document.getElementById('crew-grid');
         if (!grid) return;
-        grid.innerHTML = ''; // Clear existing grid
+        grid.innerHTML = ''; 
         const currentCrewData = crewData[currentLang] || crewData.de;
         currentCrewData.forEach(member => {
             const memberEl = document.createElement('div');
