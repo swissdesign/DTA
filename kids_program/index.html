@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-key="page_title">DTA Kids Programm - Demoteam Andermatt</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #111111;
+            color: #F1F1F1;
+            font-family: 'Inter', sans-serif;
+        }
+        .text-neon-orange { color: #FF4500; }
+        .bg-neon-orange { background-color: #FF4500; }
+        .border-neon-orange { border-color: #FF4500; }
+        .focus\:ring-neon-orange:focus {
+            --tw-ring-color: #FF4500;
+        }
+        .lang-btn.active {
+            background-color: #FF4500;
+            color: #111111;
+        }
+    </style>
+</head>
+<body class="bg-pitch-black">
+
+    <header class="py-8">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <a href="/index.html" class="text-neon-orange font-semibold hover:underline" data-key="back_to_home">&larr; Zurück zur Startseite</a>
+            <div class="flex space-x-2">
+                <button id="lang-de" class="lang-btn active border border-neon-orange font-bold py-1 px-3 rounded-md text-sm transition-colors">DE</button>
+                <button id="lang-en" class="lang-btn border border-gray-600 text-gray-400 font-bold py-1 px-3 rounded-md text-sm transition-colors hover:border-neon-orange hover:text-neon-orange">EN</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="text-center">
+            <h1 class="text-5xl md:text-7xl font-black uppercase tracking-tighter" data-key="main_headline">DTA Kids</h1>
+            <p class="mt-4 max-w-3xl mx-auto text-xl text-gray-300" data-key="sub_headline">Das ist nicht nur ein weiterer Skiclub. Das ist die Startlinie für die nächste Generation von Team-Skifahrern.</p>
+        </div>
+
+        <div class="mt-16 text-left grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <h2 class="text-3xl font-bold text-neon-orange" data-key="mission_title">Die Mission</h2>
+                <p class="mt-4 text-lg text-gray-300" data-key="mission_text">Vergiss, was du über Skirennen weisst. Das hier ist ein Mannschaftssport...</p>
+            </div>
+            <img src="https://placehold.co/600x400/111/FFF?text=DTA+Kids" alt="Kids skiing" class="rounded-lg shadow-2xl">
+        </div>
+
+        <div class="mt-20">
+            <h2 class="text-3xl font-bold text-neon-orange text-center" data-key="program_title">Das Programm</h2>
+            <div class="mt-8 max-w-5xl mx-auto grid md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+                <div class="bg-black bg-opacity-20 p-6 rounded-lg">
+                    <h3 class="font-bold text-xl" data-key="group_size_label">Gruppengrösse</h3>
+                    <p class="mt-2 text-lg" data-key="group_size_value">Exklusiv für 8 Kinder</p>
+                </div>
+                <div class="bg-black bg-opacity-20 p-6 rounded-lg">
+                    <h3 class="font-bold text-xl" data-key="training_label">Training</h3>
+                    <p class="mt-2 text-lg" data-key="training_value">Mittwochs, 13:00 - 16:00 Uhr</p>
+                </div>
+                <div class="bg-black bg-opacity-20 p-6 rounded-lg">
+                    <h3 class="font-bold text-xl" data-key="coach_label">Trainer</h3>
+                    <p class="mt-2 text-lg" data-key="coach_value">Pascal Heiniger</p>
+                </div>
+                <div class="bg-black bg-opacity-20 p-6 rounded-lg">
+                    <h3 class="font-bold text-xl" data-key="selection_label">Auswahl</h3>
+                    <p class="mt-2 text-lg" data-key="selection_value">Einstellung, Respekt, Verfügbarkeit</p>
+                </div>
+            </div>
+             <p class="mt-6 text-center text-gray-400 max-w-3xl mx-auto" data-key="pilot_program_note">Dies ist ein Pilotprogramm...</p>
+        </div>
+
+        <div class="mt-20 max-w-4xl mx-auto">
+             <h2 class="text-3xl font-bold text-neon-orange text-center" data-key="form_title">Anmeldeformular</h2>
+             <p class="mt-4 text-lg text-gray-300 text-center" data-key="form_intro">Glaubst du, du hast das Zeug dazu?...</p>
+             <form id="kids-application-form" class="mt-8 space-y-6 bg-black bg-opacity-20 p-8 rounded-lg">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4" data-key="child_info_label">Informationen zum Kind</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <input type="text" name="child_name" data-key-placeholder="child_name_placeholder" class="w-full bg-gray-800 border border-gray-700 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-neon-orange" required>
+                        <input type="date" name="child_dob" data-key-placeholder="child_dob_placeholder" class="w-full bg-gray-800 border border-gray-700 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-neon-orange" required>
+                    </div>
+                </div>
+                 <div>
+                    <h3 class="text-xl font-semibold mb-4" data-key="parent_info_label">Informationen zum Elternteil/Erziehungsberechtigten</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <input type="text" name="parent_name" data-key-placeholder="parent_name_placeholder" class="w-full bg-gray-800 border border-gray-700 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-neon-orange" required>
+                        <input type="email" name="parent_email" data-key-placeholder="parent_email_placeholder" class="w-full bg-gray-800 border border-gray-700 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-neon-orange" required>
+                         <input type="tel" name="parent_phone" data-key-placeholder="parent_phone_placeholder" class="w-full bg-gray-800 border border-gray-700 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-neon-orange" required>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4" data-key="experience_label">Skierfahrung</h3>
+                    <textarea name="experience" data-key-placeholder="experience_placeholder" rows="4" class="w-full bg-gray-800 border border-gray-700 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-neon-orange" required></textarea>
+                </div>
+                <div>
+                     <h3 class="text-xl font-semibold mb-2" data-key="commitment_label">Bestätigung des Engagements</h3>
+                     <label class="flex items-start text-gray-400">
+                        <input type="checkbox" name="commitment" class="mt-1 mr-3 h-5 w-5 rounded bg-gray-700 border-gray-600 text-neon-orange focus:ring-neon-orange" required>
+                        <span data-key="commitment_text">Wir verstehen, dass dies ein Mannschaftssport ist...</span>
+                    </label>
+                </div>
+                <button type="submit" class="w-full bg-neon-orange text-pitch-black font-bold py-3 px-5 rounded-full text-lg hover:bg-opacity-80 transition-all duration-300" data-key="submit_button">Bewerbung einreichen</button>
+             </form>
+             <p id="form-status" class="text-center mt-4"></p>
+        </div>
+    </main>
+
+    <footer class="bg-black py-12 mt-16">
+        <div class="container mx-auto px-4 text-center text-gray-400">
+            <p>&copy; 2025 Demoteam Andermatt</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async function() {
+            let translations = {};
+            let currentLang = 'de';
+
+            async function loadTranslations() {
+                try {
+                    const response = await fetch('translations.json');
+                    if (!response.ok) {
+                        console.error('Could not load translations file.');
+                        return;
+                    }
+                    translations = await response.json();
+                    translatePage(currentLang);
+                } catch (error) {
+                    console.error('Error fetching translations:', error);
+                }
+            }
+
+            function translatePage(lang) {
+                currentLang = lang;
+                document.documentElement.lang = lang;
+
+                document.querySelectorAll('[data-key]').forEach(el => {
+                    const key = el.dataset.key;
+                    if (translations[lang] && translations[lang][key]) {
+                        el.innerHTML = translations[lang][key];
+                    }
+                });
+
+                document.querySelectorAll('[data-key-placeholder]').forEach(el => {
+                    const key = el.dataset.keyPlaceholder;
+                    if (translations[lang] && translations[lang][key]) {
+                        el.placeholder = translations[lang][key];
+                    }
+                });
+                
+                const pageTitle = document.querySelector('title');
+                const titleKey = pageTitle.dataset.key;
+                if (translations[lang] && translations[lang][titleKey]) {
+                    pageTitle.textContent = translations[lang][titleKey];
+                }
+
+                updateLangButtons();
+            }
+
+            function updateLangButtons() {
+                const deBtn = document.getElementById('lang-de');
+                const enBtn = document.getElementById('lang-en');
+                if (currentLang === 'de') {
+                    deBtn.classList.add('active');
+                    deBtn.classList.remove('border-gray-600', 'text-gray-400');
+                    enBtn.classList.remove('active');
+                    enBtn.classList.add('border-gray-600', 'text-gray-400');
+                } else {
+                    enBtn.classList.add('active');
+                    enBtn.classList.remove('border-gray-600', 'text-gray-400');
+                    deBtn.classList.remove('active');
+                    deBtn.classList.add('border-gray-600', 'text-gray-400');
+                }
+            }
+
+            document.getElementById('lang-de').addEventListener('click', () => translatePage('de'));
+            document.getElementById('lang-en').addEventListener('click', () => translatePage('en'));
+            
+            const form = document.getElementById('kids-application-form');
+            if(form) {
+                const statusEl = document.getElementById('form-status');
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    statusEl.textContent = 'Submitting...';
+                    statusEl.classList.remove('text-red-500');
+                    statusEl.classList.add('text-neon-orange');
+                    
+                    setTimeout(() => {
+                        statusEl.textContent = 'Thank you for your application! We will review it and be in touch.';
+                        statusEl.classList.remove('text-neon-orange');
+                        statusEl.classList.add('text-green-500');
+                        form.reset();
+                    }, 1500);
+                });
+            }
+
+            await loadTranslations();
+        });
+    </script>
+</body>
+</html>
