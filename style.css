@@ -2,113 +2,135 @@
  /**
  * ✦ Handcrafted CSS for Demo Team Andermatt ✦
  * --------------------------------------------
- * Designed by P. Heiniger Design to bring high-performance, 
- * visually striking, and interactive UI elements to life.
- * Tailored for the unique style and motion language of 
- * Demo Team Andermatt.
- * Not a generic theme—every class is part of a custom system.
+ * Designed by P. Heiniger Design for high-performance,
+ * visually striking, and interactive UI elements.
+ * Tailored to the motion language of Demo Team Andermatt.
+ * Every class is part of a custom design system.
  */
 
+/* -----------------------------------------------
+ * ✦ Base Setup
+ * --------------------------------------------- */
 body {
-    background-color: #111111; /* Dark pitch-black background for contrast */
-    color: #F1F1F1;            /* Soft off-white text for high readability */
-    font-family: 'Inter', sans-serif; /* Clean, modern sans-serif font */
+  background-color: #111111;       /* Dark pitch-black background for contrast */
+  color: #F1F1F1;                  /* Soft off-white text for high readability */
+  font-family: 'Inter', sans-serif; /* Clean, modern sans-serif font */
 }
 
-/* ✦ Color utility classes */
-.bg-pitch-black { background-color: #111111; }      /* Matches body bg */
-.text-off-white { color: #F1F1F1; }                  /* For consistent light text */
-.text-neon-orange { color: #FF4500; }                /* Signature accent color (orange) */
-.bg-neon-orange { background-color: #FF4500; }       /* Neon orange background */
-.border-neon-orange { border-color: #FF4500; }       /* Border accent utility */
-.outline-neon-orange { outline-color: #FF4500; }     /* For forms or focus rings */
+/* -----------------------------------------------
+ * ✦ Utility Color Classes
+ * --------------------------------------------- */
+.bg-pitch-black       { background-color: #111111; } /* Matches site base */
+.text-off-white       { color: #F1F1F1; }            /* Light text */
+.text-neon-orange     { color: #FF4500; }            /* Accent color */
+.bg-neon-orange       { background-color: #FF4500; } /* Background highlight */
+.border-neon-orange   { border-color: #FF4500; }     /* Border highlight */
+.outline-neon-orange  { outline-color: #FF4500; }    /* Focus ring / input accent */
 
-/* ✦ Hero video container that scrolls behind content */
+/* -----------------------------------------------
+ * ✦ Hero Section
+ * --------------------------------------------- */
 .hero-video-container {
-    position: sticky;     /* Keeps video pinned at top while scrolling */
-    top: 0;
-    height: 100vh;        /* Full viewport height */
-    width: 100%;
-    overflow: hidden;
-    z-index: -1;          /* Places video *behind* main content */
+  position: sticky;     /* Keeps video pinned on scroll */
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  z-index: -1;          /* Behind content */
 }
 
-/* ✦ Centered and responsive hero video */
 .hero-video {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: auto;
-    height: auto;
-    min-width: 100%;
-    min-height: 100%;
-    transform: translate(-50%, -50%);
-    object-fit: cover;    /* Ensures video fills container nicely */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  transform: translate(-50%, -50%);
+  object-fit: cover;    /* Keeps proper aspect */
 }
 
-/* ✦ Content that scrolls above hero video */
+/* -----------------------------------------------
+ * ✦ Content Layout
+ * --------------------------------------------- */
 .scroll-content {
-    position: relative;
-    z-index: 1;
-    background-color: transparent;
+  position: relative;
+  z-index: 1;
+  background-color: transparent;
 }
 
-/* ✦ Section padding for full-width blocks */
 .content-section {
-    background-color: #111111;
-    padding-top: 5rem;
-    padding-bottom: 5rem;
+  background-color: #111111;
+  padding: 5rem 0; /* top & bottom */
 }
 
-/* ✦ Modal appearance and transition */
+/* -----------------------------------------------
+ * ✦ Modal
+ * --------------------------------------------- */
 .modal {
-    transition: opacity 0.25s ease; /* Smooth fade in/out */
+  transition: opacity 0.25s ease; /* Fade transition */
 }
 .modal-content {
-    transition: transform 0.25s ease; /* Subtle scaling effect */
+  transition: transform 0.25s ease; /* Subtle scale in/out */
 }
 
-/* ✦ Crew card image behavior on hover */
+/* -----------------------------------------------
+ * ✦ Crew Cards (Hover Transition)
+ * --------------------------------------------- */
 .crew-card-img {
-    transition: opacity 0.3s ease-in-out; /* Smooth image crossfade */
+  transition: opacity 0.3s ease-in-out; /* Smooth fade */
 }
-/* ✦ On hover: fade out serious portrait... */
+
 .crew-card:hover .crew-card-img.serious {
-    opacity: 0;
+  opacity: 0; /* Hide serious version */
 }
-/* ✦ ...and fade in candid image */
+
 .crew-card:hover .crew-card-img.candid {
-    opacity: 1;
+  opacity: 1; /* Reveal candid version */
 }
 
-/* ✦ Underline accent after section titles */
+/* -----------------------------------------------
+ * ✦ Section Title Styling
+ * --------------------------------------------- */
 .section-title::after {
-    content: '';
-    display: block;
-    width: 50px;
-    height: 3px;
-    background-color: #FF4500;
-    margin-top: 0.5rem;
+  content: '';
+  display: block;
+  width: 50px;
+  height: 3px;
+  background-color: #FF4500;
+  margin-top: 0.5rem;
 }
 
-/* ✦ Navigation hover underline animation */
+/* -----------------------------------------------
+ * ✦ Navigation Styling
+ * --------------------------------------------- */
 .nav-link {
-    position: relative;
-    transition: color 0.3s ease; /* Smooth color transition on hover */
+  position: relative;
+  transition: color 0.3s ease; /* Smooth color transition */
 }
+
 .nav-link::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    transform: scaleX(0);        /* Start hidden */
-    height: 2px;
-    bottom: -4px;
-    left: 0;
-    background-color: #FF4500;
-    transform-origin: bottom right;
-    transition: transform 0.25s ease-out;
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #FF4500;
+  transform: scaleX(0);           /* Hidden initially */
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
 }
+
 .nav-link:hover::after {
-    transform: scaleX(1);        /* Expand underline on hover */
-    transform-origin: bottom left;
+  transform: scaleX(1);           /* Grows underline on hover */
+  transform-origin: bottom left;
+}
+
+/* -----------------------------------------------
+ * ✦ Language Toggle (Active Button)
+ * --------------------------------------------- */
+.lang-btn.active {
+  background-color: #FF4500;
+  color: #111111;
+  border-color: #FF4500;
 }
