@@ -141,8 +141,8 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    width: 500vw;
-    height: 500vh;
+    width: 100vw;
+    height: 100vh;
     background-color: #111111; /* Using your pitch-black color */
     display: flex;
     justify-content: center;
