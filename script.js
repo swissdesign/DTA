@@ -6,6 +6,34 @@
  * all while being optimized for a static hosting environment like GitHub Pages.
  */
 
+// --- PRELOADER LOGIC ---
+// This function runs as soon as the DOM is ready to set up the animation delays.
+document.addEventListener('DOMContentLoaded', () => {
+    const logoPaths = document.querySelectorAll('#preloader-logo path, #preloader-logo polygon, #preloader-logo rect');
+    logoPaths.forEach((path, index) => {
+        // Set a custom property on each path for the staggered CSS animation delay
+        path.style.setProperty('--index', index);
+    });
+});
+
+// This function runs after all content (images, videos, etc.) has loaded.
+window.addEventListener('load', () => {
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+        // Add a short delay before starting the fade-out to ensure the animation completes.
+        setTimeout(() => {
+            preloader.classList.add('loaded');
+        }, 3000); // This should be slightly less than the animation duration.
+
+        // Completely remove the preloader from the page after the fade-out transition.
+        setTimeout(() => {
+            preloader.style.display = 'none';
+        }, 4000); // This should be animation duration + transition duration.
+    }
+});
+// --- END PRELOADER LOGIC ---
+
+
 document.addEventListener('DOMContentLoaded', async function() {
 
     let translations = {};
@@ -145,8 +173,8 @@ document.addEventListener('DOMContentLoaded', async function() {
             memberEl.className = 'crew-card group cursor-pointer';
             memberEl.innerHTML = `
                 <div class="relative overflow-hidden rounded-lg">
-                    <img src="${member.img_serious}" alt="${member.name}" class="crew-card-img serious w-full h-auto object-cover absolute inset-0 opacity-100">
-                    <img src="${member.img_candid}" alt="${member.name}" class="crew-card-img candid w-full h-auto object-cover absolute inset-0 opacity-0">
+                    <img src="${member.img_serious}" alt="${member.name}" class="crew-card-img serious w-full h-auto absolute inset-0 opacity-100">
+                    <img src="${member.img_candid}" alt="${member.name}" class="crew-card-img candid w-full h-auto absolute inset-0 opacity-0">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                     <div class="absolute bottom-0 left-0 p-4">
                         <h3 class="font-bold text-lg">${member.name}</h3>

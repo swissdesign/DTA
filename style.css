@@ -133,3 +133,47 @@ body {
   color: #111111;
   border-color: #FF4500;
 }
+
+/* -----------------------------------------------
+ * ✦ Preloader Styles
+ * --------------------------------------------- */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #111111; /* Using your pitch-black color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000; /* Ensure it's on top of everything */
+    opacity: 1;
+    transition: opacity 0.75s ease-in-out;
+    pointer-events: all;
+}
+
+#preloader.loaded {
+    opacity: 0;
+    pointer-events: none; /* Allow clicks to pass through after fade out */
+}
+
+/* -----------------------------------------------
+ * ✦ SVG Animation (Synchronized Draw)
+ * --------------------------------------------- */
+#preloader-logo path,
+#preloader-logo polygon,
+#preloader-logo rect {
+    /* Set initial state for the drawing animation */
+    stroke-dasharray: 2500; /* A value long enough to cover any path */
+    stroke-dashoffset: 2500;
+    /* Apply the animation */
+    animation: synchronized-draw 3.5s ease-in-out forwards;
+    animation-delay: calc(var(--index) * 20ms); /* Staggered delay for each path */
+}
+
+@keyframes synchronized-draw {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
