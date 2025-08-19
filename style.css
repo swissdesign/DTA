@@ -161,3 +161,44 @@ main {
   white-space: nowrap;
   border: 0;
 }
+
+/* -----------------------------------------------
+ * ✦ Journal Horizontal Scroller
+ * --------------------------------------------- */
+#journal-scroll-container {
+    /* Hide the default scrollbar */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+#journal-scroll-container::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+.journal-card {
+    /* Define card width for different screen sizes */
+    flex: 0 0 90%; /* Mobile: 90% width */
+    max-width: 90%;
+    scroll-snap-align: start; /* Snap to the start of the card */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+@media (min-width: 640px) {
+    .journal-card {
+        flex: 0 0 60%;
+        max-width: 60%;
+    }
+}
+
+@media (min-width: 768px) {
+    .journal-card {
+        flex: 0 0 45%;
+        max-width: 45%;
+    }
+}
+
+@media (min-width: 1024px) {
+    .journal-card {
+        flex: 0 0 31%;
+        max-width: 31%;
+    }
+}
