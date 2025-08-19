@@ -21,14 +21,10 @@ window.addEventListener('load', () => {
     const preloader = document.getElementById('preloader');
     if (preloader) {
         // Add a short delay before starting the fade-out to ensure the animation completes.
-        setTimeout(() => {
-            preloader.classList.add('loaded');
-        }, 3000); // This should be slightly less than the animation duration.
+        setTimeout(() => { preloader.classList.add('loaded'); }, 1800); // This should be slightly less than the animation duration.
 
         // Completely remove the preloader from the page after the fade-out transition.
-        setTimeout(() => {
-            preloader.style.display = 'none';
-        }, 4000); // This should be animation duration + transition duration.
+        setTimeout(() => { preloader.style.display = 'none'; }, 2600); // This should be animation duration + transition duration.
     }
 });
 // --- END PRELOADER LOGIC ---
