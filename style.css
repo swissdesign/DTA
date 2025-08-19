@@ -127,8 +127,8 @@ main {
 }
 
 #preloader svg {
-    width: 400px; /* You can adjust the size */
-    height: 400px; /* You can adjust the size */
+    width: 150px; /* You can adjust the size */
+    height: 150px; /* You can adjust the size */
     -webkit-animation: spin 5s linear infinite; /* Safari */
     animation: spin 5s linear infinite; /* Slower spin for the logo */
 }
@@ -143,6 +143,7 @@ main {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
 
 
 /* -----------------------------------------------
