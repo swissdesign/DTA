@@ -323,3 +323,56 @@ body {
   #lang-de { right: 68px; }
 }
 
+ /* CSS to integrate in the the rest of the above file */
+
+        /* Custom styles to complement Tailwind */
+        body {
+            background-color: #111111;
+            color: #F1F1F1;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Style for the header when scrolled */
+        .header-scrolled {
+            background-color: rgba(17, 17, 17, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        /* Custom transition for smooth effects */
+        .transition-all-300 {
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Hamburger Menu Icon Animation */
+        .hamburger {
+            cursor: pointer;
+            padding: 15px;
+            display: inline-block;
+        }
+
+        .hamburger-line {
+            width: 30px;
+            height: 2px;
+            background-color: #F1F1F1;
+            display: block;
+            margin: 6px 0;
+            transition: 0.4s;
+        }
+
+        .hamburger.is-active .hamburger-line:nth-child(1) {
+            transform: rotate(-45deg) translate(-7px, 6px);
+        }
+
+        .hamburger.is-active .hamburger-line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.is-active .hamburger-line:nth-child(3) {
+            transform: rotate(45deg) translate(-7px, -6px);
+        }
+
+        /* Ensure main content isn't hidden by the fixed header */
+        main {
+            padding-top: 80px; /* Adjust this value based on the final header height */
+        }
