@@ -39,16 +39,16 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     // --- DATA OBJECTS ---
     const crewData = [
-        { name: "Mathias", role: "Head Coach", img: "https://github.com/swissdesign/dta/raw/main/assets/images/crew/mathias.webp", details_key: "mathias_details" },
-        { name: "Pascal", role: "Expert", img: "https://github.com/swissdesign/dta/raw/main/assets/images/crew/Pascal.webp", details_key: "pascal_details" },
-        { name: "Roger", role: "Expert", img: "https://github.com/swissdesign/dta/raw/main/assets/images/crew/Roger.webp", details_key: "roger_details" },
-        { name: "Marcel", role: "Expert", img: "https://github.com/swissdesign/dta/raw/main/assets/images/crew/Marcel.webp", details_key: "marcel_details" },
-        { name: "Corsin", role: "Expert", img: "https://github.com/swissdesign/dta/raw/main/assets/images/crew/Corsin.webp", details_key: "corsin_details" },
-        { name: "Lars", role: "Rider", img: "https://github.com/swissdesign/dta/raw/main/assets/images/crew/Lars.webp", details_key: "lars_details" },
-        { name: "Sales", role: "Rider", img: "https://github.com/swissdesign/dta/raw/main/assets/images/crew/Sales.webp", details_key: "sales_details" },
-        { name: "Klara", role: "Rider", img: "https://github.com/swissdesign/dta/raw/main/assets/images/crew/Klara.webp", details_key: "klara_details" },
-        { name: "Aline", role: "Rider", img: "https://github.com/swissdesign/dta/raw/main/assets/images/crew/Aline.webp", details_key: "aline_details" },
-        { name: "Maria", role: "Rider", img: "https://github.com/swissdesign/dta/raw/main/assets/images/crew/Maria.webp", details_key: "maria_details" }
+        { name: "Mathias", role: "Der Finanz-Zauberer", img: "https://github.com/swissdesign/dta/raw/main/assets/images/crew/mathias.webp", details_key: "mathias_details" },
+        { name: "Pascal", role: "Der Präsi", img: "https://github.com/swissdesign/dta/raw/main/assets/images/crew/Pascal.webp", details_key: "pascal_details" },
+        { name: "Roger", role: "Der Pistenflüsterer", img: "https://github.com/swissdesign/dta/raw/main/assets/images/crew/Roger.webp", details_key: "roger_details" },
+        { name: "Marcel", role: "Vizepräsi", img: "https://github.com/swissdesign/dta/raw/main/assets/images/crew/Marcel.webp", details_key: "marcel_details" },
+        { name: "Corsin", role: "Der Luftakrobat", img: "https://github.com/swissdesign/dta/raw/main/assets/images/crew/Corsin.webp", details_key: "corsin_details" },
+        { name: "Lars", role: "Der Hauptling", img: "https://github.com/swissdesign/dta/raw/main/assets/images/crew/Lars.webp", details_key: "lars_details" },
+        { name: "Sales", role: "Der Taktgeber", img: "https://github.com/swissdesign/dta/raw/main/assets/images/crew/Sales.webp", details_key: "sales_details" },
+        { name: "Klara", role: "Team-Mum", img: "https://github.com/swissdesign/dta/raw/main/assets/images/crew/Klara.webp", details_key: "klara_details" },
+        { name: "Aline", role: "Das Naturkind", img: "https://github.com/swissdesign/dta/raw/main/assets/images/crew/Aline.webp", details_key: "aline_details" },
+        { name: "Maria", role: "Die Pisten-Paganini", img: "https://github.com/swissdesign/dta/raw/main/assets/images/crew/Maria.webp", details_key: "maria_details" }
     ];
     
     const partnersData = [
