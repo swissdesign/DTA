@@ -1,0 +1,325 @@
+/**
+ * ✦ Handcrafted CSS for Demo Team Andermatt ✦
+ * --------------------------------------------
+ * Designed by P. Heiniger Design for high-performance,
+ * visually striking, and interactive UI elements.
+ * Tailored to the motion language of Demo Team Andermatt.
+ * Every class is part of a custom design system.
+ */
+
+/* -----------------------------------------------
+ * ✦ Base Setup
+ * --------------------------------------------- */
+body {
+  background-color: #111111;       /* Dark pitch-black background for contrast */
+  color: #F1F1F1;                  /* Soft off-white text for high readability */
+  font-family: 'Inter', sans-serif; /* Clean, modern sans-serif font */
+}
+
+/* -----------------------------------------------
+ * ✦ Utility Color Classes
+ * --------------------------------------------- */
+.bg-pitch-black       { background-color: #111111; } /* Matches site base */
+.text-off-white       { color: #F1F1F1; }            /* Light text */
+.text-neon-orange     { color: #FF4500; }            /* Accent color */
+.bg-neon-orange       { background-color: #FF4500; } /* Background highlight */
+.border-neon-orange   { border-color: #FF4500; }     /* Border highlight */
+.outline-neon-orange  { outline-color: #FF4500; }    /* Focus ring / input accent */
+
+/* -----------------------------------------------
+ * ✦ Hero Section
+ * --------------------------------------------- */
+.hero-video-container {
+  position: sticky;     /* Keeps video pinned on scroll */
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  z-index: -1;          /* Behind content */
+}
+
+.hero-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  transform: translate(-50%, -50%);
+  object-fit: cover;    /* Keeps proper aspect */
+}
+
+/* -----------------------------------------------
+ * ✦ Content Layout
+ * --------------------------------------------- */
+.scroll-content {
+  position: relative;
+  z-index: 1;
+  background-color: transparent;
+}
+
+.content-section {
+  background-color: #111111;
+  padding: 5rem 0; /* top & bottom */
+}
+
+/* -----------------------------------------------
+ * ✦ Modal
+ * --------------------------------------------- */
+.modal {
+  transition: opacity 0.25s ease; /* Fade transition */
+}
+.modal-content {
+  transition: transform 0.25s ease; /* Subtle scale in/out */
+}
+
+/* -----------------------------------------------
+ * ✦ Crew Cards (Hover Transition)
+ * --------------------------------------------- */
+.crew-card-img {
+  transition: opacity 0.3s ease-in-out; /* Smooth fade */
+}
+
+.crew-card:hover .crew-card-img.serious {
+  opacity: 0; /* Hide serious version */
+}
+
+.crew-card:hover .crew-card-img.candid {
+  opacity: 1; /* Reveal candid version */
+}
+
+/* -----------------------------------------------
+ * ✦ Section Title Styling
+ * --------------------------------------------- */
+.section-title::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 3px;
+  background-color: #FF4500;
+  margin-top: 0.5rem;
+}
+
+/* -----------------------------------------------
+ * ✦ Navigation Styling
+ * --------------------------------------------- */
+.nav-link {
+  position: relative;
+  transition: color 0.3s ease; /* Smooth color transition */
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #FF4500;
+  transform: scaleX(0);           /* Hidden initially */
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.nav-link:hover::after {
+  transform: scaleX(1);           /* Grows underline on hover */
+  transform-origin: bottom left;
+}
+
+/* -----------------------------------------------
+ * ✦ Language Toggle (Active Button)
+ * --------------------------------------------- */
+.lang-btn.active {
+  background-color: #FF4500;
+  color: #111111;
+  border-color: #FF4500;
+}
+
+/* -----------------------------------------------
+ * ✦ Preloader Styles
+ * --------------------------------------------- */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: transparent; /* Using your pitch-black color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000; /* Ensure it's on top of everything */
+    opacity: 1;
+    transition: opacity 0.75s ease-in-out;
+    pointer-events: all;
+}
+
+#preloader.loaded {
+    opacity: 0;
+    pointer-events: none; /* Allow clicks to pass through after fade out */
+}
+
+/* -----------------------------------------------
+ * ✦ SVG Animation (Synchronized Draw)
+ * --------------------------------------------- */
+#preloader-logo path,
+#preloader-logo polygon,
+#preloader-logo rect {
+    /* Set initial state for the drawing animation */
+    stroke-dasharray: 2500; /* A value long enough to cover any path */
+    stroke-dashoffset: 2500;
+    /* Apply the animation */
+    animation: synchronized-draw 3.5s ease-in-out forwards;
+    animation-delay: calc(var(--index) * 20ms); /* Staggered delay for each path */
+}
+
+@keyframes synchronized-draw {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+
+
+/* === Robust Preloader (simplified) === */
+.preloader-inner{
+  position: relative;
+  width: clamp(240px, 28vmin, 420px);
+  height: clamp(240px, 28vmin, 420px);
+  display: grid;
+  place-items: center;
+  gap: 0.75rem;
+}
+.preloader-ring{
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  border: 8px solid rgba(241,241,241,0.15);
+  border-top-color: #FF4500;
+  animation: preloader-spin 1.2s linear infinite;
+}
+.preloader-logo-wrap{
+  width: 70%;
+  height: 70%;
+  border-radius: 9999px;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.45), inset 0 0 0 2px rgba(241,241,241,0.1);
+}
+.preloader-logo{
+  width: 90%;
+  height: 90%;
+  object-fit: contain;
+  display: block;
+}
+.preloader-text{
+  margin-top: calc(clamp(160px, 22vmin, 260px) + 16px);
+  position: absolute;
+  bottom: -2.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #F1F1F1;
+}
+
+/* Spin keyframes */
+@keyframes preloader-spin{
+  to { transform: rotate(360deg); }
+}
+
+/* Ensure preloader is front and large */
+#preloader{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* === Header circular logo === */
+.header-logo-link{ display:inline-grid; place-items:center; }
+.header-logo-circle{
+  width: clamp(64px, 10vw, 112px);
+  height: clamp(64px, 10vw, 112px);
+  border-radius: 9999px;
+  background: transparent;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35), inset 0 0 0 2px rgba(241,241,241,0.15);
+  display:grid;
+  place-items:center;
+}
+.header-logo-img{
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
+  display:block;
+  filter: drop-shadow(0 1px 0 rgba(0,0,0,0.25));
+}
+
+
+/* === SVG logo: circular wrappers & spin === */
+.logo-circle{
+  width: clamp(64px, 10vw, 120px);
+  height: clamp(64px, 10vw, 120px);
+  border-radius: 9999px;
+  background: transparent;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35), inset 0 0 0 2px rgba(241,241,241,0.15);
+}
+.logo-circle svg{
+  width: 80%;
+  height: 80%;
+  display: block;
+}
+
+.preloader-svg-wrap{
+  width: clamp(160px, 22vmin, 260px);
+  height: clamp(160px, 22vmin, 260px);
+  border-radius: 9999px;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.45), inset 0 0 0 2px rgba(241,241,241,0.12);
+}
+
+.spin{ animation: spin 1.5s linear infinite; }
+@keyframes spin{ to { transform: rotate(360deg); } }
+
+/* Preloader container still centers content fullscreen */
+#preloader{ display:flex; align-items:center; justify-content:center; }
+
+/* Accessibility utility (if not present) */
+.sr-only{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0,0,0,0);white-space:nowrap;border:0;
+}
+
+
+/* --- enforced: SVG lines white (header + preloader) --- */
+#preloader-logo *,
+.header-logo-link svg * {
+  stroke: #ffffff !important;
+  fill: none !important;
+}
+
+
+/* --- vertical rail navigation on desktop --- */
+@media (min-width: 768px) {
+  #main-header nav {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%) rotate(90deg);
+    transform-origin: right center;
+    z-index: 9999;
+    gap: 2rem;
+    padding-right: 12px;
+  }
+  /* Fix EN/DE in top-right corner */
+  #lang-en, #lang-de {
+    position: fixed;
+    top: 12px;
+    z-index: 10000;
+  }
+  #lang-en { right: 16px; }
+  #lang-de { right: 68px; }
+}
+
