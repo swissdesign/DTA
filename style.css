@@ -109,44 +109,41 @@ main {
  * ✦ Preloader
  * --------------------------------------------- */
 #preloader {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #111111;
-  z-index: 10000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 1;
-  transition: opacity 0.8s ease-in-out;
-}
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 999;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    background: #000; /* Changed to black */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
 #preloader.loaded {
   opacity: 0;
   pointer-events: none; /* Allows clicks to pass through after fading */
 }
 
-/* Animation for the SVG logo paths drawing themselves */
-#preloader-logo path,
-#preloader-logo polygon,
-#preloader-logo rect {
-  opacity: 0;
-  animation: fadeInPath 0.5s ease-out forwards;
-  animation-delay: calc(var(--index) * 0.02s);
+#preloader svg {
+    width: 150px; /* You can adjust the size */
+    height: 150px; /* You can adjust the size */
+    -webkit-animation: spin 5s linear infinite; /* Safari */
+    animation: spin 5s linear infinite; /* Slower spin for the logo */
 }
 
-@keyframes fadeInPath {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* The spin animation keyframes can remain the same */
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
 }
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
 
 /* -----------------------------------------------
  * ✦ Accessibility
