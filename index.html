@@ -191,15 +191,29 @@
             </div>
         </section>
 
-        <!-- Journal Section -->
-        <section class="py-20 bg-gray-900" id="journal">
-            <div class="container mx-auto px-6">
-                <h2 class="text-3xl md:text-5xl font-bold text-center mb-12" data-key="journal_title">Journal</h2>
-                <div id="journal-entries" class="space-y-12">
-                    <!-- Journal entries will be loaded here -->
-                </div>
+  <!-- Journal Section -->
+<section class="py-20 bg-gray-900" id="journal">
+    <div class="container mx-auto px-6">
+        <h2 class="text-3xl md:text-5xl font-bold text-center mb-12" data-key="journal_title">Journal</h2>
+        
+        <!-- Horizontal Scroller -->
+        <div class="relative">
+            <!-- This container will hold the cards and scroll -->
+            <div id="journal-scroll-container" class="flex overflow-x-auto scroll-smooth snap-x snap-mandatory pb-8 -mx-6 px-6 gap-6">
+                <!-- Journal cards will be injected here by JavaScript -->
             </div>
-        </section>
+
+            <!-- Scroll Buttons -->
+            <button id="journal-scroll-left" aria-label="Scroll left" class="absolute left-0 top-1/2 -translate-y-1/2 bg-gray-800/50 backdrop-blur-sm rounded-full p-3 text-white shadow-lg hover:bg-gray-700 transition-all hidden md:block disabled:opacity-0 disabled:cursor-not-allowed">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+            </button>
+            <button id="journal-scroll-right" aria-label="Scroll right" class="absolute right-0 top-1/2 -translate-y-1/2 bg-gray-800/50 backdrop-blur-sm rounded-full p-3 text-white shadow-lg hover:bg-gray-700 transition-all hidden md:block disabled:opacity-0 disabled:cursor-not-allowed">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            </button>
+        </div>
+
+    </div>
+</section>
 
         <!-- Media Hub Section -->
         <section class="py-20" id="media">
