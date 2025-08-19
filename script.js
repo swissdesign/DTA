@@ -382,3 +382,122 @@ document.addEventListener('DOMContentLoaded', async function() {
     initPartnersGrid();
     await loadTranslations();
 });
+
+
+// --- Javascript to integrate in to the rest of the above code in the right order
+
+ document.addEventListener('DOMContentLoaded', async () => {
+
+        // --- HEADER SCROLL EFFECT ---
+        function initHeaderScroll() {
+            const header = document.getElementById('main-header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('header-scrolled');
+                } else {
+                    header.classList.remove('header-scrolled');
+                }
+            });
+        }
+
+        // --- MOBILE MENU ---
+        function initMobileMenu() {
+            const menuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navLinks = mobileMenu.querySelectorAll('.mobile-nav-link');
+
+            menuButton.addEventListener('click', () => {
+                menuButton.classList.toggle('is-active');
+                mobileMenu.classList.toggle('translate-x-full');
+                document.body.classList.toggle('overflow-hidden'); // Prevent scrolling when menu is open
+            });
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    menuButton.classList.remove('is-active');
+                    mobileMenu.classList.add('translate-x-full');
+                    document.body.classList.remove('overflow-hidden');
+                });
+            });
+        }
+
+        initHeaderScroll();
+        initMobileMenu();
+
+        // The rest of your original script can be pasted here.
+        // For demonstration, I'll include the key functions.
+        // Make sure to adjust paths if necessary.
+
+        const crewData = [
+            { name: "Mathias", role: "Head Coach", img: "https://github.com/swissdesign/dta/raw/main/assets/images/crew/mathias.webp" },
+            { name: "Pascal", role: "Expert", img: "https://github.com/swissdesign/dta/raw/main/assets/images/crew/Pascal.webp" },
+            { name: "Roger", role: "Expert", img: "https://github.com/swissdesign/dta/raw/main/assets/images/crew/Roger.webp" },
+            { name: "Marcel", role: "Expert", img: "https://github.com/swissdesign/dta/raw/main/assets/images/crew/Marcel.webp" },
+            { name: "Corsin", role: "Expert", img: "https://github.com/swissdesign/dta/raw/main/assets/images/crew/Corsin.webp" },
+            { name: "Lars", role: "Rider", img: "https://github.com/swissdesign/dta/raw/main/assets/images/crew/Lars.webp" },
+            { name: "Sales", role: "Rider", img: "https://github.com/swissdesign/dta/raw/main/assets/images/crew/Sales.webp" },
+            { name: "Klara", role: "Rider", img: "https://github.com/swissdesign/dta/raw/main/assets/images/crew/Klara.webp" },
+            { name: "Aline", role: "Rider", img: "https://github.com/swissdesign/dta/raw/main/assets/images/crew/Aline.webp" },
+            { name: "Maria", role: "Rider", img: "https://github.com/swissdesign/dta/raw/main/assets/images/crew/Maria.webp" }
+        ];
+
+        const partnersData = [
+           { name: "Andermatt", logo: "https://github.com/swissdesign/dta/raw/main/assets/images/partners/andermatt.svg", url: "#" },
+           { name: "Mammut", logo: "https://github.com/swissdesign/dta/raw/main/assets/images/partners/mammut.svg", url: "#" },
+           { name: "Stöckli", logo: "https://github.com/swissdesign/dta/raw/main/assets/images/partners/stockli.svg", url: "#" },
+        ];
+
+
+        function initCrewGrid() {
+            const grid = document.querySelector('#crew .grid');
+            if (!grid) return;
+            grid.innerHTML = crewData.map(member => `
+                <div class="crew-member group cursor-pointer" data-name="${member.name}">
+                    <div class="relative overflow-hidden rounded-lg">
+                        <img src="${member.img}" alt="${member.name}" class="w-full h-auto object-cover transform group-hover:scale-110 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-black bg-opacity-50 group-hover:bg-opacity-20 transition-all duration-300"></div>
+                    </div>
+                    <h3 class="mt-4 text-xl font-bold">${member.name}</h3>
+                    <p class="text-gray-400">${member.role}</p>
+                </div>
+            `).join('');
+        }
+        
+        function initPartnersGrid() {
+            const grid = document.getElementById('partners-grid');
+            if (!grid) return;
+            grid.innerHTML = partnersData.map(partner => `
+                <a href="${partner.url}" target="_blank" rel="noopener noreferrer" class="flex justify-center items-center p-4 rounded-lg transition-transform duration-300 hover:scale-105">
+                    <img src="${partner.logo}" alt="${partner.name}" class="max-h-12 w-auto filter grayscale hover:filter-none transition-all duration-300">
+                </a>
+            `).join('');
+        }
+        
+        // --- HERO VIDEO SCROLL ---
+        function initHeroVideoScrub() {
+            const video = document.getElementById('hero-video');
+            if (!video) return;
+
+            video.pause();
+            video.currentTime = 0;
+
+            window.addEventListener('scroll', () => {
+                const heroSection = document.getElementById('hero');
+                if (!heroSection) return;
+
+                const sectionTop = heroSection.offsetTop;
+                const sectionHeight = heroSection.offsetHeight;
+                const scrollPosition = window.scrollY;
+
+                if (scrollPosition >= sectionTop && scrollPosition <= sectionTop + sectionHeight) {
+                    video.currentTime = video.duration * (scrollPosition - sectionTop) / sectionHeight;
+                }
+            });
+        }
+        
+        // Initialize all functions
+        initCrewGrid();
+        initPartnersGrid();
+        initHeroVideoScrub();
+        // ... add other init functions from your original script here
+    });
