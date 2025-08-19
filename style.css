@@ -21,7 +21,7 @@ body {
 
 /* This ensures the main content is not hidden behind the fixed header */
 main {
-    padding-top: 130px; 
+    padding-top: 140px; 
 }
 
 /* Style for the header when the user scrolls down */
