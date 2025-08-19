@@ -213,6 +213,70 @@ document.addEventListener('DOMContentLoaded', async function() {
             </a>
         `).join('');
     }
+function initJournalScroller() {
+        const container = document.getElementById('journal-scroll-container');
+        const scrollLeftBtn = document.getElementById('journal-scroll-left');
+        const scrollRightBtn = document.getElementById('journal-scroll-right');
+        const journalSection = document.getElementById('journal');
+
+        if (!container || !journalSection) return;
+
+        // Fetch journal entries from the manifest
+        fetch('journal-manifest.json')
+            .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.json();
+            })
+            .then(entries => {
+                if (entries.length === 0) {
+                    journalSection.style.display = 'none';
+                    return;
+                }
+
+                // Create HTML for each card
+                container.innerHTML = entries.map(entry => `
+                    <div class="journal-card bg-gray-800 rounded-lg overflow-hidden flex flex-col group">
+                        <a href="${entry.file}" class="block">
+                            <div class="overflow-hidden">
+                                <img src="${entry.image}" alt="${entry.title}" class="h-56 w-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            </div>
+                            <div class="p-6">
+                                <p class="text-xs text-gray-400 uppercase">${entry.date}</p>
+                                <h3 class="text-xl font-bold mt-2 text-white">${entry.title}</h3>
+                                <p class="text-gray-300 mt-2 text-sm">${entry.caption}</p>
+                            </div>
+                        </a>
+                    </div>
+                `).join('');
+
+                // --- Scroller Button Logic ---
+                const updateButtons = () => {
+                    const maxScroll = container.scrollWidth - container.clientWidth;
+                    scrollLeftBtn.disabled = container.scrollLeft < 10;
+                    scrollRightBtn.disabled = container.scrollLeft > maxScroll - 10;
+                };
+
+                container.addEventListener('scroll', updateButtons, { passive: true });
+                
+                scrollLeftBtn.addEventListener('click', () => {
+                    const cardWidth = container.querySelector('.journal-card').offsetWidth;
+                    container.scrollBy({ left: -(cardWidth + 24), behavior: 'smooth' }); // 24px is the gap
+                });
+
+                scrollRightBtn.addEventListener('click', () => {
+                    const cardWidth = container.querySelector('.journal-card').offsetWidth;
+                    container.scrollBy({ left: cardWidth + 24, behavior: 'smooth' });
+                });
+                
+                updateButtons(); // Initial check
+            })
+            .catch(error => {
+                console.error('Failed to load journal entries:', error);
+                journalSection.style.display = 'none'; // Hide section on error
+            });
+    }
+
+
 
     // --- EVENT LISTENERS ---
     document.getElementById('lang-de-desktop').addEventListener('click', () => translatePage('de'));
@@ -225,8 +289,10 @@ document.addEventListener('DOMContentLoaded', async function() {
     initMobileMenu();
     initHeroVideoScrub();
     initCrewGrid();
+    initJournalScroller(); // <-- ADD THIS LINE
     initModal();
     initSponsorshipForm();
     initPartnersGrid();
     await loadTranslations();
+
 });
