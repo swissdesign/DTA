@@ -76,4 +76,14 @@ document.addEventListener('DOMContentLoaded', () => {
         yearSpan.textContent = new Date().getFullYear();
     }
 
+       function initPartnersGrid() {
+        const grid = document.getElementById('partners-grid');
+        if (!grid) return;
+        grid.innerHTML = partnersData.map(partner => `
+            <a href="${partner.url}" target="_blank" rel="noopener noreferrer" class="flex justify-center items-center p-4 rounded-lg transition-transform duration-300 hover:scale-105">
+                <img src="${partner.logo}" alt="${partner.name}" class="max-h-12 w-auto filter grayscale hover:filter-none transition-all duration-300">
+            </a>
+        `).join('');
+    }
+
 });
