@@ -39,22 +39,22 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     // --- DATA OBJECTS ---
     const crewData = [
-        { name: "Mathias", role: "Der Finanz-Zauberer", img: "https://github.com/swissdesign/dta/raw/main/assets/images/crew/mathias.webp", details_key: "mathias_details" },
-        { name: "Pascal", role: "Der Präsi", img: "https://github.com/swissdesign/dta/raw/main/assets/images/crew/Pascal.webp", details_key: "pascal_details" },
-        { name: "Roger", role: "Der Pistenflüsterer", img: "https://github.com/swissdesign/dta/raw/main/assets/images/crew/Roger.webp", details_key: "roger_details" },
-        { name: "Marcel", role: "Vizepräsi", img: "https://github.com/swissdesign/dta/raw/main/assets/images/crew/Marcel.webp", details_key: "marcel_details" },
-        { name: "Corsin", role: "Der Luftakrobat", img: "https://github.com/swissdesign/dta/raw/main/assets/images/crew/Corsin.webp", details_key: "corsin_details" },
-        { name: "Lars", role: "Der Hauptling", img: "https://github.com/swissdesign/dta/raw/main/assets/images/crew/Lars.webp", details_key: "lars_details" },
-        { name: "Sales", role: "Der Taktgeber", img: "https://github.com/swissdesign/dta/raw/main/assets/images/crew/Sales.webp", details_key: "sales_details" },
-        { name: "Klara", role: "Team-Mum", img: "https://github.com/swissdesign/dta/raw/main/assets/images/crew/Klara.webp", details_key: "klara_details" },
-        { name: "Aline", role: "Das Naturkind", img: "https://github.com/swissdesign/dta/raw/main/assets/images/crew/Aline.webp", details_key: "aline_details" },
-        { name: "Maria", role: "Die Pisten-Paganini", img: "https://github.com/swissdesign/dta/raw/main/assets/images/crew/Maria.webp", details_key: "maria_details" }
+        { name: "Mathias", role: "Der Finanz-Zauberer", img: "./assets/images/crew/mathias.webp", details_key: "mathias_details" },
+        { name: "Pascal", role: "Der Präsi", img: "./assets/images/crew/Pascal.webp", details_key: "pascal_details" },
+        { name: "Roger", role: "Der Pistenflüsterer", img: "./assets/images/crew/Roger.webp", details_key: "roger_details" },
+        { name: "Marcel", role: "Vizepräsi", img: "./assets/images/crew/Marcel.webp", details_key: "marcel_details" },
+        { name: "Corsin", role: "Der Luftakrobat", img: "./assets/images/crew/Corsin.webp", details_key: "corsin_details" },
+        { name: "Lars", role: "Der Hauptling", img: "./assets/images/crew/Lars.webp", details_key: "lars_details" },
+        { name: "Sales", role: "Der Taktgeber", img: "./assets/images/crew/Sales.webp", details_key: "sales_details" },
+        { name: "Klara", role: "Team-Mum", img: "./assets/images/crew/Klara.webp", details_key: "klara_details" },
+        { name: "Aline", role: "Das Naturkind", img: "./assets/images/crew/Aline.webp", details_key: "aline_details" },
+        { name: "Maria", role: "Die Pisten-Paganini", img: "./assets/images/crew/Maria.webp", details_key: "maria_details" }
     ];
     
     const partnersData = [
-       { name: "Andermatt", logo: "https://github.com/swissdesign/dta/raw/main/assets/images/partners/andermatt.svg", url: "#" },
-       { name: "Mammut", logo: "https://github.com/swissdesign/dta/raw/main/assets/images/partners/mammut.svg", url: "#" },
-       { name: "Stöckli", logo: "https://github.com/swissdesign/dta/raw/main/assets/images/partners/stockli.svg", url: "#" },
+       { name: "Andermatt", logo: "./assets/images/partners/andermatt.svg", url: "#" },
+       { name: "Mammut", logo: "./assets/images/partners/mammut.svg", url: "#" },
+       { name: "Stöckli", logo: "./assets/images/partners/stockli.svg", url: "#" },
     ];
 
     // --- TRANSLATION & CONTENT ---
@@ -222,7 +222,7 @@ function initJournalScroller() {
         if (!container || !journalSection) return;
 
         // Fetch journal entries from the manifest
-        fetch('journal/journal_manifest.json')
+        fetch('./journal/journal_manifest.json')
             .then(response => {
                 if (!response.ok) throw new Error('Network response was not ok');
                 return response.json();
