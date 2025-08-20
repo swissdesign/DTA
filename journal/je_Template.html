@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Journal Entry Template • DTA</title>
+  <meta name="description" content="Official media statement from Demo Team Andermatt." />
+  <link rel="preconnect" href="https://rsms.me" />
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/journal.css" />
+  <style>
+    /* Page-specific tiny helpers (kept minimal; main look in journal.css & Tailwind) */
+    .floating-logo { position: fixed; top: 10px; left: 50%; transform: translateX(-50%); z-index: 50; opacity: .9; }
+    .floating-logo:hover { opacity: 1; }
+    .prose p { margin-bottom: 1rem; }
+    .active-entry { outline: 2px solid #f97316; outline-offset: 2px; }
+  </style>
+</head>
+<body class="antialiased bg-[#F8F8F8] text-[#1a1a1a]">
+
+  <!-- Top-center floating logo linking back to demo.team.ch -->
+  <a href="https://demo.team.ch" class="floating-logo block w-[120px] sm:w-[160px]" aria-label="Back to demo.team.ch">
+    <!-- SVG provided by Pascal -->
+    <svg width="400" height="400" viewBox="0 0 2000 2000" fill="white" xmlns="http://www.w3.org/2000/svg" class="w-full drop-shadow">
+      <g id="Bear__x26__Cross">
+        <path id="bear-shape" d="M795.8,745.9c-4.2-5.4-9.2-6.4-14.2-7.3-10.3-1.7-20.6-2.9-30.8-5-9-1.8-17.8-4.5-26.6-7-9.3-2.7-14.3-8.9-14.5-18.7-.1-5.7-.5-11.4-.2-17.1.3-6.3,2.5-8.8,8.8-9.9,7-1.1,14.2-1.8,21.3-2.1,29.7-1.4,59.5-2.4,89.2-4,10.1-.5,20.2-2.2,30.3-3.4,5.1-.6,8.5-3.4,9.9-8.6.7-2.5,2-4.9,3.3-7.2,3.5-6.1,8.8-9.5,15.8-10.2,7.5-.7,14.6.6,21.4,3.8,5.6,2.7,9.6,6.8,11.9,12.6,1.3,3.2,2.4,6.5,3.4,9.8,1.3,4.3,4.2,6.4,8.6,6.4,3.1.1,6.1-.3,9.2-.1,6.3.5,12.7.5,18.7,2.1,12.6,3.4,19.3,15.6,15.7,28.2-1.3,4.6-3.9,8.9-6.1,13.2-1.1,2.2-2.8,4-4,6.2-2.7,4.6-2.6,9.3-.2,14,3.1,6.1,8,10.3,14.3,12.8,4.7,1.9,9.6,3.5,14.4,5,18.4,5.6,33.2,16,44.8,31.3,12.8,16.7,23.9,34.5,34.4,52.7,5.3,9.2,10.6,18.3,15.8,27.6,13.7,24.4,29.4,47.4,46.5,69.6,13.8,17.9,26.8,36.5,40.4,54.6,11,14.6,22.5,29,33.8,43.4,11.2,14.3,22.6,28.4,33.5,42.9,14.2,18.9,22.2,40.7,29,63,2.9,9.3,2.1,18.5-1.7,27.5-2.6,6.2-6.8,10.6-13.5,12.3-2.8.7-5.5,1.6-8.3,2.1-6.2.9-10.1,4.6-11.7,10.3-1.6,5.6-2.9,11.5-3.5,17.3-3.2,32.8-3.3,65.6-.1,98.3.9,9.5,2.8,19,5.7,28.1,3.4,10.8,2.6,20.8-2.3,30.8-2,4-3.9,8.1-6.3,11.9-5.4,8.7-13,14.2-23,17.1-27.4,7.8-54.9,15.6-82.1,24-11.7,3.6-22.9,8.5-34.4,12.8-3.4,1.3-6.9,2.9-10.4,3.4-5.3.8-9.6,3.4-13.5,6.7-6.8,5.5-13.4,11.3-20.2,16.9-2.3,1.9-4.4,5.1-7.8,3.6-3.2-1.5-2.9-5.3-2.6-8.2.6-6.5,1.7-12.9,2.6-19.3.2-1.5.7-3,1.4-5.7-2.4.9-3.8,1.2-5.1,1.9-7.6,4.4-12.7,11.3-17.9,18.2-1.2,1.6-2.8,3-4.4,4.7-3.2-3.4-2.8-6.9-1.9-9.8,1.8-5.8,3.9-11.5,6.7-16.9,2.2-4.3,5.4-8.1,8.5-12.6-.8-1.4-1.8-3.1-3.2-5.5-5.2,3.6-10,7-14.8,10.3-4.6,3.1-8.1,7.8-15.1,9.5.6-2.9.8-4.9,1.5-6.6,3.3-8.2,8.1-15.5,14.2-21.9,2.1-2.2,4.2-4.4,7.3-7.6-2.5.6-3.9.6-5,1.2-5.9,2.8-11.7,5.7-17.6,8.5-2.1,1-4.4,1.5-6.9,2.4-1.6-4.5.9-7,2.6-9.5,8.2-12.1,18.4-22.3,30.7-30.3,3.9-2.5,8-4.8,12.3-6.7,2.7-1.2,5.9-1.6,8.9-2,25.5-2.9,51.1-5.5,76.5-8.7,7.2-.9,14.4-2.7,21.4-5,13-4.2,14.2-9.9,4.8-19.5-1.9-1.9-3.9-3.6-5.6-5.6-3.9-4.5-8.1-7.7-14.7-6.6-4.2.7-7.2-2.3-9.8-5.3-4.9-5.6-7.9-12.3-10.1-19.4-.8-2.5-1.5-5-2.2-7.4-.7-.1-1.1-.3-1.4-.1-8.2,3.6-11.9,1.8-12.9-7.1-1.4-12.9.1-25.7,2.3-38.3,2.7-14.9,7-29.3,13.4-43.1,1.4-3.1,3-6.2,2.2-10.4-1.5.7-2.9,1.1-3.9,1.9-14.1,10.8-27.4,22.5-39.8,35.2-9.7,10-11.4,21.2-5.8,33.7,1.5,3.3,3.2,6.6,4.8,9.9,1.2,2.4,2.5,4.7,3.6,7.1,6.1,13.5,4.2,23-7.4,32.5-9.8,8-20.5,15-32.3,19.6-22.5,8.7-44.4,18.5-65.1,30.8-2.8,1.7-5.8,3-8.8,4.3-8,3.6-16,3.6-24.3.3-9.4-3.8-19.1-7.1-28.8-10-15.3-4.6-29.9-10.8-44-18.2-4.3-2.3-8.6-4.6-12.9-7.1-2.5-1.5-4.8-1.7-7.5-.6-9.9,3.8-19.8,7.5-29.7,11.2-2.1.8-4.2,1.7-6.4,1.9-3.3.3-5-1.8-4.1-5,.5-1.7,1.4-3.5,2.6-4.8,4.4-4.8,9-9.4,13.5-14.1,1.3-1.3,2.7-2.4,5-4.4-2.3.1-3.6-.1-4.7.3-6.9,2-13.7,4-20.5,6.1-1.2.4-2.3.8-3.5,1.2-2.1.7-4.8,1.9-5.8-.9-.5-1.3.6-4,1.9-5.1,7.3-6.5,14.8-12.7,22.3-19,1.3-1.1,2.8-2.1,4.2-3.2-.1-.4-.3-.8-.4-1.2-8.3,1.4-16.6,2.9-24.9,4.4-1.4.2-2.8.7-4.2,1-1.8.4-4.2,1-4.7-1.2-.3-1.3.9-3.5,2.1-4.5,9.5-8.1,19.8-15,31.4-19.8,1.8-.8,3.6-1.6,5.2-3.2h-16.1c-2,0-4.1.3-6.1-.1-3.2-.5-4-2.8-1.8-5.2.8-.9,1.8-1.6,2.9-2.2,15.3-8.3,31.4-12.2,48.8-10,2.4.3,4.9.8,7.1,1.9,6.1,3.2,12.6,4.4,19.2,5.7,8.9,1.8,17.1,5.3,24.7,10.2,8,5.2,16.1,10.3,24.1,15.6,4.8,3.2,9.9,5.5,15.7,6.4,7.7,1.2,14.6-.9,20.6-5.7,9.7-7.8,10.1-19.9,1.1-30.3-3.6.3-5.3,3.1-6.6,6.1-.7,1.7-1,3.5-1.6,5.2s-1.6,2.8-4.2,1.9c-.2-1.1-.5-2.4-.5-3.7-.1-3.5.3-7,0-10.4-.8-8.3-4.2-14.9-12.7-17.7-4.7-1.6-7-4.7-6.7-9.6,2-27.8,10.6-53,29.9-73.8,14.1-15.2,32-22.7,52.3-25.2,7.2-.9,14.4-2.3,23-3.6-2.1-2-3.1-3.2-4.3-4-13.9-9.2-27.9-18.4-41.9-27.6-4.4-2.9-5.1-2.8-8.8,1.1-5.6,5.9-11.2,11.9-16.5,18-24.6,28.2-52.8,52.1-84.7,71.5-12.9,7.8-26.2,14.8-39.4,22.1-2.3,1.3-4.6,2.5-7.1-.1-.6-.6-2.3-.3-3.5-.3-2.4.1-4.9.4-7.3.6-13.8.7-26.3-2.7-36.5-12.6-9-8.6-17.9-17.3-27-25.8-13.6-12.9-27.4-25.6-41-38.5-2.6-2.4-5.6-3-9-3.3-3.6-.3-7.1-1.4-10.7-1.9-2-.3-4-.4-5.9,0-9.2,1.6-18.4,3.5-27.6,5.1-2.3.4-5.3,1.7-6.6-1.2-1.3-3,1.6-4.2,3.5-5.6,9.5-6.7,19.1-13.2,30.3-17,2.1-.7,2.1-.8,2.9-3.9-10.5-1.2-20.7.7-30.8,3.2-1.8.4-3.5,1.2-5.3,1.3-1,.1-2.3-.8-2.9-1.6-.3-.4.4-1.9,1-2.6.8-.9,2-1.4,3-2.1,11.2-6.8,22.7-12.9,36.3-13.6,1.1-.1,2.2-1.2,4.2-2.4-2.4-.9-3.6-1.7-4.9-1.9-7.3-.9-14.6-1.6-21.9-2.3-1.2-.1-2.5.2-3.6-.2-1.4-.5-2.6-1.5-3.9-2.3.8-1.3,1.3-3,2.5-3.8,5.8-4,12.3-6.6,19.3-7.2,5.8-.5,11.8-.1,17.6.1,2.1.1,4.1.7,5.2-2.4-3.7-3.2-7.6-6.4-11.4-9.8-1.5-1.3-3.1-2.7-4.2-4.4-1.4-2.1-.3-4.2,2.2-4.4,2.4-.2,5-.2,7.2.6,7.1,2.6,14,5.5,20.9,8.4,1.7.7,3.3,1.8,5,2.2,15.4,3.1,28.4,11.2,40.7,20.3,10.7,7.9,20.6,16.7,31.1,24.8,4,3.1,8.4,5.9,13,8,7.5,3.4,11.4,2.4,16.7-3.9,3.2-3.9,6.2-8.1,9-12.4,8.6-13.4,17-26.9,25.4-40.4,1.7-2.7,3.1-5.8,4.1-8.8,1.4-4.4.4-7-3.6-9.3-2.6-1.5-5.6-2.6-8.5-3.2-14.7-3.3-29.5-6.3-44.2-9.6-22.2-4.9-43.3-13-64.5-20.9-12.9-4.8-21.4-13.9-25.9-26.7-3-8.7-5.7-17.4-8.1-26.3-3.7-13.9-9.7-26.8-14.8-40.1-6-15.6-17.2-25.7-30.7-34.2-2.1-1.3-4.1-3.1-6.2-4.7,2.1-3.8,5.1-3.3,7.8-3.1,9.5.8,18.3,3.6,26.5,8.5,1.4.8,2.7,2.9,5.2.6-.8-1.2-1.5-2.6-2.5-3.7-5.3-5.9-10.7-11.8-16-17.7-1-1.1-2-2-2.9-3.1-1.4-1.9-4-3.7-2.1-6.3,1.7-2.3,4.5-1.2,6.8-.5,11.6,3.7,22.2,9.1,31,17.8,2.5,2.5,4.8,3.6,8.4.6-4-5-7.8-10-11.8-14.8-1.9-2.4-4.2-4.5-6.1-6.8-1.3-1.7-3.8-3.6-1.9-5.7.9-1,3.8-.9,5.5-.4,11.7,3.1,21.1,9.5,27.3,20.1,1.7,2.9,3.3,5.8,6.1,8.4-.3-3.4-.6-6.7-1-10-.9-6.9-1.9-13.7-2.7-20.6-.2-1.8,0-4.5,1.1-5.4,2.1-1.8,4.2.4,5.8,1.9,12.2,11.1,18.6,24.8,16.5,41.4-.7,5.3.4,9.1,3.9,13.1,6.9,7.8,12.8,16.4,17.3,25.8,3.6,7.6,8.5,14.4,14.7,20.1,8.2,7.6,17.7,12.2,29.1,12.4,8.6.1,17.1-.5,25.4-3.1,5.6-1.7,9.2-5,9.8-11.1.3-2.6.6-5.3,1.2-7.8,1.1-4.7.7-8.6-3.7-11.9-3.8-2.9-4.8-7.7-4.6-12.2.7-11.4,1.6-22.8,3.1-34,1.1-8.1,5.9-13.9,13-18.3,15-9.2,28.5-20.5,40-33.8,3.5-4.1,6-9.2,8.3-14.1,1.6-3.3,1.6-7,0-11.5-1.7,1.2-3.2,1.9-4,3-2.9,3.9-5.9,7.8-8.3,12.1-16.5,29.8-52.7,38.7-78.1,30.2-6.5-2.2-13-4.7-19.4-7.4-5.5-2.2-10.7-5.1-16.2-7.3-12.7-5.1-25.9-8.7-39.8-8.7-5.3,0-10.6-.2-15.9-.5-3.7-.2-7.3-.6-10.9-1.4-3.9-.9-7.5-2.6-8.2-7.1-.7-4.3,1.5-7.6,4.9-9.8,2.5-1.6,5.4-3.1,8.3-3.5,4.6-.7,9.3-.8,14-.5,14.4.9,28.5-.3,42.4-4.3,1.9-.6,3.8-1.3,5.7-2.1,1.1-.5,2-1.2,3-3-3.2-.3-6.5-.6-9.7-.8-20.3-1.3-40.7-2.2-61-4-24.2-2.2-45.2-12-62-29.8-3.3-3.5-6.4-7.5-8.5-11.8-3.9-7.8.3-14.8,9-16,5.6-.8,10.6,1.1,14.9,4.3,4.7,3.5,9.3,7.3,13.6,11.3,9,8.4,19.4,14.3,31.5,16.5,10.4,1.9,20.9,3.7,31.4,4.9,12.8,1.5,25.6,2.3,38.4,3.4,2.1-.2,4.3-.4,7.5-.4Z"/>
+        <path id="cross-shape" d="M1104.7,796.6c5.3-34.1.7-68.2-.8-102.4,2.6-1.6,4.5-2.3,7.1.2,2.1,2.1,5,3.5,7.7,4.8,11.4,5.3,23.5,7.8,35.9,9.6,14.8,2.1,46.6,2.6,60.1.5.1-1.3.4-2.6.4-4-1-31.2-3.4-62.3-12.7-92.4-1-3.1-1.5-6.3-4.4-8.4-.3-.2,0-1.1,0-2.4,18.5-.8,36.8,1.9,55.2,2.5,18.2.6,36.4,1.3,55.7,2-17.4,32.1-17.9,66-17.9,100.7,4.1-.3,7.8-.4,11.3-.7,19.5-1.9,39-3.6,58.4-5.9,11.3-1.4,22.5-3.7,33.7-5.8,2.7-.5,5.7-.9,7-4.2.2-.6,1.8-1.1,2.5-.9.7.2,1.5,1.3,1.7,2.2.3,1.4.2,2.8.1,4.3-.5,24.5-1.2,48.9-1.5,73.4-.1,5.9.5,11.8,1.4,17.6.7,4,.3,7.5-1.1,11.2-.9,0-1.9.3-2.4,0-9.6-7.4-21-10-32.5-11.6-18.2-2.5-36.4-4.4-54.7-6-7.4-.6-15,.4-23,.7-.3,3.7-.9,7.1-.8,10.5.7,21.8,1.3,43.6,6.1,65,1.2,5.1,2.8,10.2,4.7,15.2,1.2,3.2,3.3,6,5.4,9.5-1,1.9-2.3,4.3-3.7,6.7-8.4-.5-16.7-1.2-25-1.5-15.7-.6-31.4-.8-47.1-1.3-9.7-.3-19.4-2.3-29.1.8-1.7-3.6-1.5-6.5-.5-9.4,9.7-26.7,12.4-54.7,15.2-82.7.4-3.8-.3-7.6-.5-11.6-1.6-.2-2.8-.6-4-.6-27.6-.1-55,1.5-82.1,6.9-6.6,1.3-13.1,3.3-18.5,7.7-2,1.4-4,1.5-7.3-.2Z"/>
+      </g>
+      <!-- (Trimmed for brevity: rest of SVG groups/paths remain as provided) -->
+    </svg>
+  </a>
+
+  <!-- Header (kept consistent with Journal page for menu overlay) -->
+  <header class="fixed top-0 left-0 w-full p-6 md:p-8 z-40 flex justify-between items-center mix-blend-difference pointer-events-none">
+    <a href="/index.html" class="text-white pointer-events-auto">
+      <svg class="h-8 w-auto" width="100" height="35" viewBox="0 0 100 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 35V0H10V5H15V10H20V15H25V20H20V25H15V30H10V35H0Z" fill="currentColor"/>
+        <path d="M40 35V0H50V5H55V10H60V15H65V20H60V25H55V30H50V35H40Z" fill="currentColor"/>
+        <path d="M80 35V0H90V5H95V10H100V15H95V20H90V25H85V30H80V35Z" fill="currentColor"/>
+      </svg>
+    </a>
+    <button id="menu-toggle" class="z-50 text-white pointer-events-auto">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+      </svg>
+    </button>
+  </header>
+
+  <!-- Fullscreen Navigation Menu -->
+  <nav id="menu-overlay" class="fixed top-0 left-0 w-full h-full bg-[#1a1a1a] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-500 ease-in-out z-40">
+    <div class="text-center text-gray-200 space-y-2">
+      <a href="/index.html" class="block text-4xl md:text-6xl font-light uppercase py-4 transition-colors hover:text-white">Home</a>
+      <a href="/journal.html" class="block text-4xl md:text-6xl font-light uppercase py-4 transition-colors hover:text-white">Journal</a>
+      <a href="#sponsorship" class="block text-4xl md:text-6xl font-light uppercase py-4 transition-colors hover:text-white">Sponsor</a>
+    </div>
+  </nav>
+
+  <!-- Main -->
+  <main class="container mx-auto px-6 md:px-8 pt-28 md:pt-40">
+    <!-- Meta heading area -->
+    <article class="max-w-3xl mx-auto">
+      <header class="mb-8 md:mb-12">
+        <p class="text-xs uppercase tracking-wide text-gray-500">Media Statement</p>
+        <h1 class="text-4xl md:text-6xl font-light leading-tight">Journal Entry Title</h1>
+        <p class="mt-2 text-gray-500">15 Aug 2024 · Andermatt</p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href="#" class="inline-flex items-center gap-2 bg-orange-600 hover:bg-orange-700 text-white text-sm font-medium px-4 py-2 rounded-md" download>
+            <!-- PDF icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/></svg>
+            Download PDF
+          </a>
+          <a href="#" class="inline-flex items-center gap-2 border border-gray-300 hover:bg-white/60 text-gray-900 text-sm font-medium px-4 py-2 rounded-md" download>
+            <!-- Download icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            High‑res Media
+          </a>
+        </div>
+      </header>
+
+      <!-- Image slider (1–3 images) -->
+      <section class="mb-10">
+        <div class="relative">
+          <div id="entry-slider" class="overflow-hidden rounded-xl bg-white">
+            <div class="flex transition-transform duration-500" data-active-index="0">
+              <!-- Duplicate or remove slides as needed (max 3) -->
+              <img src="https://placehold.co/1600x900/png" alt="Slide 1" class="w-full shrink-0 aspect-[16/9] object-cover" />
+              <img src="https://placehold.co/1600x900/png?text=Slide+2" alt="Slide 2" class="w-full shrink-0 aspect-[16/9] object-cover" />
+              <img src="https://placehold.co/1600x900/png?text=Slide+3" alt="Slide 3" class="w-full shrink-0 aspect-[16/9] object-cover" />
+            </div>
+          </div>
+          <button id="slide-prev" class="hidden md:flex absolute left-3 top-1/2 -translate-y-1/2 bg-gray-800/60 hover:bg-gray-800 text-white rounded-full p-2" aria-label="Previous image">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button id="slide-next" class="hidden md:flex absolute right-3 top-1/2 -translate-y-1/2 bg-gray-800/60 hover:bg-gray-800 text-white rounded-full p-2" aria-label="Next image">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+          <div id="slide-dots" class="absolute inset-x-0 bottom-3 flex justify-center gap-2"></div>
+        </div>
+      </section>
+
+      <!-- Body copy -->
+      <section class="prose max-w-none">
+        <p class="text-lg text-gray-700">Lead paragraph: briefly summarise the announcement in one or two sentences. Keep it factual and clear for media use.</p>
+        <p>Body text goes here. Replace with your actual media statement. Keep paragraphs short. Include quotes where helpful. Add links if needed.</p>
+        <p>Close with next steps, contact details, or where to find more information.</p>
+      </section>
+    </article>
+
+    <!-- Journal slider (manifest-driven) -->
+    <section class="py-16 md:py-20" aria-labelledby="more-from-journal">
+      <div class="flex items-end justify-between mb-6">
+        <h2 id="more-from-journal" class="text-2xl md:text-3xl font-medium">More from the Journal</h2>
+        <div class="hidden md:flex gap-2">
+          <button id="journal-scroll-left" class="rounded-full bg-gray-200 hover:bg-gray-300 p-2" aria-label="Scroll left">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button id="journal-scroll-right" class="rounded-full bg-gray-200 hover:bg-gray-300 p-2" aria-label="Scroll right">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="relative">
+        <div id="journal-scroll-container" class="flex overflow-x-auto scroll-smooth snap-x snap-mandatory pb-6 -mx-6 px-6 gap-6"></div>
+      </div>
+    </section>
+
+    <!-- Sponsorship Section -->
+    <section class="py-16 md:py-20 bg-gray-900 rounded-2xl" id="sponsorship">
+      <div class="container mx-auto px-6 text-center">
+        <h2 class="text-3xl md:text-5xl font-bold mb-6 text-white">Become a Sponsor</h2>
+        <p class="max-w-3xl mx-auto text-gray-300 mb-10">Join us on our journey. We're seeking partners who share our passion for snowsports and excellence. Support the next generation of instructors and athletes.</p>
+        <form id="sponsorship-form" class="max-w-xl mx-auto text-left">
+          <div class="mb-4">
+            <label for="name" class="block text-gray-300 mb-2">Name</label>
+            <input type="text" id="name" name="name" class="w-full bg-gray-800 border border-gray-700 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-orange-500" required>
+          </div>
+          <div class="mb-4">
+            <label for="email" class="block text-gray-300 mb-2">Email</label>
+            <input type="email" id="email" name="email" class="w-full bg-gray-800 border border-gray-700 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-orange-500" required>
+          </div>
+          <div class="mb-6">
+            <label for="message" class="block text-gray-300 mb-2">Message</label>
+            <textarea id="message" name="message" rows="4" class="w-full bg-gray-800 border border-gray-700 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-orange-500" required></textarea>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-md transition-colors">Send Inquiry</button>
+          </div>
+          <p id="form-status" class="text-center mt-4 h-6 text-gray-200"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="text-center py-12 md:py-20 text-gray-500 text-sm">
+    <p>&copy; <span id="year"></span> DTA. All Rights Reserved.</p>
+  </footer>
+
+  <!-- Shared JS -->
+  <script src="/journal.js"></script>
+  <!-- Page bootstrap -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Footer year (mirrors journal.js behaviour if missing)
+      const yearEl = document.getElementById('year');
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+      // Simple slider for up to 3 images
+      const track = document.querySelector('#entry-slider > div');
+      const slides = Array.from(track?.children || []);
+      const prev = document.getElementById('slide-prev');
+      const next = document.getElementById('slide-next');
+      const dots = document.getElementById('slide-dots');
+
+      if (track && slides.length) {
+        function update(i) {
+          const index = Math.max(0, Math.min(i, slides.length - 1));
+          track.dataset.activeIndex = index;
+          track.style.transform = `translateX(-${index * 100}%)`;
+          dots.querySelectorAll('button').forEach((b, bi) => b.classList.toggle('opacity-100', bi === index));
+        }
+        // Build dots
+        slides.forEach((_, i) => {
+          const b = document.createElement('button');
+          b.className = 'h-2 w-2 rounded-full bg-white/80 opacity-50 hover:opacity-100 transition-opacity';
+          b.addEventListener('click', () => update(i));
+          dots.appendChild(b);
+        });
+        update(0);
+        prev?.addEventListener('click', () => update(Number(track.dataset.activeIndex || 0) - 1));
+        next?.addEventListener('click', () => update(Number(track.dataset.activeIndex || 0) + 1));
+      }
+
+      // Journal scroller below: load manifest and mark current file active
+      if (window.initJournalScrollerForEntry) {
+        window.initJournalScrollerForEntry();
+      }
+
+      // Sponsorship form (defined in journal.js additions)
+      if (window.initSponsorshipForm) {
+        window.initSponsorshipForm();
+      }
+    });
+  </script>
+</body>
+</html>
