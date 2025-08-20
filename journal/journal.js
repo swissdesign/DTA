@@ -38,26 +38,27 @@ const manifestURL = (isInJournalFolder ? '../journal_manifest.json' : './journal
         return res.json();
       })
       .then(entries => {
-        const currentFile = window.location.pathname.split('/').pop();
+        const currentFile = window.location.pathname.split('/').pop().toLowerCase();
 
-        scrollContainer.innerHTML = entries.map(entry => {
-          const isCurrent = entry.file === currentFile;
-          return `
-            <div class="journal-card flex-shrink-0 snap-start ${isCurrent ? 'active-entry' : ''}" style="flex:0 0 80%;max-width:80%;">
-              <a href="${entry.file}" class="block" aria-current="${isCurrent ? 'page' : 'false'}">
-                <div class="overflow-hidden">
-                  <img src="${entry.image}" alt="${entry.title}"
-                       class="h-56 w-full object-cover group-hover:scale-105 transition-transform duration-300"
-                       onerror="this.onerror=null;this.src='https://placehold.co/800x450/EEE/31343C?text=Image+Not+Found';">
-                </div>
-                <div class="p-6">
-                  <p class="text-xs text-gray-500 uppercase">${entry.date}</p>
-                  <h3 class="text-xl font-semibold mt-2 text-gray-900">${entry.title}</h3>
-                  <p class="text-gray-600 mt-2 text-sm">${entry.caption}</p>
-                </div>
-              </a>
-            </div>`;
-        }).join('');
+scrollContainer.innerHTML = entries.map(entry => {
+  const entryFile = (entry.file || '').split('/').pop().toLowerCase();
+  const isCurrent = entryFile === currentFile;
+  return `
+    <div class="journal-card flex-shrink-0 snap-start ${isCurrent ? 'active-entry' : ''}" style="flex:0 0 80%;max-width:80%;">
+      <a href="${entry.file}" class="block" aria-current="${isCurrent ? 'page' : 'false'}">
+        <div class="overflow-hidden">
+          <img src="${entry.image}" alt="${entry.title}"
+               class="h-56 w-full object-cover group-hover:scale-105 transition-transform duration-300"
+               onerror="this.onerror=null;this.src='https://placehold.co/800x450/EEE/31343C?text=Image+Not+Found';">
+        </div>
+        <div class="p-6">
+          <p class="text-xs text-gray-500 uppercase">${entry.date}</p>
+          <h3 class="text-xl font-semibold mt-2 text-gray-900">${entry.title}</h3>
+          <p class="text-gray-600 mt-2 text-sm">${entry.caption}</p>
+        </div>
+      </a>
+    </div>`;
+}).join('');
 
         // Arrow scroll by one card width (+ gap)
         function scrollByCard(dir) {
