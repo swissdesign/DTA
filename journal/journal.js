@@ -5,7 +5,9 @@
 document.addEventListener('DOMContentLoaded', () => {
   // Resolve manifest path relative to the current page (works on GH Pages)
   const isInJournalFolder = window.location.pathname.toLowerCase().includes('/journal/');
-  const manifestURL = (isInJournalFolder ? '../journal_manifest.json' : './journal_manifest.json') + '?v=' + Date.now(); // cache-bust
+  const manifestURL =
+    (isInJournalFolder ? '../journal_manifest.json' : './journal_manifest.json') +
+    '?v=' + Date.now(); // cache-bust while testing
 
   // --- Navigation Menu Logic ---
   const menuToggle = document.getElementById('menu-toggle');
@@ -25,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- Entry Page Horizontal Scroller (single, correct block) ---
+  // --- Entry Page Horizontal Scroller ---
   const scrollContainer = document.getElementById('journal-scroll-container');
   if (scrollContainer) {
     const leftBtn = document.getElementById('journal-scroll-left');
@@ -71,7 +73,8 @@ document.addEventListener('DOMContentLoaded', () => {
           const entryFile = (entry.file || '').split('/').pop().toLowerCase();
           const isCurrent = entryFile === currentFile;
           return `
-            <div class="journal-card flex-shrink-0 snap-start ${isCurrent ? 'active-entry' : ''}" style="flex:0 0 80%;max-width:80%;">
+            <div class="journal-card flex-shrink-0 snap-start ${isCurrent ? 'active-entry' : ''}"
+                 style="flex:0 0 80%;max-width:80%;">
               <a href="${entry.file}" class="block" aria-current="${isCurrent ? 'page' : 'false'}">
                 <div class="overflow-hidden">
                   <img src="${entry.image}" alt="${entry.title}"
@@ -97,7 +100,8 @@ document.addEventListener('DOMContentLoaded', () => {
       })
       .catch(err => {
         console.error('[journal] scroller failed:', err);
-        scrollContainer.innerHTML = `<p class="text-gray-500">${DEBUG ? err.message : 'Could not load more entries.'}</p>`;
+        scrollContainer.innerHTML =
+          `<p class="text-gray-500">${DEBUG ? err.message : 'Could not load more entries.'}</p>`;
       });
   }
 
@@ -131,7 +135,8 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     } catch (error) {
       console.error('Could not load journal entries:', error);
-      journalGrid.innerHTML = '<p class="text-center col-span-full text-gray-500">Could not load journal entries at this time.</p>';
+      journalGrid.innerHTML =
+        '<p class="text-center col-span-full text-gray-500">Could not load journal entries at this time.</p>';
     }
   }
   loadJournalEntries(); // only does work if #journal-grid exists
@@ -139,16 +144,4 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- Footer Year ---
   const yearSpan = document.getElementById('year');
   if (yearSpan) yearSpan.textContent = new Date().getFullYear();
-
-  // --- Partners grid (optional) ---
-  function initPartnersGrid() {
-    const grid = document.getElementById('partners-grid');
-    if (!grid || typeof partnersData === 'undefined') return;
-    grid.innerHTML = partnersData.map(partner => `
-      <a href="${partner.url}" target="_blank" rel="noopener noreferrer"
-         class="flex justify-center items-center p-4 rounded-lg transition-transform duration-300 hover:scale-105">
-        <img src="${partner.logo}" alt="${partner.name}"
-             class="max-h-12 w-auto filter grayscale hover:filter-none transition-all duration-300">
-      </a>`).join('');
-  }
 });
