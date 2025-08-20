@@ -25,6 +25,51 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+// --- Entry Page Horizontal Scroller ---
+const scrollContainer = document.getElementById('journal-scroll-container');
+if (scrollContainer) {
+  const leftBtn = document.getElementById('journal-scroll-left');
+  const rightBtn = document.getElementById('journal-scroll-right');
+
+  fetch(manifestURL)
+    .then(res => res.json())
+    .then(entries => {
+      const currentFile = window.location.pathname.split('/').pop();
+
+      scrollContainer.innerHTML = entries.map(entry => {
+        const isCurrent = entry.file === currentFile;
+        return `
+          <div class="journal-card flex-shrink-0 snap-start ${isCurrent ? 'active-entry' : ''}" style="flex:0 0 80%;max-width:80%;">
+            <a href="${entry.file}" class="block" aria-current="${isCurrent ? 'page' : 'false'}">
+              <div class="overflow-hidden">
+                <img src="${entry.image}" alt="${entry.title}"
+                     class="h-56 w-full object-cover group-hover:scale-105 transition-transform duration-300"
+                     onerror="this.onerror=null;this.src='https://placehold.co/800x450/EEE/31343C?text=Image+Not+Found';">
+              </div>
+              <div class="p-6">
+                <p class="text-xs text-gray-500 uppercase">${entry.date}</p>
+                <h3 class="text-xl font-semibold mt-2 text-gray-900">${entry.title}</h3>
+                <p class="text-gray-600 mt-2 text-sm">${entry.caption}</p>
+              </div>
+            </a>
+          </div>`;
+      }).join('');
+
+      // Scroll arrows
+      function scrollByCard(dir) {
+        const card = scrollContainer.querySelector('.journal-card');
+        const step = card ? (card.getBoundingClientRect().width + 24) : 320;
+        scrollContainer.scrollBy({ left: dir * step, behavior: 'smooth' });
+      }
+      leftBtn?.addEventListener('click', () => scrollByCard(-1));
+      rightBtn?.addEventListener('click', () => scrollByCard(1));
+    })
+    .catch(err => {
+      console.error('Scroller failed:', err);
+      scrollContainer.innerHTML = '<p class="text-gray-500">Could not load more entries.</p>';
+    });
+}
+    
     // --- Dynamic Journal Grid Loading ---
     const journalGrid = document.getElementById('journal-grid');
     const manifestURL = 'journal-manifest.json';
