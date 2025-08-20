@@ -126,7 +126,7 @@ const entryHref = (filePath) => {
         card.style.animationDelay = `${index * 100}ms`;
         card.innerHTML = `
           <div class="journal-card">
-            <a href="${entry.file}" class="block">
+            <a href="${entryHref(entry.file)}" class="block">
               <img src="${entry.image}" alt="${entry.title}" class="journal-card-image"
                    onerror="this.onerror=null;this.src='https://placehold.co/600x400/EEE/31343C?text=Image+Not+Found';">
               <div class="journal-card-content">
