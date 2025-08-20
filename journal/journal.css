@@ -96,3 +96,8 @@ body.menu-open #menu-toggle path:nth-child(3) {
     right: 0;
     bottom: 0;
 }
+
+.active-entry {
+  outline: 2px solid #f97316; /* Tailwind orange-500 */
+  outline-offset: 2px;
+}
