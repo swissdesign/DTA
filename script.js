@@ -222,7 +222,7 @@ function initJournalScroller() {
         if (!container || !journalSection) return;
 
         // Fetch journal entries from the manifest
-        fetch('journal-manifest.json')
+        fetch('journal/journal_manifest.json')
             .then(response => {
                 if (!response.ok) throw new Error('Network response was not ok');
                 return response.json();
