@@ -7,22 +7,17 @@
  */
 
 // --- PRELOADER LOGIC ---
-// This runs as soon as the DOM is ready to set up animation delays.
 document.addEventListener('DOMContentLoaded', () => {
     const logoPaths = document.querySelectorAll('#preloader-logo path, #preloader-logo polygon, #preloader-logo rect');
     logoPaths.forEach((path, index) => {
-        // Set a custom property for the staggered CSS animation delay
         path.style.setProperty('--index', index);
     });
 });
 
-// This runs after all content (images, videos, etc.) has loaded.
 window.addEventListener('load', () => {
     const preloader = document.getElementById('preloader');
     if (preloader) {
-        // Add a class to trigger the fade-out animation
         preloader.classList.add('loaded');
-        // Completely remove the preloader after the transition to free up resources
         preloader.addEventListener('transitionend', () => {
             preloader.style.display = 'none';
         });
@@ -31,11 +26,34 @@ window.addEventListener('load', () => {
 // --- END PRELOADER LOGIC ---
 
 
-// Main script execution starts after the DOM is fully loaded.
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
 
     let translations = {};
     let currentLang = 'de'; // Default language
+
+    // --- HARDCODED CREW DATA (As per original script) ---
+    const crewData = {
+        de: [
+            { id: 'heiniger', name: 'Pascal Heiniger', title: 'Der Präsi', bio: 'Unser Steuermann mit einem Masterplan...', image: 'assets/images/crew/Pascal.webp' },
+            { id: 'baumann_m', name: 'Marcel Baumann', title: 'Vizepräsi & Marketing-Guru', bio: 'Mit Skistiefeln fest im Schnee...', image: 'assets/images/crew/Marcel.webp' },
+            { id: 'wipfli', name: 'Klara Wipfli', title: 'Team-Mum', bio: 'Klara, unsere Team-Psychologin...', image: 'assets/images/crew/Klara.webp' },
+            { id: 'baumann_r', name: 'Roger Baumann', title: 'Der Pistenflüsterer', bio: 'Roger, der mit seinen Skiern spricht...', image: 'assets/images/crew/Roger.webp' },
+            { id: 'zavratnik', name: 'Mathias Zavratnik', title: 'Der Finanz-Zauberer', bio: 'Das menschliche Abakus unserer Truppe.', image: 'assets/images/crew/mathias.webp' },
+            { id: 'danioth', name: 'Sales Danioth', title: 'Der Taktgeber', bio: 'Mit einem Gehirn, das schneller tickt...', image: 'assets/images/crew/Sales.webp' },
+            { id: 'risi', name: 'Corsin Risi', title: 'Der Luftakrobat', bio: 'Corsin, unser Freestyle-König...', image: 'assets/images/crew/Corsin.webp' },
+            { id: 'temperli', name: 'Aline Temperli', title: 'Das Naturkind', bio: 'Wenn Aline nicht auf den Pisten anzutreffen ist...', image: 'assets/images/crew/Aline.webp' },
+        ],
+        en: [
+            { id: 'heiniger', name: 'Pascal Heiniger', title: 'The President', bio: 'Our helmsman with a master plan...', image: 'assets/images/crew/Pascal.webp' },
+            { id: 'baumann_m', name: 'Marcel Baumann', title: 'Vice President & Marketing Guru', bio: 'With ski boots firmly in the snow...', image: 'assets/images/crew/Marcel.webp' },
+            { id: 'wipfli', name: 'Klara Wipfli', title: 'Team Mum', bio: 'Klara, our team psychologist...', image: 'assets/images/crew/Klara.webp' },
+            { id: 'baumann_r', name: 'Roger Baumann', title: 'The Trail Whisperer', bio: 'Roger, who talks to his skis...', image: 'assets/images/crew/Roger.webp' },
+            { id: 'zavratnik', name: 'Mathias Zavratnik', title: 'The Finance Wizard', bio: 'The human abacus of our troupe.', image: 'assets/images/crew/mathias.webp' },
+            { id: 'danioth', name: 'Sales Danioth', title: 'The Metronome', bio: 'With a brain that ticks faster...', image: 'assets/images/crew/Sales.webp' },
+            { id: 'risi', name: 'Corsin Risi', title: 'The Aerial Acrobat', bio: 'Corsin, our freestyle king...', image: 'assets/images/crew/Corsin.webp' },
+            { id: 'temperli', name: 'Aline Temperli', title: 'The Nature Lover', bio: 'If Aline is not found on the slopes...', image: 'assets/images/crew/Aline.webp' },
+        ]
+    };
 
     // --- HEADER SCROLL BEHAVIOR ---
     function initHeaderScroll() {
@@ -60,7 +78,6 @@ document.addEventListener('DOMContentLoaded', function() {
             mobileNav.classList.toggle('open');
         });
 
-        // Close menu when a link is clicked
         mobileNavLinks.forEach(link => {
             link.addEventListener('click', () => {
                 hamburger.classList.remove('open');
@@ -96,36 +113,33 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // --- CREW GRID ---
+    // --- CREW GRID (using hardcoded data) ---
     function initCrewGrid() {
         const grid = document.getElementById('crew-grid');
         if (!grid) return;
+        
+        grid.innerHTML = ''; // Clear existing content
+        const currentCrew = crewData[currentLang] || crewData.de;
 
-        fetch('assets/media-manifest.json')
-            .then(res => res.json())
-            .then(data => {
-                const crewMembers = data.crew;
-                grid.innerHTML = '';
-                crewMembers.forEach(member => {
-                    const memberCard = document.createElement('div');
-                    memberCard.className = 'crew-card cursor-pointer group';
-                    memberCard.setAttribute('data-member-id', member.id);
-                    memberCard.innerHTML = `
-                        <div class="relative overflow-hidden rounded-lg aspect-w-1 aspect-h-1">
-                            <img src="${member.image}" alt="${member.name}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70"></div>
-                            <div class="absolute bottom-0 left-0 p-4">
-                                <h3 class="text-xl font-bold">${member.name}</h3>
-                            </div>
-                        </div>
-                    `;
-                    grid.appendChild(memberCard);
-                });
-            })
-            .catch(error => console.error('Error loading crew members:', error));
+        currentCrew.forEach(member => {
+            const memberCard = document.createElement('div');
+            memberCard.className = 'crew-card cursor-pointer group';
+            // Use the member's id for the data attribute
+            memberCard.setAttribute('data-member-id', member.id);
+            memberCard.innerHTML = `
+                <div class="relative overflow-hidden rounded-lg aspect-w-1 aspect-h-1">
+                    <img src="${member.image}" alt="${member.name}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70"></div>
+                    <div class="absolute bottom-0 left-0 p-4">
+                        <h3 class="text-xl font-bold">${member.name}</h3>
+                    </div>
+                </div>
+            `;
+            grid.appendChild(memberCard);
+        });
     }
 
-    // --- JOURNAL SCROLLER ---
+    // --- JOURNAL SCROLLER (fetches from JSON) ---
     function initJournalScroller() {
         const journalSection = document.getElementById('journal');
         const container = document.getElementById('journal-scroll-container');
@@ -149,7 +163,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 
                 journalSection.style.display = '';
-
                 posts.sort((a, b) => new Date(b.date) - new Date(a.date));
                 const recentPosts = posts.slice(0, 5);
                 container.innerHTML = '';
@@ -205,12 +218,11 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .catch(error => {
                 console.error('Failed to load journal entries:', error);
-                // Instead of hiding the section, show a helpful error message.
                 container.innerHTML = `<p class="text-red-500 text-center w-full"><strong>Error:</strong> Journal could not be loaded. Check console for details.</p>`;
             });
     }
 
-    // --- MODAL ---
+    // --- MODAL (works with hardcoded crew data) ---
     function initModal() {
         const modalContainer = document.getElementById('modal-container');
         const modalContent = document.getElementById('modal-content');
@@ -231,26 +243,24 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         function openModal(memberId) {
-            fetch('assets/media-manifest.json')
-                .then(res => res.json())
-                .then(data => {
-                    const member = data.crew.find(m => m.id == memberId);
-                    if (member) {
-                        modalContent.innerHTML = `
-                            <button id="modal-close" class="absolute top-4 right-4 text-gray-400 hover:text-white text-4xl leading-none">&times;</button>
-                            <div class="text-center">
-                                <img src="${member.image}" alt="${member.name}" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-gray-700">
-                                <h2 class="text-2xl font-bold">${member.name}</h2>
-                                <p class="text-red-500 font-semibold mt-1">${member.role[currentLang] || member.role['de']}</p>
-                                <p class="text-gray-300 mt-4">${member.bio[currentLang] || member.bio['de']}</p>
-                            </div>
-                        `;
-                        document.getElementById('modal-close').addEventListener('click', closeModal);
-                        modalContainer.classList.remove('opacity-0', 'pointer-events-none');
-                        modalContent.classList.remove('scale-95');
-                        document.body.style.overflow = 'hidden';
-                    }
-                });
+            const currentCrew = crewData[currentLang] || crewData.de;
+            const member = currentCrew.find(m => m.id === memberId);
+            
+            if (member) {
+                modalContent.innerHTML = `
+                    <button id="modal-close" class="absolute top-4 right-4 text-gray-400 hover:text-white text-4xl leading-none">&times;</button>
+                    <div class="text-center">
+                        <img src="${member.image}" alt="${member.name}" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-gray-700">
+                        <h2 class="text-2xl font-bold">${member.name}</h2>
+                        <p class="text-red-500 font-semibold mt-1">${member.title}</p>
+                        <p class="text-gray-300 mt-4">${member.bio}</p>
+                    </div>
+                `;
+                document.getElementById('modal-close').addEventListener('click', closeModal);
+                modalContainer.classList.remove('opacity-0', 'pointer-events-none');
+                modalContent.classList.remove('scale-95');
+                document.body.style.overflow = 'hidden';
+            }
         }
 
         function closeModal() {
@@ -260,10 +270,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // --- SPONSORSHIP FORM ---
-    function initSponsorshipForm() {}
-
-    // --- PARTNERS GRID ---
+    // --- PARTNERS GRID (fetches from JSON) ---
     function initPartnersGrid() {
         const grid = document.getElementById('partners-grid');
         if (!grid) return;
@@ -285,24 +292,20 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // --- TRANSLATIONS ---
-    function loadTranslations() {
-        fetch('translations.json')
-            .then(response => {
-                if (!response.ok) throw new Error('Translation file not found');
-                return response.json();
-            })
-            .then(data => {
-                translations = data;
-                const savedLang = localStorage.getItem('language') || 'de';
-                translatePage(savedLang);
-            })
-            .catch(error => {
-                console.error('Could not load translations:', error);
-                translatePage('de'); // Fallback
-            });
+    async function loadTranslations() {
+        try {
+            const response = await fetch('translations.json');
+            if (!response.ok) throw new Error('Translation file not found');
+            translations = await response.json();
+            const savedLang = localStorage.getItem('language') || 'de';
+            await translatePage(savedLang);
+        } catch (error) {
+            console.error('Could not load translations:', error);
+            await translatePage('de'); // Fallback
+        }
     }
 
-    function translatePage(lang) {
+    async function translatePage(lang) {
         currentLang = lang;
         localStorage.setItem('language', lang);
         document.documentElement.lang = lang;
@@ -324,7 +327,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 element.innerHTML = translations['de'][key];
             }
         });
-
+        
+        // Re-initialize content that depends on language
+        initCrewGrid();
         initJournalScroller(); 
     }
 
@@ -338,12 +343,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initHeaderScroll();
     initMobileMenu();
     initHeroVideoScrub();
-    initCrewGrid();
     initModal();
-    initSponsorshipForm();
     initPartnersGrid();
-    loadTranslations();
-    // FIX: Call initJournalScroller on initial page load.
-    initJournalScroller();
+    await loadTranslations(); // This will call initCrewGrid and initJournalScroller
 
 });
