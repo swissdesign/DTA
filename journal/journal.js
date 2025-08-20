@@ -5,7 +5,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   // --- Shared manifest path (underscore) ---
-  const manifestURL = 'journal_manifest.json'; // fix name once
+  const manifestURL = './journal_manifest.json'; // fix name once
 
   // --- Navigation Menu Logic ---
   const menuToggle = document.getElementById('menu-toggle');
