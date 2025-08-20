@@ -80,7 +80,7 @@ const entryHref = (filePath) => {
           return `
             <div class="journal-card flex-shrink-0 snap-start ${isCurrent ? 'active-entry' : ''}"
                  style="flex:0 0 80%;max-width:80%;">
-              <a href="${entry.file}" class="block" aria-current="${isCurrent ? 'page' : 'false'}">
+             <a href="${entryHref(entry.file)}" class="block" aria-current="${isCurrent ? 'page' : 'false'}">
                 <div class="overflow-hidden">
                   <img src="${entry.image}" alt="${entry.title}"
                        class="h-56 w-full object-cover group-hover:scale-105 transition-transform duration-300"
