@@ -4,8 +4,9 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // --- Shared manifest path (underscore) ---
-  const manifestURL = './journal_manifest.json'; // fix name once
+// Resolve manifest path relative to the current page (works on GH Pages)
+const isInJournalFolder = window.location.pathname.toLowerCase().includes('/journal/');
+const manifestURL = (isInJournalFolder ? '../journal_manifest.json' : './journal_manifest.json') + '?v=' + Date.now(); // cache-bust
 
   // --- Navigation Menu Logic ---
   const menuToggle = document.getElementById('menu-toggle');
