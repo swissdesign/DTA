@@ -8,6 +8,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const manifestURL =
     (isInJournalFolder ? '../journal_manifest.json' : './journal_manifest.json') +
     '?v=' + Date.now(); // cache-bust while testing
+  const IN_JOURNAL = window.location.pathname.toLowerCase().includes('/journal/');
+const entryHref = (filePath) => {
+  const name = (filePath || '').split('/').pop(); // "je_003.html"
+  return IN_JOURNAL ? `./${name}` : `./journal/${name}`;
+};
 
   // --- Navigation Menu Logic ---
   const menuToggle = document.getElementById('menu-toggle');
