@@ -88,16 +88,37 @@ body.menu-open #menu-toggle path:nth-child(3) {
     .prose p { margin-bottom: 1rem; }
     .active-entry { outline: 2px solid #f97316; outline-offset: 2px; }
 
-.journal-card a::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+/* cards */
+.journal-card {
+  flex: 0 0 70%;          /* card width relative to container */
+  max-width: 70%;
+  background: white;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  scroll-snap-align: start;
 }
 
-.active-entry {
-  outline: 2px solid #f97316; /* Tailwind orange-500 */
-  outline-offset: 2px;
+/* active card highlight */
+.journal-card.active-entry {
+  outline: 3px solid #333;
+}
+
+/* container */
+#journal-scroll-container {
+  display: flex;
+  gap: 1.5rem; /* spacing between cards */
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 0 1rem; /* adjust outer spacing */
+}
+
+/* hide scrollbar */
+#journal-scroll-container::-webkit-scrollbar {
+  display: none;
+}
+#journal-scroll-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
