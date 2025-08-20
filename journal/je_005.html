@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="journal.css" />
+  <script src="journal.js" defer></script>
 </head>
 <body class="antialiased bg-[#F8F8F8] text-[#1a1a1a]">
 
@@ -69,7 +70,7 @@
       <header class="mb-8 md:mb-12">
         <p class="text-xs uppercase tracking-wide text-gray-500">Media Statement</p>
         <h1 class="text-4xl md:text-6xl font-light leading-tight">Journal Entry 005</h1>
-        <p class="mt-2 text-gray-500">05 Aug 2025 · Andermatt</p>
+        <p class="mt-2 text-gray-500">05 Aug 2024 · Andermatt</p>
         <div class="mt-6 flex flex-wrap gap-3">
           <a href="#" class="inline-flex items-center gap-2 bg-orange-600 hover:bg-orange-700 text-white text-sm font-medium px-4 py-2 rounded-md" download>
             <!-- PDF icon -->
@@ -185,15 +186,6 @@
         next?.addEventListener('click', () => update(Number(track.dataset.activeIndex || 0) + 1));
       }
 
-      // Journal scroller below: load manifest and mark current file active
-      if (window.initJournalScrollerForEntry) {
-        window.initJournalScrollerForEntry();
-      }
-
-      // Sponsorship form (defined in journal.js additions)
-      if (window.initSponsorshipForm) {
-        window.initSponsorshipForm();
-      }
     });
   </script>
 </body>
