@@ -111,7 +111,7 @@ body.menu-open #menu-toggle path:nth-child(3) {
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
-  padding: 0 1rem; /* adjust outer spacing */
+  padding: 2rem; /* adjust outer spacing */
 }
 
 /* hide scrollbar */
