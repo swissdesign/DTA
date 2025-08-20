@@ -82,6 +82,12 @@ body.menu-open #menu-toggle path:nth-child(3) {
     line-height: 1.6;
 }
 
+    /* Page-specific tiny helpers (kept minimal; main look in journal.css & Tailwind) */
+    .floating-logo { position: fixed; top: 10px; left: 50%; transform: translateX(-50%); z-index: 50; opacity: .9; }
+    .floating-logo:hover { opacity: 1; }
+    .prose p { margin-bottom: 1rem; }
+    .active-entry { outline: 2px solid #f97316; outline-offset: 2px; }
+
 .journal-card a::after {
     content: '';
     position: absolute;
