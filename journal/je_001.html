@@ -12,8 +12,9 @@
 </head>
 <body class="antialiased bg-[#F8F8F8] text-[#1a1a1a]">
 
-  <!-- Top-center floating logo linking back to demo.team.ch -->
-  <a href="https://demo.team.ch" class="floating-logo block w-[120px] sm:w-[160px]" aria-label="Back to demo.team.ch">
+  <!-- Header (kept consistent with Journal page for menu overlay) -->
+  <header class="fixed top-0 left-0 w-full p-6 md:p-8 z-40 flex justify-between items-center mix-blend-difference pointer-events-none">
+ <a href="https://demo.team.ch" class="floating-logo block w-[120px] sm:w-[160px]" aria-label="Back to demo.team.ch">
     <!-- SVG provided by Pascal -->
     <svg width="100" height="100" viewBox="0 0 2000 2000" fill="White" xmlns="http://www.w3.org/2000/svg">
         <g id="Bear__x26__Cross">
@@ -62,16 +63,6 @@
         </g>
     </svg>
   </a>
-
-  <!-- Header (kept consistent with Journal page for menu overlay) -->
-  <header class="fixed top-0 left-0 w-full p-6 md:p-8 z-40 flex justify-between items-center mix-blend-difference pointer-events-none">
-    <a href="/index.html" class="text-white pointer-events-auto">
-      <svg class="h-8 w-auto" width="100" height="35" viewBox="0 0 100 35" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0 35V0H10V5H15V10H20V15H25V20H20V25H15V30H10V35H0Z" fill="currentColor"/>
-        <path d="M40 35V0H50V5H55V10H60V15H65V20H60V25H55V30H50V35H40Z" fill="currentColor"/>
-        <path d="M80 35V0H90V5H95V10H100V15H95V20H90V25H85V30H80V35Z" fill="currentColor"/>
-      </svg>
-    </a>
     <button id="menu-toggle" class="z-50 text-white pointer-events-auto">
       <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
