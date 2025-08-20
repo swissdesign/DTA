@@ -101,7 +101,7 @@ body.menu-open #menu-toggle path:nth-child(3) {
 
 /* active card highlight */
 .journal-card.active-entry {
-  outline: 3px solid #333;
+  outline: 3px solid #f97316;
 }
 
 /* container */
