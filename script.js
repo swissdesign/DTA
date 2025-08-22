@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
 
     function initCrewGrid() {
-        const grid = document.querySelector('#crew-grid'); // Corrected ID
+        const grid = document.querySelector('#crew .grid'); // Reverted to original selector
         if (!grid) return;
         grid.innerHTML = crewData.map(member => `
             <div class="crew-member group cursor-pointer" data-name="${member.name}" data-details-key="${member.details_key}">
@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     function initModal() {
         const modalContainer = document.getElementById('modal-container');
         const modalContent = document.getElementById('modal-content');
-        const crewGrid = document.querySelector('#crew-grid'); // Corrected ID
+        const crewGrid = document.querySelector('#crew .grid'); // Reverted to original selector
 
         if (!modalContainer || !modalContent || !crewGrid) return;
         
@@ -308,3 +308,4 @@ document.addEventListener('DOMContentLoaded', async function() {
     await loadTranslations();
 
 });
+
