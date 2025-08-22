@@ -143,15 +143,56 @@
     </div>
     </section>
 
-    <!-- Partners Section -->
+    <!-- Partners -->
    <section class="py-20" id="partners">
-            <div class="container mx-auto px-6">
-                <h2 class="text-3xl md:text-5xl font-bold text-center mb-12" data-key="partners_title">Our Partners</h2>
-                <div id="partners-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 items-center">
-                    <!-- Partner logos will be inserted here -->
-                </div>
-            </div>
-        </section>
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl md:text-5xl font-bold text-center mb-12" data-key="partners_title">Our Partners</h2>
+      <p class="text-neutral-300 text-center max-w-3xl mx-auto -mt-8 mb-12" data-key="partners_subtitle">
+        Our journey would not be possible without the generous support of our partners. A heartfelt thank you!
+      </p>
+      <div id="partners-grid" class="partners-grid grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 items-center"></div>
+    </div>
+  </section>
+  
+    <script>
+    (function() {
+      async function loadPartners() {
+        const grid = document.getElementById('partners-grid');
+        if (!grid) return;
+        try {
+          const res = await fetch('../assets/images/partners/partners.json', { cache: 'no-store' });
+          const partners = await res.json();
+          // Render anchors with inline SVG/IMG markup
+          partners.forEach(p => {
+            const a = document.createElement('a');
+            a.href = p.href || '#';
+            a.setAttribute('aria-label', p.name || 'Partner');
+            a.className = 'group aspect-[3/2] md:aspect-[4/3] bg-transparent';
+            const span = document.createElement('span');
+            span.className = 'partner-logo';
+            // Insert SVG markup string if provided, else fallback to <img src="...">
+            if (p.svg && typeof p.svg === 'string' && p.svg.trim().startsWith('<')) {
+              span.innerHTML = p.svg;
+            } else if (p.src) {
+              const img = document.createElement('img');
+              img.src = p.src;
+              img.alt = p.name || 'Partner logo';
+              img.loading = 'lazy';
+              span.appendChild(img);
+            } else {
+              span.textContent = p.name || 'Partner';
+            }
+            a.appendChild(span);
+            grid.appendChild(a);
+          });
+        } catch (e) {
+          console.error('Partners load failed:', e);
+          grid.innerHTML = '<p class="text-red-500">Could not load partners.</p>';
+        }
+      }
+      document.addEventListener('DOMContentLoaded', loadPartners);
+    })();
+    </script>
   </main>
 
   <footer class="text-center py-12 md:py-20 text-gray-500 text-sm">
