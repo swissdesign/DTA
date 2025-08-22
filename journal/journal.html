@@ -121,14 +121,14 @@
     
     <!-- Partners Section -->
    <section class="py-20 partners-on-light" id="partners">
-  <div class="container mx-auto px-6">
-    <h2 class="text-3xl md:text-5xl font-bold text-center mb-12" data-key="partners_title">Our Partners</h2>
-    <p class="text-neutral-300 text-center max-w-3xl mx-auto -mt-8 mb-12" data-key="partners_subtitle">
-      Our journey would not be possible without the generous support of our partners. A heartfelt thank you!
-    </p>
-    <div id="partners-grid" class="partners-grid grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 items-center"></div>
-  </div>
-</section>
+     <div class="container mx-auto px-6">
+       <h2 class="text-3xl md:text-5xl font-bold text-center mb-12" data-key="partners_title">Our Partners</h2>
+       <p class="text-neutral-300 text-center max-w-3xl mx-auto -mt-8 mb-12" data-key="partners_subtitle">
+         Our journey would not be possible without the generous support of our partners. A heartfelt thank you!
+       </p>
+       <div id="partners-grid" class="partners-grid grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 items-center"></div>
+     </div>
+   </section>
     <script>
     (function() {
       async function loadPartners() {
@@ -176,6 +176,70 @@
         <p>&copy; <span id="year"></span> DTA. All Rights Reserved.</p>
     </footer>
 
-    <script src="journal.js"></script>
+    <script>
+        // This script now contains the logic from journal.js
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuToggle = document.getElementById('menu-toggle');
+            const menuOverlay = document.getElementById('menu-overlay');
+            const yearSpan = document.getElementById('year');
+
+            // Set current year in the footer
+            if (yearSpan) {
+                yearSpan.textContent = new Date().getFullYear();
+            }
+
+            // Toggle the fullscreen mobile menu
+            if (menuToggle && menuOverlay) {
+                menuToggle.addEventListener('click', () => {
+                    menuOverlay.classList.toggle('opacity-0');
+                    menuOverlay.classList.toggle('pointer-events-none');
+                });
+            }
+
+            // --- Load Journal Entries ---
+            const journalGrid = document.getElementById('journal-grid');
+            if (journalGrid) {
+                // Fetch the manifest file
+                fetch('journal_manifest.json')
+                    .then(response => {
+                        // Check if the request was successful
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(entries => {
+                        // Sort entries by date so the newest ones appear first
+                        entries.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+                        // Loop through each entry and create its HTML element
+                        entries.forEach((entry, index) => {
+                            const gridItem = document.createElement('a');
+                            gridItem.href = entry.link;
+                            gridItem.className = 'journal-grid-item group block bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 ease-in-out';
+                            // Apply a staggered animation delay
+                            gridItem.style.animationDelay = `${index * 100}ms`;
+
+                            gridItem.innerHTML = `
+                                <div class="overflow-hidden rounded-t-lg">
+                                    <img src="${entry.image}" alt="${entry.title}" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out" onerror="this.onerror=null;this.src='https://placehold.co/600x400/f8f8f8/1a1a1a?text=Image+Not+Found';">
+                                </div>
+                                <div class="p-6">
+                                    <h2 class="text-2xl font-semibold mb-2">${entry.title}</h2>
+                                    <p class="text-gray-500 text-sm">${new Date(entry.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                                </div>
+                            `;
+                            // Add the new element to the grid
+                            journalGrid.appendChild(gridItem);
+                        });
+                    })
+                    .catch(error => {
+                        // If something goes wrong, display an error message
+                        console.error('Error loading journal entries:', error);
+                        journalGrid.innerHTML = '<p class="text-center text-red-500 col-span-full">Failed to load journal entries. Please try again later.</p>';
+                    });
+            }
+        });
+    </script>
 </body>
 </html>
