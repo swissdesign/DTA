@@ -52,9 +52,9 @@ document.addEventListener('DOMContentLoaded', async function() {
     ];
     
     const partnersData = [
-       { name: "Andermatt", logo: "./assets/images/partners/andermatt.svg", url: "#" },
-       { name: "Mammut", logo: "./assets/images/partners/mammut.svg", url: "#" },
-       { name: "Stöckli", logo: "./assets/images/partners/stockli.svg", url: "#" },
+       { name: "Andermatt", logo: "./assets/images/partners/", url: "#" },
+       { name: "Mammut", logo: "./assets/images/partners/", url: "#" },
+       { name: "Stöckli", logo: "./assets/images/partners/", url: "#" },
     ];
 
     // --- TRANSLATION & CONTENT ---
