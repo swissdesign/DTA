@@ -1,51 +1,44 @@
 [
   {
-    "file": "./journal/je_001.html",
-    "image": "https://placehold.co/1600x900/png",
-    "date": "25.04.2024",
-    "title": "First year 23/24",
-    "caption": "Our Arosa debut"
-  },
-  {
-    "file": "./journal/je_002.html",
-    "image": "https://placehold.co/1600x900/png",
-    "date": "03.12.2024",
-    "title": "Season 24/25",
-    "caption": "A new Momentum"
-  },
-  {
-    "file": "./journal/je_003.html",
-    "image": "https://placehold.co/1600x900/png",
-    "date": "15.03.2025",
-    "title": "Rang 2. Zentralschweizer Meisterschaften",
-    "caption": "Test caption Template"
-  },
-  {
-    "file": "./journal/je_004.html",
-    "image": "https://placehold.co/1600x900/png",
-    "date": "16.04.2025",
-    "title": "Swiss Snow Happening Saas Fee",
-    "caption": "#Legendär"
-  },
-    {
-    "file": "./journal/je_005.html",
-    "image": "https://placehold.co/1600x900/png",
-    "date": "22.08.2025",
-    "title": "Autumn 2025",
-    "caption": "Preparing Season 25/26"
-  },
-    {
     "file": "./journal/je_006.html",
     "image": "https://placehold.co/1600x900/png",
     "date": "25.08.2025",
     "title": "Website & J+S",
     "caption": "Official Homepage"
   },
-    {
-    "file": "./journal/je_007.html",
+  {
+    "file": "./journal/je_005.html",
     "image": "https://placehold.co/1600x900/png",
-    "date": "22.01.2022",
-    "title": "Season 25/26",
-    "caption": "What to expect from the Demo Team this year"
+    "date": "15.06.2025",
+    "title": "Setting the Table for 25/26",
+    "caption": "Preparing Season 25/26 - Structure, Clarity and New Ideas"
+  },
+  {
+    "file": "./journal/je_004.html",
+    "image": "https://placehold.co/1600x900/png",
+    "date": "01.05.2025",
+    "title": "Happening 25: Saas Fee",
+    "caption": "Swiss Snow Happening in Sass Fee - a New Benchmark for the Demo Team Andermatt"
+  },
+  {
+    "file": "./journal/je_003.html",
+    "image": "https://placehold.co/1600x900/png",
+    "date": "17.03.2025",
+    "title": "Breakthrough in Central Switzerland",
+    "caption": "A step forward for Andermatt & the Central Swiss Ski Schools at the ZSM in Andermatt"
+  },
+  {
+    "file": "./journal/je_002.html",
+    "image": "https://placehold.co/1600x900/png",
+    "date": "15.12.2024",
+    "title": "Building Momentum 24/25",
+    "caption": "Season two began with tighter formations, clearer goals and a bigger training rhythm — Andermatt moved from ‘participants’ to ‘contenders.’"
+  },
+  {
+    "file": "./journal/je_001.html",
+    "image": "https://placehold.co/1600x900/png",
+    "date": "01.05.2024",
+    "title": "Founding Year 23/24",
+    "caption": "Demo Team Andermatt announced its re awakeing and stepped onto the national stage of synchronized skiing."
   }
 ]
