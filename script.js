@@ -40,6 +40,9 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     // --- DATA OBJECTS ---
     const crewData = [
+        { id: 'Klara', name: "Klara", role: "Team-Mum", img: "./assets/images/crew/Klara.webp", details_key: "klara_details" },
+        { id: 'Aline', name: "Aline", role: "Das Naturkind", img: "./assets/images/crew/Aline.webp", details_key: "aline_details" },
+        { id: 'Maria', name: "Maria", role: "Die Pisten-Paganini", img: "./assets/images/crew/Maria.webp", details_key: "maria_details" }
         { id: 'Mathias', name: "Mathias", role: "Der Finanz-Zauberer", img: "./assets/images/crew/mathias.webp", details_key: "mathias_details" },
         { id: 'Pascal', name: "Pascal", role: "Der Präsi", img: "./assets/images/crew/Pascal.webp", details_key: "pascal_details" },
         { id: 'Roger', name: "Roger", role: "Der Pistenflüsterer", img: "./assets/images/crew/Roger.webp", details_key: "roger_details" },
@@ -47,9 +50,6 @@ document.addEventListener('DOMContentLoaded', async function() {
         { id: 'Corsin', name: "Corsin", role: "Der Luftakrobat", img: "./assets/images/crew/Corsin.webp", details_key: "corsin_details" },
         { id: 'Lars', name: "Lars", role: "Der Hauptling", img: "./assets/images/crew/Lars.webp", details_key: "lars_details" },
         { id: 'Sales', name: "Sales", role: "Der Taktgeber", img: "./assets/images/crew/Sales.webp", details_key: "sales_details" },
-        { id: 'Klara', name: "Klara", role: "Team-Mum", img: "./assets/images/crew/Klara.webp", details_key: "klara_details" },
-        { id: 'Aline', name: "Aline", role: "Das Naturkind", img: "./assets/images/crew/Aline.webp", details_key: "aline_details" },
-        { id: 'Maria', name: "Maria", role: "Die Pisten-Paganini", img: "./assets/images/crew/Maria.webp", details_key: "maria_details" }
     ];
     
     // Placeholder for partners data, assuming it might be loaded elsewhere or from a file.
