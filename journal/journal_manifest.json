@@ -33,5 +33,19 @@
     "date": "22.01.2022",
     "title": "Test 005",
     "caption": "Test caption Template"
+  },
+    {
+    "file": "./journal/je_006.html",
+    "image": "https://placehold.co/1600x900/png",
+    "date": "22.01.2022",
+    "title": "Website & J+S",
+    "caption": "Test caption Template"
+  },
+    {
+    "file": "./journal/je_007.html",
+    "image": "https://placehold.co/1600x900/png",
+    "date": "22.01.2022",
+    "title": "Mid-season 25/26 pulse",
+    "caption": "Test caption Template"
   }
 ]
