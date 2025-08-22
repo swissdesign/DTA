@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     ];
     
     const partnersData = [
-       { name: "Andermatt", logo: "./assets/images/partners/", url: "#" },
+       { name: "Andermatt", logo: "../assets/images/partners/", url: "#" },
        { name: "Mammut", logo: "./assets/images/partners/", url: "#" },
        { name: "Stöckli", logo: "./assets/images/partners/", url: "#" },
     ];
