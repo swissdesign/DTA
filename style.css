@@ -15,6 +15,13 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
+h5 {
+  color: orange;
+  display: inline;   /* so it doesn’t break line */
+  font-weight: inherit;
+  font-size: inherit;
+}
+
 /* -----------------------------------------------
  * ✦ Header & Navigation
  * --------------------------------------------- */
