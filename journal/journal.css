@@ -8,6 +8,14 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+h5 {
+  color: orange;
+  display: inline;   /* so it doesn’t break line */
+  font-weight: inherit;
+  font-size: inherit;
+}
+
+
 /* --- Header & Navigation --- */
 
 /* Style for the hamburger icon lines */
