@@ -35,44 +35,65 @@ window.addEventListener('load', () => {
 document.addEventListener('DOMContentLoaded', async function() {
 
     let translations = {};
-    let currentLang = 'de'; // Default language
+    // Check localStorage for a saved language, otherwise default to 'de'.
+    let currentLang = localStorage.getItem('dta_lang') || 'de';
 
     // --- DATA OBJECTS ---
     const crewData = [
-        { name: "Mathias", role: "Der Finanz-Zauberer", img: "./assets/images/crew/mathias.webp", details_key: "mathias_details" },
-        { name: "Pascal", role: "Der Präsi", img: "./assets/images/crew/Pascal.webp", details_key: "pascal_details" },
-        { name: "Roger", role: "Der Pistenflüsterer", img: "./assets/images/crew/Roger.webp", details_key: "roger_details" },
-        { name: "Marcel", role: "Vizepräsi", img: "./assets/images/crew/Marcel.webp", details_key: "marcel_details" },
-        { name: "Corsin", role: "Der Luftakrobat", img: "./assets/images/crew/Corsin.webp", details_key: "corsin_details" },
-        { name: "Lars", role: "Der Hauptling", img: "./assets/images/crew/Lars.webp", details_key: "lars_details" },
-        { name: "Sales", role: "Der Taktgeber", img: "./assets/images/crew/Sales.webp", details_key: "sales_details" },
-        { name: "Klara", role: "Team-Mum", img: "./assets/images/crew/Klara.webp", details_key: "klara_details" },
-        { name: "Aline", role: "Das Naturkind", img: "./assets/images/crew/Aline.webp", details_key: "aline_details" },
-        { name: "Maria", role: "Die Pisten-Paganini", img: "./assets/images/crew/Maria.webp", details_key: "maria_details" }
+        { id: 'Mathias', name: "Mathias", role: "Der Finanz-Zauberer", img: "./assets/images/crew/mathias.webp", details_key: "mathias_details" },
+        { id: 'Pascal', name: "Pascal", role: "Der Präsi", img: "./assets/images/crew/Pascal.webp", details_key: "pascal_details" },
+        { id: 'Roger', name: "Roger", role: "Der Pistenflüsterer", img: "./assets/images/crew/Roger.webp", details_key: "roger_details" },
+        { id: 'Marcel', name: "Marcel", role: "Vizepräsi", img: "./assets/images/crew/Marcel.webp", details_key: "marcel_details" },
+        { id: 'Corsin', name: "Corsin", role: "Der Luftakrobat", img: "./assets/images/crew/Corsin.webp", details_key: "corsin_details" },
+        { id: 'Lars', name: "Lars", role: "Der Hauptling", img: "./assets/images/crew/Lars.webp", details_key: "lars_details" },
+        { id: 'Sales', name: "Sales", role: "Der Taktgeber", img: "./assets/images/crew/Sales.webp", details_key: "sales_details" },
+        { id: 'Klara', name: "Klara", role: "Team-Mum", img: "./assets/images/crew/Klara.webp", details_key: "klara_details" },
+        { id: 'Aline', name: "Aline", role: "Das Naturkind", img: "./assets/images/crew/Aline.webp", details_key: "aline_details" },
+        { id: 'Maria', name: "Maria", role: "Die Pisten-Paganini", img: "./assets/images/crew/Maria.webp", details_key: "maria_details" }
     ];
+    
+    // Placeholder for partners data, assuming it might be loaded elsewhere or from a file.
+    const partnersData = [
+        // Example: { name: "Partner One", logo: "path/to/logo.svg", url: "#" }
+    ];
+
 
     // --- TRANSLATION & CONTENT ---
     async function loadTranslations() {
+        console.log("Fetching translations...");
         try {
             const response = await fetch('translations.json');
             if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
             translations = await response.json();
-            translatePage(currentLang);
+            console.log("Translations loaded successfully.");
+            // Set the initial language based on what was found in localStorage or the default.
+            setLanguage(currentLang);
         } catch (error) {
             console.error("Could not load translations:", error);
         }
     }
 
-    function translatePage(lang) {
+    function setLanguage(lang) {
+        console.log(`Attempting to set language to: ${lang}`);
+        if (!translations[lang]) {
+            console.error(`Language "${lang}" not found in translations.`);
+            return;
+        }
         currentLang = lang;
         document.documentElement.lang = lang;
+        // Save the new language choice to localStorage.
+        localStorage.setItem('dta_lang', lang);
+
         document.querySelectorAll('[data-key]').forEach(el => {
             const key = el.getAttribute('data-key');
             if (translations[lang]?.[key]) {
                 el.innerHTML = translations[lang][key];
+            } else {
+                 console.warn(`Translation key "${key}" not found for language "${lang}".`);
             }
         });
         updateLangButtons();
+        console.log(`Language successfully set to: ${lang}`);
     }
     
     function updateLangButtons() {
@@ -100,9 +121,9 @@ document.addEventListener('DOMContentLoaded', async function() {
     function initMobileMenu() {
         const menuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
-        const navLinks = mobileMenu.querySelectorAll('.mobile-nav-link');
-
         if (!menuButton || !mobileMenu) return;
+        
+        const navLinks = mobileMenu.querySelectorAll('.mobile-nav-link');
 
         const toggleMenu = () => {
             menuButton.classList.toggle('is-active');
@@ -125,7 +146,6 @@ document.addEventListener('DOMContentLoaded', async function() {
             const scrollPosition = window.scrollY;
             const sectionHeight = heroSection.offsetHeight;
             if (scrollPosition < sectionHeight) {
-                // Ensure video time doesn't exceed duration
                 const newTime = video.duration * (scrollPosition / sectionHeight);
                 if (isFinite(newTime)) {
                     video.currentTime = newTime;
@@ -135,7 +155,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
 
     function initCrewGrid() {
-        const grid = document.querySelector('#crew .grid');
+        const grid = document.querySelector('#crew-grid'); // Corrected ID
         if (!grid) return;
         grid.innerHTML = crewData.map(member => `
             <div class="crew-member group cursor-pointer" data-name="${member.name}" data-details-key="${member.details_key}">
@@ -144,7 +164,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                     <div class="absolute inset-0 bg-black bg-opacity-50 group-hover:bg-opacity-20 transition-all duration-300"></div>
                 </div>
                 <h3 class="mt-4 text-xl font-bold">${member.name}</h3>
-                <p class="text-gray-400">${member.role}</p>
+                <p class="text-gray-400" data-key="crew_${member.id.toLowerCase()}_title">${member.role}</p>
             </div>
         `).join('');
     }
@@ -152,7 +172,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     function initModal() {
         const modalContainer = document.getElementById('modal-container');
         const modalContent = document.getElementById('modal-content');
-        const crewGrid = document.querySelector('#crew .grid');
+        const crewGrid = document.querySelector('#crew-grid'); // Corrected ID
 
         if (!modalContainer || !modalContent || !crewGrid) return;
         
@@ -163,11 +183,13 @@ document.addEventListener('DOMContentLoaded', async function() {
                 const member = crewData.find(m => m.name === memberName);
                 if (member) {
                     const detailsText = translations[currentLang]?.[member.details_key] || "Details coming soon.";
+                    const roleText = translations[currentLang]?.[`crew_${member.id.toLowerCase()}_title`] || member.role;
+
                     modalContent.innerHTML = `
                         <button id="modal-close" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">&times;</button>
-                        <img src="${member.img}" alt="${member.name}" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover">
+                        <img src="${member.img}" alt="${member.name}" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-neutral-800">
                         <h3 class="text-2xl font-bold text-center">${member.name}</h3>
-                        <p class="text-gray-400 text-center mb-4">${member.role}</p>
+                        <p class="text-red-400 text-center mb-4">${roleText}</p>
                         <p class="text-gray-300">${detailsText}</p>
                     `;
                     modalContainer.classList.add('active');
@@ -200,14 +222,15 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     function initPartnersGrid() {
         const grid = document.getElementById('partners-grid');
-        if (!grid) return;
+        if (!grid || !partnersData) return;
         grid.innerHTML = partnersData.map(partner => `
             <a href="${partner.url}" target="_blank" rel="noopener noreferrer" class="flex justify-center items-center p-4 rounded-lg transition-transform duration-300 hover:scale-105">
                 <img src="${partner.logo}" alt="${partner.name}" class="max-h-12 w-auto filter grayscale hover:filter-none transition-all duration-300">
             </a>
         `).join('');
     }
-function initJournalScroller() {
+
+    function initJournalScroller() {
         const container = document.getElementById('journal-scroll-container');
         const scrollLeftBtn = document.getElementById('journal-scroll-left');
         const scrollRightBtn = document.getElementById('journal-scroll-right');
@@ -215,7 +238,6 @@ function initJournalScroller() {
 
         if (!container || !journalSection) return;
 
-        // Fetch journal entries from the manifest
         fetch('./journal/journal_manifest.json')
             .then(response => {
                 if (!response.ok) throw new Error('Network response was not ok');
@@ -227,7 +249,6 @@ function initJournalScroller() {
                     return;
                 }
 
-                // Create HTML for each card
                 container.innerHTML = entries.map(entry => `
                     <div class="journal-card bg-gray-800 rounded-lg overflow-hidden flex flex-col group">
                         <a href="${entry.file}" class="block">
@@ -243,7 +264,6 @@ function initJournalScroller() {
                     </div>
                 `).join('');
 
-                // --- Scroller Button Logic ---
                 const updateButtons = () => {
                     const maxScroll = container.scrollWidth - container.clientWidth;
                     scrollLeftBtn.disabled = container.scrollLeft < 10;
@@ -270,20 +290,18 @@ function initJournalScroller() {
             });
     }
 
-
-
-    // --- EVENT LISTENERS ---
-    document.getElementById('lang-de-desktop').addEventListener('click', () => translatePage('de'));
-    document.getElementById('lang-en-desktop').addEventListener('click', () => translatePage('en'));
-    document.getElementById('lang-de-mobile').addEventListener('click', () => translatePage('de'));
-    document.getElementById('lang-en-mobile').addEventListener('click', () => translatePage('en'));
+    // --- EVENT LISTENERS for Language Buttons ---
+    document.getElementById('lang-de-desktop').addEventListener('click', () => setLanguage('de'));
+    document.getElementById('lang-en-desktop').addEventListener('click', () => setLanguage('en'));
+    document.getElementById('lang-de-mobile').addEventListener('click', () => setLanguage('de'));
+    document.getElementById('lang-en-mobile').addEventListener('click', () => setLanguage('en'));
     
     // --- INITIALIZATION CALLS ---
     initHeaderScroll();
     initMobileMenu();
     initHeroVideoScrub();
     initCrewGrid();
-    initJournalScroller(); // <-- ADD THIS LINE
+    initJournalScroller();
     initModal();
     initSponsorshipForm();
     initPartnersGrid();
