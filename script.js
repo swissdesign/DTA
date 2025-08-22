@@ -50,12 +50,6 @@ document.addEventListener('DOMContentLoaded', async function() {
         { name: "Aline", role: "Das Naturkind", img: "./assets/images/crew/Aline.webp", details_key: "aline_details" },
         { name: "Maria", role: "Die Pisten-Paganini", img: "./assets/images/crew/Maria.webp", details_key: "maria_details" }
     ];
-    
-    const partnersData = [
-       { name: "Andermatt", logo: "../assets/images/partners/", url: "#" },
-       { name: "Mammut", logo: "./assets/images/partners/", url: "#" },
-       { name: "Stöckli", logo: "./assets/images/partners/", url: "#" },
-    ];
 
     // --- TRANSLATION & CONTENT ---
     async function loadTranslations() {
