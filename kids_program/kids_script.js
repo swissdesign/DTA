@@ -208,5 +208,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     // Initial Load
+        initPartnersGrid();
     await loadTranslations();
 });
