@@ -305,7 +305,7 @@
         const grid = document.getElementById('partners-grid');
         if (!grid) return;
         try {
-          const res = await fetch('./assets/images/partners/partners.json', { cache: 'no-store' });
+          const res = await fetch('../assets/images/partners/partners.json', { cache: 'no-store' });
           const partners = await res.json();
           // Render anchors with inline SVG/IMG markup
           partners.forEach(p => {
