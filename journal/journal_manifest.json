@@ -22,21 +22,21 @@
   },
   {
     "file": "./journal/je_003.html",
-    "image": "https://placehold.co/1600x900/png",
+    "image": "../assets/images/Journal/ZSM25_001.webp",
     "date": "17.03.2025",
     "title": "Breakthrough in Central Switzerland",
     "caption": "A step forward for Andermatt & the Central Swiss Ski Schools at the ZSM in Andermatt"
   },
   {
     "file": "./journal/je_002.html",
-    "image": "https://placehold.co/1600x900/png",
+    "image": "../assets/images/Journal/2425_001.webp",
     "date": "15.12.2024",
     "title": "Building Momentum 24/25",
     "caption": "Season two began with tighter formations, clearer goals and a bigger training rhythm — Andermatt moved from ‘participants’ to ‘contenders.’"
   },
   {
     "file": "./journal/je_001.html",
-    "image": "https://placehold.co/1600x900/png",
+    "image": "../assets/images/Journal/2324_001.webp",
     "date": "01.05.2024",
     "title": "Founding Year 23/24",
     "caption": "Demo Team Andermatt announced its re awakeing and stepped onto the national stage of synchronized skiing."
