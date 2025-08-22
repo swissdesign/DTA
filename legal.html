@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impressum & Datenschutz - Demo Team Andermatt</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="assets/logo-simplified.svg" type="image/svg+xml">
+    <style>
+        /* Additional styles for the legal page */
+        body {
+            background-color: #ffffff;
+            color: #333; /* Darker text for better readability on white */
+        }
+
+        .legal-content {
+            padding: 100px 5vw 5vw 5vw; /* Add padding to top to account for nav, and on sides */
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .legal-content h1, .legal-content h2, .legal-content h3 {
+            color: #333;
+            font-family: 'Helvetica', 'Arial', sans-serif;
+        }
+        
+        .legal-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .legal-content h2 {
+            font-size: 1.8rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 0.5rem;
+        }
+        
+        .legal-content h3 {
+            font-size: 1.4rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .legal-content p, .legal-content li {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .legal-content a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .legal-content a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Ensure partner logos are visible on white background */
+        .partner-grid img {
+             /* The filter might need adjustment if logos are not clear */
+        }
+
+        /* Override nav color for this page if needed */
+        nav {
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+        }
+        nav a {
+            color: #333;
+        }
+        
+        .language-switcher button {
+            color: #333;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="assets/logo-simplified.svg" alt="Logo" style="height: 40px; filter: invert(1);">
+            </a>
+            <div class="nav-links">
+                <a href="index.html#crew-section" data-translate="crew">Crew</a>
+                <a href="journal/journal.html" data-translate="journal">Journal</a>
+                <a href="index.html#partners-section" data-translate="partners">Partner</a>
+                <a href="kids_program/Kids.html" data-translate="kids_programm">Kids Programm</a>
+                 <a href="legal.html" data-translate="legal">Impressum</a>
+            </div>
+            <div class="language-switcher">
+                <button onclick="changeLanguage('de')">DE</button>
+                <button onclick="changeLanguage('en')">EN</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="legal-content">
+        <h1>Impressum & Datenschutz</h1>
+
+        <!-- Impressum Section -->
+        <section id="impressum">
+            <h2>Impressum</h2>
+            <p>
+                <strong>Demo Team Andermatt</strong><br>
+                [Strasse und Hausnummer]<br>
+                [PLZ Ort]<br>
+                Schweiz
+            </p>
+            <p>
+                <strong>Kontakt:</strong><br>
+                E-Mail: <a href="mailto:info@demoteamandermatt.ch">info@demoteamandermatt.ch</a><br>
+                <!-- Optional: Telefon: [Ihre Telefonnummer] -->
+            </p>
+            <p>
+                <strong>Vertretungsberechtigte Personen:</strong><br>
+                [Namen der Vorstandsmitglieder oder vertretungsberechtigten Personen]
+            </p>
+        </section>
+
+        <!-- Unabhängigkeitserklärung Section -->
+        <section id="unabhaengigkeit">
+            <h2>Klärung der Beziehung zur Schweizer Schneesportschule Andermatt</h2>
+            <p>
+                Das <strong>Demo Team Andermatt</strong> ist ein rechtlich eigenständiger und unabhängiger Verein. Wir sind stolz darauf, bei den Zentralschweizer Meisterschaften sowie den Schweizermeisterschaften für die <strong>Schweizer Schneesportschule Andermatt</strong> anzutreten und diese zu repräsentieren.
+            </p>
+            <p>
+                Diese sportliche Kooperation hat jedoch keinen Einfluss auf die organisatorische und finanzielle Unabhängigkeit unseres Vereins. Die Trennung stellt sicher, dass die Schweizer Schneesportschule Andermatt keine finanzielle Unterstützung für das Demo Team Andermatt leisten muss. Diese "Freiheit" gibt uns als Verein die Möglichkeit, als gemeinnützige Organisation zu agieren. Dies erhöht unsere Attraktivität für Sponsoren und unterstreicht unsere klare, eigenständige Identität.
+            </p>
+            <p>
+                Insbesondere möchten wir klarstellen:
+            </p>
+            <ul>
+                <li>
+                    <strong>Sponsoring-Trennung:</strong> Unsere Sponsoren und Partner unterstützen ausschliesslich das Demo Team Andermatt. Es besteht keine Verbindung zu den Sponsoren der Schweizer Schneesportschule Andermatt.
+                </li>
+                <li>
+                    <strong>Keine Einflussnahme:</strong> Die Sponsoren der Skischule haben keinerlei Mitspracherecht bezüglich der Präsenz von Logos auf unserer Teambekleidung, unserer strategischen Entscheidungen oder anderer Vereinsangelegenheiten. Die Auswahl und Darstellung unserer Sponsoren obliegt allein dem Demo Team Andermatt.
+                </li>
+            </ul>
+            <p>
+                Diese klare Trennung gewährleistet die Integrität und Autonomie unseres Vereins und unserer Sponsoring-Partnerschaften.
+            </p>
+        </section>
+
+        <!-- Datenschutz Section -->
+        <section id="datenschutz">
+            <h2>Datenschutzrichtlinien</h2>
+            <p>
+                Der Schutz Ihrer persönlichen Daten ist uns ein besonderes Anliegen. Wir sind bestrebt, nicht nur die gesetzlichen Datenschutzanforderungen zu erfüllen, sondern diese zu übertreffen und höchste Industriestandards zu gewährleisten.
+            </p>
+            
+            <h3>Allgemeiner Hinweis</h3>
+            <p>
+                Gestützt auf Artikel 13 der schweizerischen Bundesverfassung und die datenschutzrechtlichen Bestimmungen des Bundes (Datenschutzgesetz, DSG) hat jede Person Anspruch auf Schutz ihrer Privatsphäre sowie auf Schutz vor Missbrauch ihrer persönlichen Daten. Wir halten diese Bestimmungen ein. Persönliche Daten werden streng vertraulich behandelt und weder an Dritte verkauft noch weitergegeben.
+            </p>
+
+            <h3>Haftungsausschluss</h3>
+            <p>
+                Der Autor übernimmt keinerlei Gewähr hinsichtlich der inhaltlichen Richtigkeit, Genauigkeit, Aktualität, Zuverlässigkeit und Vollständigkeit der Informationen. Haftungsansprüche gegen den Autor wegen Schäden materieller oder immaterieller Art, welche aus dem Zugriff oder der Nutzung bzw. Nichtnutzung der veröffentlichten Informationen, durch Missbrauch der Verbindung oder durch technische Störungen entstanden sind, werden ausgeschlossen. Alle Angebote sind unverbindlich. Der Autor behält es sich ausdrücklich vor, Teile der Seiten oder das gesamte Angebot ohne gesonderte Ankündigung zu verändern, zu ergänzen, zu löschen oder die Veröffentlichung zeitweise oder endgültig einzustellen.
+            </p>
+            
+            <h3>Datenerfassung auf dieser Website</h3>
+            <p>
+                Beim Zugriff auf unsere Webseiten werden folgende Daten in Logfiles gespeichert: IP-Adresse, Datum, Uhrzeit, Browser-Anfrage und allg. übertragene Informationen zum Betriebssystem resp. Browser. Diese Nutzungsdaten bilden die Basis für statistische, anonyme Auswertungen, sodass Trends erkennbar sind, anhand derer wir unsere Angebote entsprechend verbessern können.
+            </p>
+        </section>
+    </main>
+
+    <!-- Partners Section -->
+    <section id="partners-section" class="partners-section-white">
+        <h2 data-translate="partners" style="color: #333;">Unsere Partner</h2>
+        <div class="partner-grid">
+            <!-- Partner logos will be loaded here by JavaScript -->
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Demo Team Andermatt. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Use the same partner loading logic, but ensure non-white logos are used.
+        // This assumes your partners.json has keys for both dark and light backgrounds.
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('assets/images/partners/partners.json')
+                .then(response => response.json())
+                .then(data => {
+                    const partnerGrid = document.querySelector('.partner-grid');
+                    partnerGrid.innerHTML = ''; // Clear existing
+                    data.partners.forEach(partner => {
+                        const partnerLink = document.createElement('a');
+                        partnerLink.href = partner.url;
+                        partnerLink.target = '_blank';
+                        partnerLink.rel = 'noopener noreferrer';
+
+                        const partnerLogo = document.createElement('img');
+                        // Use the standard logo path for the white background
+                        partnerLogo.src = partner.logo_path; 
+                        partnerLogo.alt = partner.name;
+                        partnerLogo.classList.add('partner-logo');
+
+                        partnerLink.appendChild(partnerLogo);
+                        partnerGrid.appendChild(partnerLink);
+                    });
+                })
+                .catch(error => console.error('Error loading partners:', error));
+        });
+    </script>
+</body>
+</html>
