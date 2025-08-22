@@ -40,16 +40,16 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     // --- DATA OBJECTS ---
     const crewData = [
-    { id: 'Klara', name: "Klara", role: "Team-Mum", img: "./assets/images/crew/Klara.webp", details_key: "klara_details" },
-    { id: 'Aline', name: "Aline", role: "Das Naturkind", img: "./assets/images/crew/Aline.webp", details_key: "aline_details" },
-    { id: 'Maria', name: "Maria", role: "Die Pisten-Paganini", img: "./assets/images/crew/Maria.webp", details_key: "maria_details" },
-    { id: 'Mathias', name: "Mathias", role: "Der Finanz-Zauberer", img: "./assets/images/crew/mathias.webp", details_key: "mathias_details" },
-    { id: 'Pascal', name: "Pascal", role: "Der Präsi", img: "./assets/images/crew/Pascal.webp", details_key: "pascal_details" },
-    { id: 'Roger', name: "Roger", role: "Der Pistenflüsterer", img: "./assets/images/crew/Roger.webp", details_key: "roger_details" },
-    { id: 'Marcel', name: "Marcel", role: "Vizepräsi", img: "./assets/images/crew/Marcel.webp", details_key: "marcel_details" },
-    { id: 'Corsin', name: "Corsin", role: "Der Luftakrobat", img: "./assets/images/crew/Corsin.webp", details_key: "corsin_details" },
-    { id: 'Lars', name: "Lars", role: "Der Hauptling", img: "./assets/images/crew/Lars.webp", details_key: "lars_details" },
-    { id: 'Sales', name: "Sales", role: "Der Taktgeber", img: "./assets/images/crew/Sales.webp", details_key: "sales_details" },
+    { id: 'Klara', name: "<h5>K</h5>lara", role: "Team-Mum", img: "./assets/images/crew/Klara.webp", details_key: "klara_details" },
+    { id: 'Aline', name: "<h5>A</h5>line", role: "Das Naturkind", img: "./assets/images/crew/Aline.webp", details_key: "aline_details" },
+    { id: 'Maria', name: "<h5>M</h5>aria", role: "Die Pisten-Paganini", img: "./assets/images/crew/Maria.webp", details_key: "maria_details" },
+    { id: 'Mathias', name: "<h5>M</h5>athias", role: "Der Finanz-Zauberer", img: "./assets/images/crew/mathias.webp", details_key: "mathias_details" },
+    { id: 'Pascal', name: "<h5>P</h5>ascal", role: "Der Präsi", img: "./assets/images/crew/Pascal.webp", details_key: "pascal_details" },
+    { id: 'Roger', name: "<h5>R</h5>oger", role: "Der Pistenflüsterer", img: "./assets/images/crew/Roger.webp", details_key: "roger_details" },
+    { id: 'Marcel', name: "<h5>M</h5>arcel", role: "Vizepräsi", img: "./assets/images/crew/Marcel.webp", details_key: "marcel_details" },
+    { id: 'Corsin', name: "<h5>C</h5>orsin", role: "Der Luftakrobat", img: "./assets/images/crew/Corsin.webp", details_key: "corsin_details" },
+    { id: 'Lars', name: "<h5>L</h5>ars", role: "Der Hauptling", img: "./assets/images/crew/Lars.webp", details_key: "lars_details" },
+    { id: 'Sales', name: "<h5>S</h5>ales", role: "Der Taktgeber", img: "./assets/images/crew/Sales.webp", details_key: "sales_details" },
 ];
     
     // Placeholder for partners data, assuming it might be loaded elsewhere or from a file.
