@@ -1,14 +1,14 @@
 [
   {
     "file": "./journal/je_006.html",
-    "image": "https://placehold.co/1600x900/png",
+    "image": "../assets/images/Journal/WP_001.webp",
     "date": "24.08.2025",
     "title": "New Website & J+S Membership",
     "caption": "Demo Team Andermatt goes online - New Website & J&S Membership"
   },
   {
     "file": "./journal/je_005.html",
-    "image": "https://placehold.co/1600x900/png",
+    "image": "../assets/images/Journal/2526_001.webp",
     "date": "15.06.2025",
     "title": "Setting the Table for 25/26",
     "caption": "Preparing Season 25/26 - Structure, Clarity and New Ideas"
