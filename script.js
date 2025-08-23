@@ -7,20 +7,22 @@
  */
 
 // --- PRELOADER LOGIC ---
+// This runs as soon as the DOM is ready to set up animation delays.
 document.addEventListener('DOMContentLoaded', () => {
-    const preloader = document.getElementById('preloader');
-    if(preloader) {
-        const logoPaths = preloader.querySelectorAll('svg path, svg ellipse');
-        logoPaths.forEach((path, index) => {
-            path.style.setProperty('--index', index);
-        });
-    }
+    const logoPaths = document.querySelectorAll('#preloader-logo path, #preloader-logo polygon, #preloader-logo rect');
+    logoPaths.forEach((path, index) => {
+        // Set a custom property for the staggered CSS animation delay
+        path.style.setProperty('--index', index);
+    });
 });
 
+// This runs after all content (images, videos, etc.) has loaded.
 window.addEventListener('load', () => {
     const preloader = document.getElementById('preloader');
     if (preloader) {
+        // Add a class to trigger the fade-out animation
         preloader.classList.add('loaded');
+        // Completely remove the preloader after the transition to free up resources
         preloader.addEventListener('transitionend', () => {
             preloader.style.display = 'none';
         });
@@ -33,30 +35,38 @@ window.addEventListener('load', () => {
 document.addEventListener('DOMContentLoaded', async function() {
 
     let translations = {};
+    // Check localStorage for a saved language, otherwise default to 'de'.
     let currentLang = localStorage.getItem('dta_lang') || 'de';
 
     // --- DATA OBJECTS ---
     const crewData = [
-        { id: 'Klara', name: "<h5>K</h5>lara", role: "Team-Mum", img: "./assets/images/crew/Klara.webp", details_key: "klara_details" },
-        { id: 'Aline', name: "<h5>A</h5>line", role: "Das Naturkind", img: "./assets/images/crew/Aline.webp", details_key: "aline_details" },
-        { id: 'Maria', name: "<h5>M</h5>aria", role: "Die Pisten-Paganini", img: "./assets/images/crew/Maria.webp", details_key: "maria_details" },
-        { id: 'Mathias', name: "<h5>M</h5>athias", role: "Der Finanz-Zauberer", img: "./assets/images/crew/mathias.webp", details_key: "mathias_details" },
-        { id: 'Pascal', name: "<h5>P</h5>ascal", role: "Der Präsi", img: "./assets/images/crew/Pascal.webp", details_key: "pascal_details" },
-        { id: 'Roger', name: "<h5>R</h5>oger", role: "Der Pistenflüsterer", img: "./assets/images/crew/Roger.webp", details_key: "roger_details" },
-        { id: 'Marcel', name: "<h5>M</h5>arcel", role: "Vizepräsi", img: "./assets/images/crew/Marcel.webp", details_key: "marcel_details" },
-        { id: 'Corsin', name: "<h5>C</h5>orsin", role: "Der Luftakrobat", img: "./assets/images/crew/Corsin.webp", details_key: "corsin_details" },
-        { id: 'Lars', name: "<h5>L</h5>ars", role: "Der Hauptling", img: "./assets/images/crew/Lars.webp", details_key: "lars_details" },
-        { id: 'Sales', name: "<h5>S</h5>ales", role: "Der Taktgeber", img: "./assets/images/crew/Sales.webp", details_key: "sales_details" },
-    ];
+    { id: 'Klara', name: "<h5>K</h5>lara", role: "Team-Mum", img: "./assets/images/crew/Klara.webp", details_key: "klara_details" },
+    { id: 'Aline', name: "<h5>A</h5>line", role: "Das Naturkind", img: "./assets/images/crew/Aline.webp", details_key: "aline_details" },
+    { id: 'Maria', name: "<h5>M</h5>aria", role: "Die Pisten-Paganini", img: "./assets/images/crew/Maria.webp", details_key: "maria_details" },
+    { id: 'Mathias', name: "<h5>M</h5>athias", role: "Der Finanz-Zauberer", img: "./assets/images/crew/mathias.webp", details_key: "mathias_details" },
+    { id: 'Pascal', name: "<h5>P</h5>ascal", role: "Der Präsi", img: "./assets/images/crew/Pascal.webp", details_key: "pascal_details" },
+    { id: 'Roger', name: "<h5>R</h5>oger", role: "Der Pistenflüsterer", img: "./assets/images/crew/Roger.webp", details_key: "roger_details" },
+    { id: 'Marcel', name: "<h5>M</h5>arcel", role: "Vizepräsi", img: "./assets/images/crew/Marcel.webp", details_key: "marcel_details" },
+    { id: 'Corsin', name: "<h5>C</h5>orsin", role: "Der Luftakrobat", img: "./assets/images/crew/Corsin.webp", details_key: "corsin_details" },
+    { id: 'Lars', name: "<h5>L</h5>ars", role: "Der Hauptling", img: "./assets/images/crew/Lars.webp", details_key: "lars_details" },
+    { id: 'Sales', name: "<h5>S</h5>ales", role: "Der Taktgeber", img: "./assets/images/crew/Sales.webp", details_key: "sales_details" },
+];
     
-    const partnersData = []; // Placeholder
+    // Placeholder for partners data, assuming it might be loaded elsewhere or from a file.
+    const partnersData = [
+        // Example: { name: "Partner One", logo: "path/to/logo.svg", url: "#" }
+    ];
+
 
     // --- TRANSLATION & CONTENT ---
     async function loadTranslations() {
+        console.log("Fetching translations...");
         try {
             const response = await fetch('translations.json');
             if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
             translations = await response.json();
+            console.log("Translations loaded successfully.");
+            // Set the initial language based on what was found in localStorage or the default.
             setLanguage(currentLang);
         } catch (error) {
             console.error("Could not load translations:", error);
@@ -64,21 +74,26 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
 
     function setLanguage(lang) {
+        console.log(`Attempting to set language to: ${lang}`);
         if (!translations[lang]) {
             console.error(`Language "${lang}" not found in translations.`);
             return;
         }
         currentLang = lang;
         document.documentElement.lang = lang;
+        // Save the new language choice to localStorage.
         localStorage.setItem('dta_lang', lang);
 
         document.querySelectorAll('[data-key]').forEach(el => {
             const key = el.getAttribute('data-key');
             if (translations[lang]?.[key]) {
                 el.innerHTML = translations[lang][key];
+            } else {
+                 console.warn(`Translation key "${key}" not found for language "${lang}".`);
             }
         });
         updateLangButtons();
+        console.log(`Language successfully set to: ${lang}`);
     }
     
     function updateLangButtons() {
@@ -109,6 +124,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         if (!menuButton || !mobileMenu) return;
         
         const navLinks = mobileMenu.querySelectorAll('.mobile-nav-link');
+
         const toggleMenu = () => {
             menuButton.classList.toggle('is-active');
             mobileMenu.classList.toggle('translate-x-full');
@@ -119,66 +135,64 @@ document.addEventListener('DOMContentLoaded', async function() {
         navLinks.forEach(link => link.addEventListener('click', toggleMenu));
     }
 
-    /**
-     * NEW: Initializes the sticky hero video with scroll-based scrubbing.
-     * This is the updated logic for smooth, performant video control.
-     */
-    function initStickyVideoScrub() {
-        const video = document.getElementById('hero-video');
-        const heroContainer = document.getElementById('hero-container');
-        if (!video || !heroContainer) return;
+    
+function initHeroVideoScrub() {
+    const section = document.getElementById('hero');
+    const video = document.getElementById('hero-video');
+    if (!section || !video) return;
 
-        // Try to play the video to unlock it on mobile. Muted autoplay should work,
-        // but this is an extra measure. We catch the error because browsers might
-        // block it, which is fine since the user will control it via scroll.
-        video.play().catch(error => {
-            console.warn("Video autoplay was prevented:", error);
-        });
+    const primeVideo = () => {
+        const p = video.play();
+        if (p && typeof p.then === 'function') {
+            p.then(() => setTimeout(() => video.pause(), 60)).catch(() => {});
+        } else {
+            setTimeout(() => video.pause(), 60);
+        }
+    };
 
-        // We must wait for the video's metadata to be loaded to get its duration.
-        video.addEventListener('loadedmetadata', () => {
-            // Set the height of the container. The taller it is, the slower you have to scroll
-            // to "play" the video. A factor of 1000 means 1000px of scrolling per second of video.
-            const scrollHeight = video.duration * 1000;
-            heroContainer.style.height = `${scrollHeight}px`;
-
-            let lastKnownScrollPosition = 0;
-            let ticking = false;
-
-            function handleScroll() {
-                // Calculate the scroll percentage within the hero container
-                const rect = heroContainer.getBoundingClientRect();
-                const scrollPercent = -rect.top / (scrollHeight - window.innerHeight);
-                
-                // Ensure the percentage is between 0 and 1
-                const clampedPercent = Math.max(0, Math.min(1, scrollPercent));
-
-                if (video.duration) {
-                    const newTime = video.duration * clampedPercent;
-                    // Only update currentTime if it's a valid number
-                    if (isFinite(newTime)) {
-                        video.currentTime = newTime;
-                    }
-                }
+    const onReady = () => {
+        let ticking = false;
+        const getProgress = () => {
+            const total = section.offsetHeight - window.innerHeight;
+            const scrolled = Math.min(Math.max(window.scrollY - section.offsetTop, 0), total);
+            return total > 0 ? (scrolled / total) : 0;
+        };
+        const update = () => {
+            ticking = false;
+            const progress = Math.min(Math.max(getProgress(), 0), 1);
+            const t = (isFinite(video.duration) && video.duration > 0) ? progress * video.duration : 0;
+            if (!isNaN(t)) {
+                try { video.currentTime = t; } catch (e) {}
             }
+        };
+        const onScroll = () => {
+            if (!ticking) {
+                ticking = true;
+                requestAnimationFrame(update);
+            }
+        };
+        video.pause();
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', onScroll);
+        onScroll();
+    };
 
-            // Use requestAnimationFrame to optimize scroll handling for performance.
-            window.addEventListener('scroll', () => {
-                lastKnownScrollPosition = window.scrollY;
-                if (!ticking) {
-                    window.requestAnimationFrame(() => {
-                        handleScroll(lastKnownScrollPosition);
-                        ticking = false;
-                    });
-                    ticking = true;
-                }
-            });
-        });
+    video.setAttribute('playsinline', '');
+    video.setAttribute('muted', '');
+    video.setAttribute('preload', 'auto');
+    video.setAttribute('autoplay', '');
+
+    if (video.readyState >= 1 && isFinite(video.duration)) {
+        primeVideo();
+        onReady();
+    } else {
+        video.addEventListener('loadedmetadata', () => { primeVideo(); onReady(); }, { once: true });
+        setTimeout(() => { primeVideo(); onReady(); }, 2000);
     }
-
+}
 
     function initCrewGrid() {
-        const grid = document.querySelector('#crew .grid');
+        const grid = document.querySelector('#crew .grid'); // Reverted to original selector
         if (!grid) return;
         grid.innerHTML = crewData.map(member => `
             <div class="crew-member group cursor-pointer" data-name="${member.name}" data-details-key="${member.details_key}">
@@ -195,7 +209,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     function initModal() {
         const modalContainer = document.getElementById('modal-container');
         const modalContent = document.getElementById('modal-content');
-        const crewGrid = document.querySelector('#crew .grid');
+        const crewGrid = document.querySelector('#crew .grid'); // Reverted to original selector
 
         if (!modalContainer || !modalContent || !crewGrid) return;
         
@@ -322,7 +336,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     // --- INITIALIZATION CALLS ---
     initHeaderScroll();
     initMobileMenu();
-    initStickyVideoScrub(); // Replaced the old function call
+    initHeroVideoScrub();
     initCrewGrid();
     initJournalScroller();
     initModal();
@@ -331,3 +345,4 @@ document.addEventListener('DOMContentLoaded', async function() {
     await loadTranslations();
 
 });
+

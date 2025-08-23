@@ -17,7 +17,7 @@ body {
 
 h5 {
   color: orange;
-  display: inline;    /* so it doesn’t break line */
+  display: inline;   /* so it doesn’t break line */
   font-weight: inherit;
   font-size: inherit;
 }
@@ -25,6 +25,11 @@ h5 {
 /* -----------------------------------------------
  * ✦ Header & Navigation
  * --------------------------------------------- */
+
+/* This ensures the main content is not hidden behind the fixed header */
+main {
+    padding-top: 130px; 
+}
 
 /* Style for the header when the user scrolls down */
 .header-scrolled {
@@ -71,29 +76,13 @@ h5 {
 
 
 /* -----------------------------------------------
- * ✦ Hero Section Video (NEW)
+ * ✦ Hero Section Video
  * --------------------------------------------- */
-.sticky-video-wrapper {
-    position: sticky;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh; /* Full viewport height */
-    z-index: 0; /* Keep it in the background */
-    overflow: hidden;
+.hero-video {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }
-
-#hero-video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensures video covers the container */
-}
-
-/* The page content wrapper needs a higher z-index to scroll on top */
-#page-content-wrapper {
-    background-color: #111111; /* Match body background */
-}
-
 
 /* -----------------------------------------------
  * ✦ Modals & Lightbox
@@ -259,3 +248,11 @@ h5 {
 /* Sensible max sizing */
 .partners-grid .partner-logo { max-width: 300px; max-height: 200px; }
 
+/* --- Fullscreen Sticky Hero --- */
+#hero { height: 220vh; }
+.hero-sticky { position: sticky; top: 0; height: 100vh; width: 100vw; }
+.hero-sticky .hero-video { width: 100%; height: 100%; object-fit: cover; }
+@supports (-webkit-touch-callout: none) {
+  .hero-sticky { position: -webkit-sticky; }
+}
+#main-header { z-index: 50; }
