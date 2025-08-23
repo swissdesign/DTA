@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             translations = await response.json();
-            translatePage(currentLang);
+            translatePage(currentLang); ensureLabelsFromPlaceholders(); accentFirstLetters();
         } catch (error) {
             console.error("Could not load translations:", error);
         }
@@ -204,6 +204,79 @@ document.addEventListener('DOMContentLoaded', async () => {
                 statusEl.className = 'text-sm text-center text-green-500 h-4';
                 form.reset();
             }, 1500);
+        });
+    }
+
+    
+    // --- Ensure visible labels above inputs/textareas using placeholder translations ---
+    function ensureLabelsFromPlaceholders() {
+        const makeId = (el) => {
+            if (el.id) return el.id;
+            const base = (el.name || el.getAttribute('data-key') || 'field').toString().replace(/[^a-z0-9]+/gi,'-').toLowerCase();
+            const id = base + '-' + Math.random().toString(36).slice(2,6);
+            el.id = id;
+            return id;
+        };
+        const fields = document.querySelectorAll('#kids-application-form input[placeholder][data-key], #kids-application-form textarea[placeholder][data-key]');
+        fields.forEach(el => {
+            const key = el.getAttribute('data-key');
+            const labelText = translations[currentLang]?.[key] || el.getAttribute('aria-label') || key || '';
+            // If previous sibling is already our generated label, update it; else create one
+            let label = el.previousElementSibling;
+            const isGenerated = label && label.classList.contains('generated-label');
+            if (!isGenerated) {
+                label = document.createElement('label');
+                label.className = 'generated-label block text-sm text-gray-300 mb-1';
+                el.parentNode.insertBefore(label, el);
+            }
+            label.htmlFor = makeId(el);
+            label.textContent = labelText;
+        });
+    }
+
+    // --- Accent first letter of text nodes by wrapping in <h5> ---
+    function accentFirstLetters() {
+        const container = document.querySelector('main') || document.body;
+        if (!container) return;
+        const selectors = 'h1,h2,h3,h4,p,li,legend,label,button,a,figcaption,blockquote';
+        container.querySelectorAll(selectors).forEach(node => {
+            if (node.dataset.firstLetterAccented === '1') return;
+            if (node.childElementCount > 0) {
+                const textNode = Array.from(node.childNodes).find(n => n.nodeType === Node.TEXT_NODE && n.nodeValue.trim().length > 0);
+                if (textNode) {
+                    const txt = textNode.nodeValue;
+                    const trimmed = txt.trimStart();
+                    if (!trimmed) return;
+                    const first = trimmed.charAt(0);
+                    const rest = trimmed.slice(1);
+                    const h5 = document.createElement('h5');
+                    h5.className = 'inline-first-letter';
+                    h5.textContent = first;
+                    const span = document.createElement('span');
+                    span.textContent = rest;
+                    const leading = txt.slice(0, txt.length - trimmed.length);
+                    const frag = document.createDocumentFragment();
+                    if (leading) frag.append(document.createTextNode(leading));
+                    frag.append(h5, span);
+                    node.replaceChild(frag, textNode);
+                    node.dataset.firstLetterAccented = '1';
+                }
+            } else {
+                const text = node.textContent || '';
+                const trimmed = text.trimStart();
+                if (!trimmed) return;
+                const first = trimmed.charAt(0);
+                const rest = trimmed.slice(1);
+                const h5 = document.createElement('h5');
+                h5.className = 'inline-first-letter';
+                h5.textContent = first;
+                const leading = text.slice(0, text.length - trimmed.length);
+                node.innerHTML = '';
+                if (leading) node.append(document.createTextNode(leading));
+                node.appendChild(h5);
+                node.appendChild(document.createTextNode(rest));
+                node.dataset.firstLetterAccented = '1';
+            }
         });
     }
 
