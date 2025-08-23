@@ -194,7 +194,7 @@
         // This assumes your partners.json has keys for both dark and light backgrounds.
         
         document.addEventListener('DOMContentLoaded', function() {
-            fetch('assets/images/partners/partners.json')
+            fetch('./assets/images/partners/partners.json')
                 .then(response => response.json())
                 .then(data => {
                     const partnerGrid = document.querySelector('.partner-grid');
