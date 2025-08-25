@@ -194,8 +194,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                 age--;
             }
 
-            if (age < 10 || age > 15) {
-                statusEl.textContent = translations[currentLang]?.form_age_error || 'Child must be between 10 and 15 years old.';
+            if (age < 08 || age > 16) {
+                statusEl.textContent = translations[currentLang]?.form_age_error || 'Child must be between 08 and 16 years old.';
                 statusEl.className = 'text-sm text-center text-red-500 h-4';
                 return;
             }
