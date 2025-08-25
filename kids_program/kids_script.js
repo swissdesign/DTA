@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             translations = await response.json();
-            translatePage(currentLang); ensureLabelsFromPlaceholders(); accentFirstLetters();
+            translatePage(currentLang); accentFirstLetters();
         } catch (error) {
             console.error("Could not load translations:", error);
         }
