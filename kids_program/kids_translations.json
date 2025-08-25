@@ -1,5 +1,5 @@
 {
-  "en": {
+  "lang-en-desktop": {
     "page_title": "DTA Kids - Demo Team Andermatt",
     "nav_home": "Home",
     "hero_title": "DTA KIDS",
@@ -44,7 +44,7 @@
     "footer_linktree": "Linktree",
     "footer_copyright": "&copy; 2025 Demoteam Andermatt. All Rights Reserved."
   },
-  "de": {
+  "lang-de-desktop": {
     "page_title": "DTA Kids - Demo Team Andermatt",
     "nav_home": "Home",
     "hero_title": "DTA KIDS",
