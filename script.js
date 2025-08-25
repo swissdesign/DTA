@@ -346,3 +346,15 @@ function initHeroVideoScrub() {
 
 });
 
+
+function ensurePlaceholdersFromAria() {
+  document.querySelectorAll('input[data-key], textarea[data-key]').forEach(el => {
+    const ph = el.getAttribute('placeholder');
+    if (!ph || ph.trim().length === 0) {
+      const fallback = el.getAttribute('aria-label') || el.getAttribute('data-key') || '';
+      if (fallback) el.setAttribute('placeholder', fallback);
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', ensurePlaceholdersFromAria);
