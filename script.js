@@ -359,7 +359,7 @@ function ensurePlaceholdersFromAria() {
 
 document.addEventListener('DOMContentLoaded', ensurePlaceholdersFromAria);
 
-<script defer>
+<script>
 document.addEventListener('DOMContentLoaded', () => {
   /* ---------- Partner logos (white background friendly) ---------- */
   const partnerGrid = document.querySelector('.partner-grid');
