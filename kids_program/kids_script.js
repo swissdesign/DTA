@@ -95,19 +95,24 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // --- Season Dates & ICS Download ---
     const trainingDates = [
-        { start: '2025-12-10T13:00:00', end: '2025-12-10T16:00:00', summary: 'DTA Kids Training' },
-        { start: '2025-12-17T13:00:00', end: '2025-12-17T16:00:00', summary: 'DTA Kids Training' },
-        { start: '2026-01-07T13:00:00', end: '2026-01-07T16:00:00', summary: 'DTA Kids Training' },
-        { start: '2026-01-14T13:00:00', end: '2026-01-14T16:00:00', summary: 'DTA Kids Training' },
-        { start: '2026-01-21T13:00:00', end: '2026-01-21T16:00:00', summary: 'DTA Kids Training' },
-        { start: '2026-01-28T13:00:00', end: '2026-01-28T16:00:00', summary: 'DTA Kids Training' },
-        { start: '2026-02-04T13:00:00', end: '2026-02-04T16:00:00', summary: 'DTA Kids Training' },
-        { start: '2026-02-11T13:00:00', end: '2026-02-11T16:00:00', summary: 'DTA Kids Training' },
-        { start: '2026-02-25T13:00:00', end: '2026-02-25T16:00:00', summary: 'DTA Kids Training' },
-        { start: '2026-03-04T13:00:00', end: '2026-03-04T16:00:00', summary: 'DTA Kids Training' },
-        { start: '2026-03-11T13:00:00', end: '2026-03-11T16:00:00', summary: 'DTA Kids Training' },
-        { start: '2026-03-18T13:00:00', end: '2026-03-18T16:00:00', summary: 'DTA Kids Training' },
-        { start: '2026-03-25T09:00:00', end: '2026-03-25T16:00:00', summary: 'DTA Kids - Final Session & Celebration' },
+        { start: '2025-12-20T09:00:00', end: '2025-12-20T16:00:00', summary: 'Einführungs WE Jr. DTA - Tag 01' },
+        { start: '2025-12-21T09:00:00', end: '2025-12-21T16:00:00', summary: 'Einführungs WE Jr. DTA - Tag 02' },
+        { start: '2026-01-07T13:00:00', end: '2026-01-07T16:00:00', summary: 'Jr. DTA Training - No. 001' },
+        { start: '2026-01-14T13:00:00', end: '2026-01-14T16:00:00', summary: 'Jr. DTA Training - No. 002' },
+        { start: '2026-01-21T13:00:00', end: '2026-01-21T16:00:00', summary: 'Jr. DTA Training - No. 003' },
+        { start: '2026-01-28T13:00:00', end: '2026-01-28T16:00:00', summary: 'Jr. DTA Training - No. 004' },
+        { start: '2026-02-04T13:00:00', end: '2026-02-04T16:00:00', summary: 'Jr. DTA Training - No. 005' },
+        { start: '2026-02-11T13:00:00', end: '2026-02-11T16:00:00', summary: 'Jr. DTA Training - No. 006' },
+        { start: '2026-02-18T13:00:00', end: '2026-02-18T16:00:00', summary: 'Jr. DTA Training - No. 007' },
+        { start: '2026-02-25T13:00:00', end: '2026-02-25T16:00:00', summary: 'Jr. DTA Training - No. 008' },
+        { start: '2026-03-04T13:00:00', end: '2026-03-04T16:00:00', summary: 'Jr. DTA Training - No. 009' },
+        { start: '2026-03-11T13:00:00', end: '2026-03-11T16:00:00', summary: 'Jr. DTA Training - No. 010' },
+        { start: '2026-03-18T13:00:00', end: '2026-03-18T16:00:00', summary: 'Jr. DTA Training - No. 011' },
+        { start: '2026-03-25T09:00:00', end: '2026-03-25T16:00:00', summary: 'Jr. DTA Training - No. 012' },
+        { start: '2026-04-01T13:00:00', end: '2026-04-01T16:00:00', summary: 'Jr. DTA Training - No. 013' },
+        { start: '2026-04-08T13:00:00', end: '2026-04-08T16:00:00', summary: 'Jr. DTA Training - No. 014' },
+        { start: '2026-04-15T13:00:00', end: '2026-04-15T16:00:00', summary: 'Jr. DTA Training - No. 015' },
+        { start: '2026-04-18T07:00:00', end: '2026-04-18T13:00:00', summary: 'Jr. DTA Abschluss Skitour Saison 25/26' },
     ];
 
     function populateDates() {
