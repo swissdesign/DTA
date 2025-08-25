@@ -359,7 +359,7 @@ function ensurePlaceholdersFromAria() {
 
 document.addEventListener('DOMContentLoaded', ensurePlaceholdersFromAria);
 
-<script>
+
 document.addEventListener('DOMContentLoaded', () => {
   /* ---------- Partner logos (white background friendly) ---------- */
   const partnerGrid = document.querySelector('.partner-grid');
@@ -410,4 +410,3 @@ document.addEventListener('DOMContentLoaded', () => {
   const langBtn = document.querySelector(`.lang-btn[data-lang="${currentLang}"]`);
   if (langBtn) langBtn.classList.add('is-active');
 });
-</script>
