@@ -358,3 +358,56 @@ function ensurePlaceholdersFromAria() {
 }
 
 document.addEventListener('DOMContentLoaded', ensurePlaceholdersFromAria);
+
+<script defer>
+document.addEventListener('DOMContentLoaded', () => {
+  /* ---------- Partner logos (white background friendly) ---------- */
+  const partnerGrid = document.querySelector('.partner-grid');
+  if (partnerGrid) {
+    fetch('./assets/images/partners/partners.json')
+      .then(r => r.json())
+      .then(data => {
+        partnerGrid.innerHTML = '';
+        (data.partners || []).forEach(p => {
+          const a = document.createElement('a');
+          a.href = p.url; a.target = '_blank'; a.rel = 'noopener noreferrer';
+
+          const img = document.createElement('img');
+          img.src = p.logo_path;          // light/white background version
+          img.alt = p.name;
+          img.classList.add('partner-logo');
+
+          a.appendChild(img);
+          partnerGrid.appendChild(a);
+        });
+      })
+      .catch(err => console.error('Error loading partners:', err));
+  }
+
+  /* ---------- Nav: active link, shadow on scroll, active language ---------- */
+  const links = document.querySelectorAll('.nav-links a');
+  const path  = location.pathname.replace(/\/+$/, '');
+  links.forEach(a => {
+    const href = a.getAttribute('href');
+    const normalized = href ? href.replace(/^\.\//, '').split('#')[0] : '';
+    const isActive = normalized && path.endsWith(normalized);
+    if (isActive || (href === 'legal.html' && path.endsWith('legal.html'))) {
+      a.classList.add('active');
+      a.setAttribute('aria-current', 'page');
+    }
+  });
+
+  const nav = document.querySelector('.site-nav');
+  const onScroll = () => {
+    if (!nav) return;
+    if (window.scrollY > 4) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  const currentLang = (new URLSearchParams(location.search)).get('lang') || window.currentLang || 'de';
+  const langBtn = document.querySelector(`.lang-btn[data-lang="${currentLang}"]`);
+  if (langBtn) langBtn.classList.add('is-active');
+});
+</script>
