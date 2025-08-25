@@ -7,7 +7,7 @@
     "mission_title": "The Mission",
     "mission_text": "Forget what you know about ski racing. This is a team sport. We're building a crew of dedicated young skiers (ages 08-16) with one ambitious goal: to compete at the European Synchronised Skiing Championships. Our focus is on creating a solid, versatile skiing foundation—covering everything from backcountry skills to race technique—because synchronized skiing demands trust, concentration, and absolute commitment to the team. It's tough, it requires focus, but the reward is a level of skill and camaraderie you won't find anywhere else.",
     "program_title": "The Program",
-    "detail_age_label": "Age Group",
+    "detail_age_label": "<h5>Age Group></h5>",
     "detail_age_value": "08 - 16 Years",
     "detail_training_label": "Training",
     "detail_training_value": "Wednesdays, 13:00 - 16:00",
