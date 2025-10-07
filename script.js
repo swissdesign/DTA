@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     { id: 'Mathias', name: "<h5>M</h5>athias", role: "Der Finanz-Zauberer", img: "./assets/images/crew/matic.webp", details_key: "mathias_details" },
     { id: 'Pascal', name: "<h5>P</h5>ascal", role: "Der Präsi", img: "./assets/images/crew/pascal.webp", details_key: "pascal_details" },
     { id: 'Roger', name: "<h5>R</h5>oger", role: "Der Pistenflüsterer", img: "./assets/images/crew/roger.webp", details_key: "roger_details" },
-    { id: 'Marcel', name: "<h5>M</h5>arcel", role: "Vizepräsi", img: "./assets/images/crew/marcel.webp", details_key: "marcel_details" },
+    { id: 'Marcel', name: "<h5>M</h5>arcel", role: "Vizepräsi", img: "./assets/images/crew/Marcel.webp", details_key: "marcel_details" },
     { id: 'Corsin', name: "<h5>C</h5>orsin", role: "Der Luftakrobat", img: "./assets/images/crew/corsin.webp", details_key: "corsin_details" },
     { id: 'Lars', name: "<h5>L</h5>ars", role: "Der Hauptling", img: "./assets/images/crew/Lars.webp", details_key: "lars_details" },
     { id: 'Sales', name: "<h5>S</h5>ales", role: "Der Taktgeber", img: "./assets/images/crew/sales.webp", details_key: "sales_details" },
