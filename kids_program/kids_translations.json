@@ -2,12 +2,16 @@
   "lang-en-desktop": {
     "page_title": "DTA Kids - Demo Team Andermatt",
     "nav_home": "Home",
+    "nav_crew": "The Crew",
+    "nav_journal": "The Journal",
+    "nav_kids": "DTA Kidz",
+    "nav_sponsorship": "Sponsoring",
     "hero_title": "DTA KIDS",
     "hero_subtitle": "We are not a ski club. This is the starting line for the next generation of team skiers & Ski Instructors.",
     "mission_title": "The Mission",
     "mission_text": "Demo Skiing is a team sport. We're building a crew of dedicated young skiers (ages 08-16) with one ambitious goal: to compete at the European Synchronised Skiing Championships. Our focus is on creating a solid, versatile skiing foundation—covering everything from backcountry skills to race technique—because synchronized skiing demands trust, concentration, and absolute commitment to the team. It's tough, it requires focus, but the reward is a level of skill and camaraderie you won't find anywhere else.",
     "program_title": "The Program",
-    "detail_age_label": "<h5>Age Group></h5>",
+    "detail_age_label": "Age Group",
     "detail_age_value": "08 - 16 Years",
     "detail_training_label": "Training",
     "detail_training_value": "Wednesdays, 13:00 - 16:00",
@@ -42,11 +46,16 @@
     "footer_instagram": "Instagram",
     "footer_email": "Email",
     "footer_linktree": "Linktree",
-    "footer_copyright": "&copy; 2025 Demoteam Andermatt. All Rights Reserved."
+    "footer_impressum": "Impressum & Datenschutz",
+    "footer_copyright": "© 2025 Demoteam Andermatt. All Rights Reserved."
   },
   "lang-de-desktop": {
     "page_title": "DTA Kids - Demo Team Andermatt",
     "nav_home": "Home",
+    "nav_crew": "Die Crew",
+    "nav_journal": "Das Journal",
+    "nav_kids": "DTA Kidz",
+    "nav_sponsorship": "Sponsoring",
     "hero_title": "DTA KIDS",
     "hero_subtitle": "Wir sind nicht einen Skiclub. Das ist die Startlinie für die nächste Generation von Team-Skifahrern & Skilehrer.",
     "mission_title": "Die Mission",
@@ -85,8 +94,9 @@
     "form_success": "Vielen Dank für deine Bewerbung! Wir werden sie prüfen und uns bei dir melden.",
     "form_age_error": "Das Kind muss zwischen 08 und 16 Jahre alt sein.",
     "footer_instagram": "Instagram",
-    "footer_email": "Email",
+    "footer_email": "E-Mail",
     "footer_linktree": "Linktree",
-    "footer_copyright": "&copy; 2025 Demoteam Andermatt. Alle Rechte vorbehalten."
+    "footer_impressum": "Impressum & Datenschutz",
+    "footer_copyright": "© 2025 Demoteam Andermatt. Alle Rechte vorbehalten."
   }
 }

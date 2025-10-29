@@ -7,6 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     <link rel="stylesheet" href="journal.css">
+    <script src="../script.js" defer></script>
     <script src="journal.js" defer></script>
     <style>
         /* Custom Tailwind styles for that Swedish design feel */
@@ -97,10 +98,10 @@
 
         <!-- Desktop Navigation -->
         <nav class="hidden md:flex items-center space-x-8 text-sm font-medium uppercase tracking-wider">
-            <a href="../index.html#crew" class="text-black hover:text-gray-600 transition-colors">The Crew</a>
-            <a href="journal.html" class="text-black hover:text-gray-600 transition-colors">The Journal</a>
-            <a href="../kids_program/Kids.html" class="text-black hover:text-gray-600 transition-colors">DTA Kidz</a>
-            <a href="../index.html#sponsorship" class="text-black hover:text-gray-600 transition-colors">Join Us</a>
+            <a href="../index.html#crew" class="text-black hover:text-gray-600 transition-colors orange-first-letter" data-key="nav_crew">The Crew</a>
+            <a href="journal.html" class="text-black hover:text-gray-600 transition-colors orange-first-letter" data-key="nav_journal">The Journal</a>
+            <a href="../kids_program/Kids.html" class="text-black hover:text-gray-600 transition-colors orange-first-letter" data-key="nav_kids">DTA Kidz</a>
+            <a href="../sponsoring/sponsoring.html" class="text-black hover:text-gray-600 transition-colors orange-first-letter" data-key="nav_sponsorship">Sponsoring</a>
             <div class="flex items-center space-x-2">
                 <a href="#" class="text-black hover:text-gray-600 transition-colors">DE</a>
                 <span class="text-gray-400">/</span>
@@ -119,10 +120,10 @@
     <!-- Fullscreen Navigation Menu (for mobile) -->
     <nav id="menu-overlay" class="fixed top-0 left-0 w-full h-full bg-[#1a1a1a] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-500 ease-in-out">
         <div class="text-center text-gray-200">
-            <a href="../index.html" class="block text-4xl md:text-6xl font-light uppercase py-4 transition-colors hover:text-white">Home</a>
-            <a href="journal.html" class="block text-4xl md:text-6xl font-light uppercase py-4 transition-colors hover:text-white">Journal</a>
-            <a href="../kids_program/Kids.html" class="block text-4xl md:text-6xl font-light uppercase py-4 transition-colors hover:text-white">DTA Kidz</a>
-            <a href="../index.html#sponsorship" class="block text-4xl md:text-6xl font-light uppercase py-4 transition-colors hover:text-white">Support us</a>
+            <a href="../index.html" class="block text-4xl md:text-6xl font-light uppercase py-4 transition-colors hover:text-white orange-first-letter">Home</a>
+            <a href="journal.html" class="block text-4xl md:text-6xl font-light uppercase py-4 transition-colors hover:text-white orange-first-letter" data-key="nav_journal">The Journal</a>
+            <a href="../kids_program/Kids.html" class="block text-4xl md:text-6xl font-light uppercase py-4 transition-colors hover:text-white orange-first-letter" data-key="nav_kids">DTA Kidz</a>
+            <a href="../sponsoring/sponsoring.html" class="block text-4xl md:text-6xl font-light uppercase py-4 transition-colors hover:text-white orange-first-letter" data-key="nav_sponsorship">Sponsoring</a>
         </div>
     </nav>
 

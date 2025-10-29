@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // --- Translations ---
     let translations = {};
-    let currentLang = localStorage.getItem('dta-lang') || 'de';
+    let currentLang = localStorage.getItem('dta_lang') || localStorage.getItem('dta-lang') || 'de';
 
     async function loadTranslations() {
         try {
@@ -46,7 +46,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             translations = await response.json();
-            translatePage(currentLang); accentFirstLetters();
+            translatePage(currentLang);
+            populateDates();
         } catch (error) {
             console.error("Could not load translations:", error);
         }
@@ -54,6 +55,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     function translatePage(lang) {
         currentLang = lang;
+        localStorage.setItem('dta_lang', lang);
         localStorage.setItem('dta-lang', lang);
         document.documentElement.lang = lang;
 
@@ -63,12 +65,13 @@ document.addEventListener('DOMContentLoaded', async () => {
                 if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
                     element.placeholder = translations[lang][key];
                 } else {
-                    element.innerHTML = translations[lang][key];
+                    element.textContent = translations[lang][key];
                 }
             }
         });
         updateLangButtons();
-        populateDates(); // Repopulate dates after language change
+        populateDates(lang); // Repopulate dates after language change
+        document.dispatchEvent(new CustomEvent('dta:language-changed', { detail: { lang } }));
     }
 
     function updateLangButtons() {
@@ -115,18 +118,18 @@ document.addEventListener('DOMContentLoaded', async () => {
         { start: '2026-04-18T07:00:00', end: '2026-04-18T13:00:00', summary: 'Jr. DTA Abschluss Skitour Saison 25/26' },
     ];
 
-    function populateDates() {
+    function populateDates(lang = currentLang) {
         const listEl = document.getElementById('event-dates-list');
         if (!listEl) return;
-        
-        const locale = currentLang === 'de' ? 'de-CH' : 'en-GB';
+
+        const locale = lang === 'de' ? 'de-CH' : 'en-GB';
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         
         listEl.innerHTML = ''; // Clear existing list
         trainingDates.forEach(date => {
             const startDate = new Date(date.start);
             const li = document.createElement('li');
-            const summaryText = (translations[currentLang] && translations[currentLang][`summary_${date.summary.replace(/\s/g, '_')}`]) || date.summary;
+            const summaryText = (translations[lang] && translations[lang][`summary_${date.summary.replace(/\s/g, '_')}`]) || date.summary;
             li.textContent = `${startDate.toLocaleDateString(locale, options)} - ${summaryText}`;
             listEl.appendChild(li);
         });
@@ -156,16 +159,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         icsContent.push('END:VCALENDAR');
         return icsContent.join('\r\n');
-    }
-
-     function initPartnersGrid() {
-        const grid = document.getElementById('partners-grid');
-        if (!grid || !partnersData) return;
-        grid.innerHTML = partnersData.map(partner => `
-            <a href="${partner.url}" target="_blank" rel="noopener noreferrer" class="flex justify-center items-center p-4 rounded-lg transition-transform duration-300 hover:scale-105">
-                <img src="${partner.logo}" alt="${partner.name}" class="max-h-12 w-auto filter grayscale hover:filter-none transition-all duration-300">
-            </a>
-        `).join('');
     }
 
     document.getElementById('download-ics')?.addEventListener('click', () => {
@@ -238,54 +231,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             label.textContent = labelText;
         });
     }
-
-    // --- Accent first letter of text nodes by wrapping in <h5> ---
-    function accentFirstLetters() {
-        const container = document.querySelector('main') || document.body;
-        if (!container) return;
-        const selectors = 'h1,h2,h3,h4,p,li,legend,label,button,a,figcaption,blockquote';
-        container.querySelectorAll(selectors).forEach(node => {
-            if (node.dataset.firstLetterAccented === '1') return;
-            if (node.childElementCount > 0) {
-                const textNode = Array.from(node.childNodes).find(n => n.nodeType === Node.TEXT_NODE && n.nodeValue.trim().length > 0);
-                if (textNode) {
-                    const txt = textNode.nodeValue;
-                    const trimmed = txt.trimStart();
-                    if (!trimmed) return;
-                    const first = trimmed.charAt(0);
-                    const rest = trimmed.slice(1);
-                    const h5 = document.createElement('h5');
-                    h5.className = 'inline-first-letter';
-                    h5.textContent = first;
-                    const span = document.createElement('span');
-                    span.textContent = rest;
-                    const leading = txt.slice(0, txt.length - trimmed.length);
-                    const frag = document.createDocumentFragment();
-                    if (leading) frag.append(document.createTextNode(leading));
-                    frag.append(h5, span);
-                    node.replaceChild(frag, textNode);
-                    node.dataset.firstLetterAccented = '1';
-                }
-            } else {
-                const text = node.textContent || '';
-                const trimmed = text.trimStart();
-                if (!trimmed) return;
-                const first = trimmed.charAt(0);
-                const rest = trimmed.slice(1);
-                const h5 = document.createElement('h5');
-                h5.className = 'inline-first-letter';
-                h5.textContent = first;
-                const leading = text.slice(0, text.length - trimmed.length);
-                node.innerHTML = '';
-                if (leading) node.append(document.createTextNode(leading));
-                node.appendChild(h5);
-                node.appendChild(document.createTextNode(rest));
-                node.dataset.firstLetterAccented = '1';
-            }
-        });
-    }
-
     // Initial Load
-        initPartnersGrid();
     await loadTranslations();
 });

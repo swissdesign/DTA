@@ -15,11 +15,18 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
-h5 {
-  color: orange;
-  display: inline;   /* so it doesn’t break line */
-  font-weight: inherit;
-  font-size: inherit;
+
+.orange-first-letter::first-letter {
+  color: #f97316;
+  font-weight: 600;
+}
+
+h1::first-letter,
+h2::first-letter,
+h3::first-letter,
+h4::first-letter {
+  color: #f97316;
+  font-weight: 600;
 }
 
 /* -----------------------------------------------

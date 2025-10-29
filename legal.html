@@ -155,6 +155,11 @@ body{
 .legal-content a{ color: #0a58ff; text-decoration: none; }
 .legal-content a:hover{ text-decoration: underline; }
 
+.orange-first-letter::first-letter{
+  color: #f97316;
+  font-weight: 600;
+}
+
 /* On scroll: subtle shadow like Journal */
 .site-nav.scrolled{
   box-shadow: 0 6px 16px rgba(0,0,0,0.06);
@@ -218,11 +223,12 @@ body{
 
     <div class="nav-right">
       <div class="nav-links">
-        <a href="index.html#crew-section" data-translate="crew">The Crew</a>
-        <a href="journal/journal.html" data-translate="journal">The Journal</a>
-        <a href="index.html#partners-section" data-translate="partners">Partners</a>
-        <a href="kids_program/Kids.html" data-translate="kids_programm">DTA Kidz</a>
-        <a href="legal.html" data-translate="legal">Impressum</a>
+        <a class="orange-first-letter" href="index.html#crew-section" data-translate="crew">The Crew</a>
+        <a class="orange-first-letter" href="journal/journal.html" data-translate="journal">The Journal</a>
+        <a class="orange-first-letter" href="index.html#partners-section" data-translate="partners">Partners</a>
+        <a class="orange-first-letter" href="kids_program/Kids.html" data-translate="kids_programm">DTA Kidz</a>
+        <a class="orange-first-letter" href="sponsoring/sponsoring.html" data-translate="sponsoring">Sponsoring</a>
+        <a class="orange-first-letter" href="legal.html" data-translate="legal">Impressum</a>
       </div>
 
       <div class="language-switcher" role="navigation" aria-label="Language switcher">

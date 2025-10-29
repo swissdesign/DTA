@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-key="sponsoring_meta_title">Sponsoring Opportunities | Demo Team Andermatt</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body class="bg-pitch-black text-off-white min-h-screen flex flex-col">
+  <header class="fixed top-0 left-0 w-full z-50 transition-all-300" id="main-header">
+    <div class="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center">
+      <a href="../index.html" class="flex items-center gap-3">
+        <img src="../assets/logo-simplified.svg" alt="Demo Team Andermatt" class="w-16 h-16" loading="lazy" />
+        <span class="uppercase tracking-widest text-sm">Demo Team Andermatt</span>
+      </a>
+      <nav class="hidden md:flex items-center space-x-6 text-sm uppercase tracking-widest">
+        <a class="px-2 py-1 hover:text-white text-gray-300 orange-first-letter" data-key="nav_crew" href="../index.html#crew">Crew</a>
+        <a class="px-2 py-1 hover:text-white text-gray-300 orange-first-letter" data-key="nav_journal" href="../journal/journal.html">The Journal</a>
+        <a class="px-2 py-1 hover:text-white text-gray-300 orange-first-letter" data-key="nav_kids" href="../kids_program/Kids.html">DTA Kidz</a>
+        <a class="px-2 py-1 text-white orange-first-letter" data-key="nav_sponsorship" aria-current="page" href="sponsoring.html">Sponsoring</a>
+        <div class="flex items-center gap-3">
+          <button class="uppercase text-sm" id="lang-de-desktop">DE</button>
+          <span class="opacity-50">/</span>
+          <button class="uppercase text-sm" id="lang-en-desktop">EN</button>
+        </div>
+      </nav>
+      <button aria-label="Open menu" class="hamburger md:hidden" id="mobile-menu-button">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+    <div class="fixed inset-y-0 right-0 w-72 bg-black/90 backdrop-blur-lg transform translate-x-full transition-transform md:hidden z-40" id="mobile-menu">
+      <nav class="p-6 space-y-4">
+        <a class="block text-lg mobile-nav-link orange-first-letter" data-key="nav_crew" href="../index.html#crew">Crew</a>
+        <a class="block text-lg mobile-nav-link orange-first-letter" data-key="nav_journal" href="../journal/journal.html">The Journal</a>
+        <a class="block text-lg mobile-nav-link orange-first-letter" data-key="nav_kids" href="../kids_program/Kids.html">DTA Kidz</a>
+        <a class="block text-lg mobile-nav-link orange-first-letter" data-key="nav_sponsorship" href="sponsoring.html">Sponsoring</a>
+        <div class="pt-4 flex items-center gap-3">
+          <button class="uppercase text-sm" id="lang-de-mobile">DE</button>
+          <span class="opacity-50">/</span>
+          <button class="uppercase text-sm" id="lang-en-mobile">EN</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="flex-1 pb-24">
+    <section class="max-w-5xl mx-auto px-6 text-center">
+      <h1 class="text-4xl md:text-6xl font-black mb-6 orange-first-letter" data-key="sponsoring_title">Sponsoring Opportunities</h1>
+      <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto" data-key="sponsoring_intro">
+        Support the Demo Team Andermatt athletes with targeted gear sponsorships. Each item keeps our crew on snow, training and competing at the highest level.
+      </p>
+      <div class="mt-10 bg-white/5 border border-white/10 rounded-2xl p-8 md:p-10 backdrop-blur-sm">
+        <h2 class="text-2xl md:text-3xl font-semibold orange-first-letter" data-key="sponsoring_cta_title">Partner with Precision</h2>
+        <p class="text-gray-300 mt-4" data-key="sponsoring_cta_body">
+          Choose the equipment that speaks to your brand and become part of our story. We provide tailored visibility and regular performance updates for every sponsor.
+        </p>
+        <a class="inline-flex items-center justify-center mt-8 px-6 py-3 rounded-full bg-orange-500 text-white uppercase tracking-widest text-sm hover:bg-orange-400 transition-colors" data-key="sponsoring_cta_button" href="mailto:demoteamandermatt@gmail.com">Start the conversation</a>
+      </div>
+    </section>
+
+    <section class="max-w-6xl mx-auto px-6 mt-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-center orange-first-letter" data-key="sponsoring_grid_title">Choose your impact</h2>
+      <p class="text-gray-400 text-center mt-4" data-key="sponsoring_grid_subtitle">
+        Every tile represents a piece of essential team kit waiting for your support. Select the gear and we’ll take care of the rest.
+      </p>
+      <div id="sponsorship-grid" class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </section>
+  </main>
+
+  <footer class="border-t border-white/5">
+    <div class="max-w-6xl mx-auto px-6 py-10 grid gap-6 md:flex md:items-center md:justify-between text-sm text-gray-400">
+      <p class="orange-first-letter" data-key="footer_copyright">© 2025 Demoteam Andermatt. All Rights Reserved.</p>
+      <div class="flex gap-6">
+        <a class="hover:text-white orange-first-letter" data-key="footer_instagram" href="https://www.instagram.com/demoteam_andermatt/" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a class="hover:text-white orange-first-letter" data-key="footer_email" href="mailto:demoteamandermatt@gmail.com">Email</a>
+        <a class="hover:text-white orange-first-letter" data-key="footer_linktree" href="https://linktr.ee/DemoTeam" target="_blank" rel="noopener noreferrer">Linktree</a>
+        <a class="hover:text-white orange-first-letter" data-key="footer_impressum" href="../legal.html">Impressum &amp; Datenschutz</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+  <script src="sponsoring.js"></script>
+</body>
+</html>
