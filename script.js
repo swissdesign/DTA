@@ -275,6 +275,21 @@ function initHeroVideoScrub() {
 
         if (!container || !journalSection) return;
 
+        const resolveEntryLink = (filePath) => {
+            if (!filePath) return '#';
+            if (/^(https?:)?\/\//.test(filePath)) return filePath;
+            const clean = filePath.replace(/^(\.\/|\.\.\/)+/, '');
+            const fileName = clean.split('/').pop();
+            return `./journal/${fileName}`;
+        };
+
+        const resolveImageSrc = (imagePath) => {
+            if (!imagePath) return '';
+            if (/^(https?:)?\/\//.test(imagePath)) return imagePath;
+            const clean = imagePath.replace(/^(\.\/|\.\.\/)+/, '');
+            return `./${clean}`;
+        };
+
         fetch('./journal/journal_manifest.json')
             .then(response => {
                 if (!response.ok) throw new Error('Network response was not ok');
@@ -288,9 +303,9 @@ function initHeroVideoScrub() {
 
                 container.innerHTML = entries.map(entry => `
                     <div class="journal-card bg-gray-800 rounded-lg overflow-hidden flex flex-col group">
-                        <a href="${entry.file}" class="block">
+                        <a href="${resolveEntryLink(entry.file)}" class="block">
                             <div class="overflow-hidden">
-                                <img src="${entry.image}" alt="${entry.title}" class="h-56 w-full object-cover group-hover:scale-105 transition-transform duration-300">
+                                <img src="${resolveImageSrc(entry.image)}" alt="${entry.title}" class="h-56 w-full object-cover group-hover:scale-105 transition-transform duration-300">
                             </div>
                             <div class="p-6">
                                 <p class="text-xs text-gray-400 uppercase">${entry.date}</p>

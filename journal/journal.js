@@ -3,16 +3,57 @@
  * Logic for the DTA Journal Page
  */
 document.addEventListener('DOMContentLoaded', () => {
-  // Resolve manifest path relative to the current page (works on GH Pages)
-  const isInJournalFolder = window.location.pathname.toLowerCase().includes('/journal/');
-  const manifestURL =
-    (isInJournalFolder ? '../journal_manifest.json' : './journal_manifest.json') +
-    '?v=' + Date.now(); // cache-bust while testing
   const IN_JOURNAL = window.location.pathname.toLowerCase().includes('/journal/');
-const entryHref = (filePath) => {
-  const name = (filePath || '').split('/').pop(); // "je_003.html"
-  return IN_JOURNAL ? `./${name}` : `./journal/${name}`;
-};
+  const DEBUG = new URLSearchParams(location.search).get('debug') === '1';
+
+  const manifestCandidates = IN_JOURNAL
+    ? ['./journal_manifest.json', '../journal_manifest.json']
+    : ['./journal/journal_manifest.json', './journal_manifest.json', '../journal/journal_manifest.json'];
+
+  const cleanRelativePath = (value = '') => value.replace(/^(?:\.\/|\.\.\/)+/, '');
+
+  const entryHref = (filePath) => {
+    if (!filePath) return '#';
+    if (/^(https?:)?\/\//.test(filePath)) return filePath;
+    const name = cleanRelativePath(filePath).split('/').pop();
+    return IN_JOURNAL ? `./${name}` : `./journal/${name}`;
+  };
+
+  const entryImageSrc = (imagePath) => {
+    if (!imagePath) return '';
+    if (/^(https?:)?\/\//.test(imagePath)) return imagePath;
+    const clean = cleanRelativePath(imagePath);
+    return IN_JOURNAL ? `../${clean}` : `./${clean}`;
+  };
+
+  let manifestPromise;
+  const getManifest = async () => {
+    if (manifestPromise) return manifestPromise;
+
+    manifestPromise = (async () => {
+      for (const candidate of manifestCandidates) {
+        const full = candidate + (DEBUG ? `?v=${Date.now()}` : '');
+        try {
+          const res = await fetch(full, { cache: DEBUG ? 'no-store' : 'default' });
+          if (!res.ok) throw new Error(`HTTP ${res.status} for ${full}`);
+          const json = await res.json();
+          if (!Array.isArray(json)) throw new Error('Manifest is not an array');
+          return json;
+        } catch (e) {
+          console.warn('[journal] manifest try failed:', e.message);
+          if (DEBUG) {
+            const note = document.createElement('p');
+            note.className = 'text-xs text-gray-500';
+            note.textContent = `Manifest attempt failed: ${e.message}`;
+            document.getElementById('journal-scroll-container')?.before(note);
+          }
+        }
+      }
+      throw new Error('No manifest path worked');
+    })();
+
+    return manifestPromise;
+  };
 
   // --- Navigation Menu Logic ---
   const menuToggle = document.getElementById('menu-toggle');
@@ -38,51 +79,19 @@ const entryHref = (filePath) => {
     const leftBtn = document.getElementById('journal-scroll-left');
     const rightBtn = document.getElementById('journal-scroll-right');
 
-    const DEBUG = new URLSearchParams(location.search).get('debug') === '1';
-
-    async function getManifest() {
-      const inJournal = window.location.pathname.toLowerCase().includes('/journal/');
-      const candidates = [
-        (inJournal ? '../journal_manifest.json' : './journal_manifest.json'),
-        './journal/journal_manifest.json',
-        '../journal/journal_manifest.json',
-        '/journal_manifest.json'
-      ];
-      for (const url of candidates) {
-        try {
-          const full = url + (DEBUG ? `?v=${Date.now()}` : '');
-          console.log('[journal] trying manifest:', full);
-          const res = await fetch(full, { cache: DEBUG ? 'no-store' : 'default' });
-          if (!res.ok) throw new Error(`HTTP ${res.status} for ${full}`);
-          const json = await res.json();
-          console.log('[journal] manifest OK:', full, json);
-          return json;
-        } catch (e) {
-          console.warn('[journal] manifest try failed:', e.message);
-          if (DEBUG) {
-            const p = document.createElement('p');
-            p.className = 'text-xs text-gray-500';
-            p.textContent = `Manifest attempt failed: ${e.message}`;
-            scrollContainer.parentElement?.insertBefore(p, scrollContainer);
-          }
-        }
-      }
-      throw new Error('No manifest path worked');
-    }
-
     getManifest()
       .then(entries => {
         const currentFile = window.location.pathname.split('/').pop().toLowerCase();
 
         scrollContainer.innerHTML = entries.map(entry => {
-          const entryFile = (entry.file || '').split('/').pop().toLowerCase();
+          const entryFile = cleanRelativePath(entry.file || '').split('/').pop().toLowerCase();
           const isCurrent = entryFile === currentFile;
           return `
             <div class="journal-card flex-shrink-0 snap-start ${isCurrent ? 'active-entry' : ''}"
                  style="flex:0 0 80%;max-width:80%;">
              <a href="${entryHref(entry.file)}" class="block" aria-current="${isCurrent ? 'page' : 'false'}">
                 <div class="overflow-hidden">
-                  <img src="${entry.image}" alt="${entry.title}"
+                  <img src="${entryImageSrc(entry.image)}" alt="${entry.title}"
                        class="h-56 w-full object-cover group-hover:scale-105 transition-transform duration-300"
                        onerror="this.onerror=null;this.src='https://placehold.co/800x450/EEE/31343C?text=Image+Not+Found';">
                 </div>
@@ -115,9 +124,7 @@ const entryHref = (filePath) => {
   async function loadJournalEntries() {
     if (!journalGrid) return;
     try {
-      const response = await fetch(manifestURL);
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      const entries = await response.json();
+      const entries = await getManifest();
 
       journalGrid.innerHTML = '';
       entries.forEach((entry, index) => {
@@ -127,7 +134,7 @@ const entryHref = (filePath) => {
         card.innerHTML = `
           <div class="journal-card">
             <a href="${entryHref(entry.file)}" class="block">
-              <img src="${entry.image}" alt="${entry.title}" class="journal-card-image"
+              <img src="${entryImageSrc(entry.image)}" alt="${entry.title}" class="journal-card-image"
                    onerror="this.onerror=null;this.src='https://placehold.co/600x400/EEE/31343C?text=Image+Not+Found';">
               <div class="journal-card-content">
                 <p class="journal-card-date">${entry.date}</p>
