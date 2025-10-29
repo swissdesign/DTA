@@ -161,16 +161,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         return icsContent.join('\r\n');
     }
 
-     function initPartnersGrid() {
-        const grid = document.getElementById('partners-grid');
-        if (!grid || !partnersData) return;
-        grid.innerHTML = partnersData.map(partner => `
-            <a href="${partner.url}" target="_blank" rel="noopener noreferrer" class="flex justify-center items-center p-4 rounded-lg transition-transform duration-300 hover:scale-105">
-                <img src="${partner.logo}" alt="${partner.name}" class="max-h-12 w-auto filter grayscale hover:filter-none transition-all duration-300">
-            </a>
-        `).join('');
-    }
-
     document.getElementById('download-ics')?.addEventListener('click', () => {
         const icsData = generateICS();
         const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8;' });
@@ -242,6 +232,5 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
     // Initial Load
-        initPartnersGrid();
     await loadTranslations();
 });
