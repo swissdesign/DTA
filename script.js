@@ -40,16 +40,16 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     // --- DATA OBJECTS ---
     const crewData = [
-    { id: 'Klara', name: "<h5>K</h5>lara", role: "Team-Mum", img: "./assets/images/crew/klara.webp", details_key: "klara_details" },
-    { id: 'Aline', name: "<h5>A</h5>line", role: "Das Naturkind", img: "./assets/images/crew/aline.webp", details_key: "aline_details" },
-    { id: 'Maria', name: "<h5>M</h5>aria", role: "Die Pisten-Paganini", img: "./assets/images/crew/Maria.webp", details_key: "maria_details" },
-    { id: 'Mathias', name: "<h5>M</h5>athias", role: "Der Finanz-Zauberer", img: "./assets/images/crew/matic.webp", details_key: "mathias_details" },
-    { id: 'Pascal', name: "<h5>P</h5>ascal", role: "Der Präsi", img: "./assets/images/crew/pascal.webp", details_key: "pascal_details" },
-    { id: 'Roger', name: "<h5>R</h5>oger", role: "Der Pistenflüsterer", img: "./assets/images/crew/roger.webp", details_key: "roger_details" },
-    { id: 'Marcel', name: "<h5>M</h5>arcel", role: "Vizepräsi", img: "./assets/images/crew/Marcel.webp", details_key: "marcel_details" },
-    { id: 'Corsin', name: "<h5>C</h5>orsin", role: "Der Luftakrobat", img: "./assets/images/crew/corsin.webp", details_key: "corsin_details" },
-    { id: 'Lars', name: "<h5>L</h5>ars", role: "Der Hauptling", img: "./assets/images/crew/Lars.webp", details_key: "lars_details" },
-    { id: 'Sales', name: "<h5>S</h5>ales", role: "Der Taktgeber", img: "./assets/images/crew/sales.webp", details_key: "sales_details" },
+    { id: 'klara', name: "Klara", role: "Team-Mum", img: "./assets/images/crew/klara.webp", details_key: "klara_details" },
+    { id: 'aline', name: "Aline", role: "Das Naturkind", img: "./assets/images/crew/aline.webp", details_key: "aline_details" },
+    { id: 'maria', name: "Maria", role: "Die Pisten-Paganini", img: "./assets/images/crew/Maria.webp", details_key: "maria_details" },
+    { id: 'mathias', name: "Mathias", role: "Der Finanz-Zauberer", img: "./assets/images/crew/matic.webp", details_key: "mathias_details" },
+    { id: 'pascal', name: "Pascal", role: "Der Präsi", img: "./assets/images/crew/pascal.webp", details_key: "pascal_details" },
+    { id: 'roger', name: "Roger", role: "Der Pistenflüsterer", img: "./assets/images/crew/roger.webp", details_key: "roger_details" },
+    { id: 'marcel', name: "Marcel", role: "Vizepräsi", img: "./assets/images/crew/Marcel.webp", details_key: "marcel_details" },
+    { id: 'corsin', name: "Corsin", role: "Der Luftakrobat", img: "./assets/images/crew/corsin.webp", details_key: "corsin_details" },
+    { id: 'lars', name: "Lars", role: "Der Hauptling", img: "./assets/images/crew/Lars.webp", details_key: "lars_details" },
+    { id: 'sales', name: "Sales", role: "Der Taktgeber", img: "./assets/images/crew/sales.webp", details_key: "sales_details" },
 ];
     
     // Placeholder for partners data, assuming it might be loaded elsewhere or from a file.
@@ -65,6 +65,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             const response = await fetch('translations.json');
             if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
             translations = await response.json();
+            window.dtaTranslations = translations;
             console.log("Translations loaded successfully.");
             // Set the initial language based on what was found in localStorage or the default.
             setLanguage(currentLang);
@@ -86,14 +87,22 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         document.querySelectorAll('[data-key]').forEach(el => {
             const key = el.getAttribute('data-key');
-            if (translations[lang]?.[key]) {
-                el.innerHTML = translations[lang][key];
+            const value = translations[lang]?.[key];
+            if (!value) {
+                console.warn(`Translation key "${key}" not found for language "${lang}".`);
+                return;
+            }
+
+            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                el.placeholder = value;
             } else {
-                 console.warn(`Translation key "${key}" not found for language "${lang}".`);
+                el.textContent = value;
             }
         });
         updateLangButtons();
         console.log(`Language successfully set to: ${lang}`);
+        window.dtaCurrentLang = currentLang;
+        document.dispatchEvent(new CustomEvent('dta:language-changed', { detail: { lang } }));
     }
     
     function updateLangButtons() {
@@ -195,13 +204,13 @@ function initHeroVideoScrub() {
         const grid = document.querySelector('#crew .grid'); // Reverted to original selector
         if (!grid) return;
         grid.innerHTML = crewData.map(member => `
-            <div class="crew-member group cursor-pointer" data-name="${member.name}" data-details-key="${member.details_key}">
+            <div class="crew-member group cursor-pointer" data-member-id="${member.id}" data-details-key="${member.details_key}">
                 <div class="relative overflow-hidden rounded-lg">
                     <img src="${member.img}" alt="${member.name}" class="w-full h-auto object-cover transform group-hover:scale-110 transition-transform duration-300">
                     <div class="absolute inset-0 bg-black bg-opacity-50 group-hover:bg-opacity-20 transition-all duration-300"></div>
                 </div>
-                <h3 class="mt-4 text-xl font-bold">${member.name}</h3>
-                <p class="text-gray-400" data-key="crew_${member.id.toLowerCase()}_title">${member.role}</p>
+                <h3 class="mt-4 text-xl font-bold orange-first-letter">${member.name}</h3>
+                <p class="text-gray-400 orange-first-letter" data-key="crew_${member.id}_title">${member.role}</p>
             </div>
         `).join('');
     }
@@ -216,16 +225,16 @@ function initHeroVideoScrub() {
         crewGrid.addEventListener('click', (e) => {
             const memberEl = e.target.closest('.crew-member');
             if (memberEl) {
-                const memberName = memberEl.dataset.name;
-                const member = crewData.find(m => m.name === memberName);
+                const memberId = memberEl.dataset.memberId;
+                const member = crewData.find(m => m.id === memberId);
                 if (member) {
                     const detailsText = translations[currentLang]?.[member.details_key] || "Details coming soon.";
-                    const roleText = translations[currentLang]?.[`crew_${member.id.toLowerCase()}_title`] || member.role;
+                    const roleText = translations[currentLang]?.[`crew_${member.id}_title`] || member.role;
 
                     modalContent.innerHTML = `
                         <button id="modal-close" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">&times;</button>
                         <img src="${member.img}" alt="${member.name}" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-neutral-800">
-                        <h3 class="text-2xl font-bold text-center">${member.name}</h3>
+                        <h3 class="text-2xl font-bold text-center orange-first-letter">${member.name}</h3>
                         <p class="text-red-400 text-center mb-4">${roleText}</p>
                         <p class="text-gray-300">${detailsText}</p>
                     `;
