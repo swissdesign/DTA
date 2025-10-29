@@ -1,0 +1,38 @@
+[
+  {
+    "id": "team_jacket",
+    "articleName": { "en": "Team Jacket", "de": "Teamjacke" },
+    "estimatedPrice": { "en": "CHF 350", "de": "CHF 350" },
+    "lifespan": { "en": "2-3 Seasons", "de": "2-3 Saisons" }
+  },
+  {
+    "id": "race_suit",
+    "articleName": { "en": "Race Suit", "de": "Rennanzug" },
+    "estimatedPrice": { "en": "CHF 520", "de": "CHF 520" },
+    "lifespan": { "en": "2 Seasons", "de": "2 Saisons" }
+  },
+  {
+    "id": "mid_layer",
+    "articleName": { "en": "Insulated Midlayer", "de": "Isolations-Midlayer" },
+    "estimatedPrice": { "en": "CHF 180", "de": "CHF 180" },
+    "lifespan": { "en": "3 Seasons", "de": "3 Saisons" }
+  },
+  {
+    "id": "training_pants",
+    "articleName": { "en": "Training Pants", "de": "Traininghose" },
+    "estimatedPrice": { "en": "CHF 210", "de": "CHF 210" },
+    "lifespan": { "en": "2 Seasons", "de": "2 Saisons" }
+  },
+  {
+    "id": "warmup_parka",
+    "articleName": { "en": "Warm-Up Parka", "de": "Warm-up Parka" },
+    "estimatedPrice": { "en": "CHF 290", "de": "CHF 290" },
+    "lifespan": { "en": "3-4 Seasons", "de": "3-4 Saisons" }
+  },
+  {
+    "id": "travel_bag",
+    "articleName": { "en": "Team Travel Bag", "de": "Team-Reisetasche" },
+    "estimatedPrice": { "en": "CHF 140", "de": "CHF 140" },
+    "lifespan": { "en": "4 Seasons", "de": "4 Saisons" }
+  }
+]
