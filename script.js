@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     const crewData = [
     { id: 'klara', name: "Klara", role: "Team-Mum", img: "./assets/images/crew/klara.webp", details_key: "klara_details" },
     { id: 'aline', name: "Aline", role: "Das Naturkind", img: "./assets/images/crew/aline.webp", details_key: "aline_details" },
-    { id: 'maria', name: "Maria", role: "Die Pisten-Paganini", img: "./assets/images/crew/Maria.webp", details_key: "maria_details" },
+    { id: 'maria', name: "Maria", role: "Die Pisten-Paganini", img: "./assets/images/crew/maria.webp", details_key: "maria_details" },
     { id: 'mathias', name: "Mathias", role: "Der Finanz-Zauberer", img: "./assets/images/crew/matic.webp", details_key: "mathias_details" },
     { id: 'pascal', name: "Pascal", role: "Der Präsi", img: "./assets/images/crew/pascal.webp", details_key: "pascal_details" },
     { id: 'roger', name: "Roger", role: "Der Pistenflüsterer", img: "./assets/images/crew/roger.webp", details_key: "roger_details" },
