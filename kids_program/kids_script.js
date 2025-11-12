@@ -172,12 +172,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.body.removeChild(link);
     });
     
-    // --- Application Form ---
+// --- Application Form ---
     const form = document.getElementById('kids-application-form');
     if (form) {
         const statusEl = document.getElementById('form-status');
+        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwyVkyk6U9u63vHRE066__Hm_B1jXm-ovxRDOe4yD82eoPyPubXi2C_YzDY0Hdz9ob2Qw/exec"; // <-- PUT THE URL FROM STEP 3 HERE
+
         form.addEventListener('submit', function(e) {
             e.preventDefault();
+            
             const formData = new FormData(form);
             const dob = new Date(formData.get('child_dob'));
             const today = new Date();
@@ -187,7 +190,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                 age--;
             }
 
-            if (age < 08 || age > 16) {
+            // Client-side validation (good for user experience)
+            if (age < 8 || age > 16) {
                 statusEl.textContent = translations[currentLang]?.form_age_error || 'Child must be between 08 and 16 years old.';
                 statusEl.className = 'text-sm text-center text-red-500 h-4';
                 return;
@@ -195,42 +199,32 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             statusEl.textContent = translations[currentLang]?.form_submitting || 'Submitting...';
             statusEl.className = 'text-sm text-center text-gray-400 h-4';
+            form.querySelector('button[type="submit"]').disabled = true; // Disable button
 
-            // Fake submission delay
-            setTimeout(() => {
-                statusEl.textContent = translations[currentLang]?.form_success || 'Thank you for your application! We will be in touch.';
-                statusEl.className = 'text-sm text-center text-green-500 h-4';
-                form.reset();
-            }, 1500);
+            // --- Real Submission using fetch ---
+            fetch(WEB_APP_URL, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.result === "success") {
+                    // Success!
+                    statusEl.textContent = translations[currentLang]?.form_success || 'Thank you for your application! We will be in touch.';
+                    statusEl.className = 'text-sm text-center text-green-500 h-4';
+                    form.reset();
+                } else {
+                    // Handle error from Apps Script
+                    throw new Error(data.message || 'Unknown error');
+                }
+            })
+            .catch(error => {
+                console.error("Form submission error:", error);
+                statusEl.textContent = translations[currentLang]?.form_error || 'Submission failed. Please try again.';
+                statusEl.className = 'text-sm text-center text-red-500 h-4';
+            })
+            .finally(() => {
+                form.querySelector('button[type="submit"]').disabled = false; // Re-enable button
+            });
         });
     }
-
-    
-    // --- Ensure visible labels above inputs/textareas using placeholder translations ---
-    function ensureLabelsFromPlaceholders() {
-        const makeId = (el) => {
-            if (el.id) return el.id;
-            const base = (el.name || el.getAttribute('data-key') || 'field').toString().replace(/[^a-z0-9]+/gi,'-').toLowerCase();
-            const id = base + '-' + Math.random().toString(36).slice(2,6);
-            el.id = id;
-            return id;
-        };
-        const fields = document.querySelectorAll('#kids-application-form input[placeholder][data-key], #kids-application-form textarea[placeholder][data-key]');
-        fields.forEach(el => {
-            const key = el.getAttribute('data-key');
-            const labelText = translations[currentLang]?.[key] || el.getAttribute('aria-label') || key || '';
-            // If previous sibling is already our generated label, update it; else create one
-            let label = el.previousElementSibling;
-            const isGenerated = label && label.classList.contains('generated-label');
-            if (!isGenerated) {
-                label = document.createElement('label');
-                label.className = 'generated-label block text-sm text-gray-300 mb-1';
-                el.parentNode.insertBefore(label, el);
-            }
-            label.htmlFor = makeId(el);
-            label.textContent = labelText;
-        });
-    }
-    // Initial Load
-    await loadTranslations();
-});
