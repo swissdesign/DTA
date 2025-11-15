@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     { id: 'roger', name: "Roger", role: "Der Pistenflüsterer", img: "./assets/images/crew/roger.webp", details_key: "roger_details" },
     { id: 'marcel', name: "Marcel", role: "Vizepräsi", img: "./assets/images/crew/Marcel.webp", details_key: "marcel_details" },
     { id: 'corsin', name: "Corsin", role: "Der Luftakrobat", img: "./assets/images/crew/corsin.webp", details_key: "corsin_details" },
-    { id: 'lars', name: "Lars", role: "Der Hauptling", img: "./assets/images/crew/Lars.webp", details_key: "lars_details" },
+    { id: 'lars', name: "Lars", role: "Der Hauptling", img: "./assets/images/crew/lars.webp", details_key: "lars_details" },
     { id: 'sales', name: "Sales", role: "Der Taktgeber", img: "./assets/images/crew/sales.webp", details_key: "sales_details" },
 ];
     
