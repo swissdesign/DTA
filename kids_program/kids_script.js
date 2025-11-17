@@ -184,7 +184,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (form) {
         const statusEl = document.getElementById('form-status');
         const submitBtn = form.querySelector('button[type="submit"]');
-        const WEB_APP_URL = form.dataset.scriptUrl || "https://script.google.com/macros/s/AKfycbww4-cJHMdXsG-dEK-j_p53MU49IVOsShnvA-Y1vQNde2gnMMZKi5sgorDFzrQU37_9/exec";
+        const WEB_APP_URL = form.dataset.scriptUrl;
 
         const getTranslation = (key, fallback = '') => {
             const translationSet = translations[currentLang] || {};
