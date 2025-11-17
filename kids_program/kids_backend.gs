@@ -2,7 +2,7 @@ const MIN_AGE = 8;
 const MAX_AGE = 14;
 const SHEET_NAME = 'KidsApplications';
 const SCRIPT_PROPERTIES = PropertiesService.getScriptProperties();
-const ADMIN_EMAIL = SCRIPT_PROPERTIES.getProperty('ADMIN_EMAIL') || 'demoteamandermatt@gmail.com';
+const ADMIN_EMAIL = SCRIPT_PROPERTIES.getProperty('ADMIN_EMAIL');
 const SITE_URL = 'https://demo.amatt.ch';
 
 function doPost(e) {
