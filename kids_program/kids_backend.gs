@@ -61,7 +61,7 @@ function doPost(e) {
     return jsonResponse({ success: true, age });
   } catch (err) {
     console.error('Error in doPost:', err);
-    return jsonResponse({ success: false, error: 'SERVER_ERROR', message: 'An unexpected server error occurred.' });
+    return jsonResponse({ success: false, error: 'SERVER_ERROR' });
   } finally {
     lock.releaseLock();
   }
