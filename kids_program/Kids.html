@@ -285,43 +285,6 @@ Synchronisiertes Skifahren ist nur das Werkzeug, die eigentliche Reise führt zu
 <div class="partners-grid grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 items-center" id="partners-grid"></div>
 </div>
 </section>
-  <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('kids-application-form');
-    const status = document.getElementById('form-status');
-
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbww4-cJHMdXsG-dEK-j_p53MU49IVOsShnvA-Y1vQNde2gnMMZKi5sgorDFzrQU37_9/exec';
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      status.textContent = 'Sending...';
-
-      try {
-        const formData = new FormData(form);
-
-        const response = await fetch(scriptURL, {
-          method: 'POST',
-          body: formData
-        });
-
-        const result = await response.json();
-
-        if (result.success) {
-          status.textContent = 'Danke! Deine Bewerbung ist eingegangen.';
-          form.reset();
-        } else {
-          status.textContent = 'Es gab ein Problem. Bitte versuche es noch einmal.';
-        }
-      } catch (error) {
-        console.error(error);
-        status.textContent = 'Es gab ein Problem mit der Verbindung.';
-      }
-
-      // Clear message after some seconds if you want
-      setTimeout(() => { status.textContent = ''; }, 8000);
-    });
-  });
-</script>
 <script>
     (function() {
       async function loadPartners() {

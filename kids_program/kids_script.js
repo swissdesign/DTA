@@ -35,7 +35,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     menuButton.addEventListener('click', toggleMenu);
     mobileNavLinks.forEach(link => link.addEventListener('click', toggleMenu));
 
-    // --- Translations ---
+    // --- Translations & Constants ---
+    const MIN_AGE = 8;
+    const MAX_AGE = 14;
     let translations = {};
     let currentLang = localStorage.getItem('dta_lang') || localStorage.getItem('dta-lang') || 'de';
 
@@ -61,11 +63,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         document.querySelectorAll('[data-key]').forEach(element => {
             const key = element.getAttribute('data-key');
-            if (translations[lang] && translations[lang][key]) {
+            const translationSet = translations[lang] || {};
+            if (translationSet && translationSet[key]) {
                 if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-                    element.placeholder = translations[lang][key];
+                    element.placeholder = translationSet[key];
                 } else {
-                    element.textContent = translations[lang][key];
+                    element.textContent = translationSet[key];
                 }
             }
         });
@@ -118,19 +121,31 @@ document.addEventListener('DOMContentLoaded', async () => {
         { start: '2026-04-18T07:00:00', end: '2026-04-18T13:00:00', summary: 'Jr. DTA Abschluss Skitour Saison 25/26' },
     ];
 
+    function formatDateSafe(dateString, lang) {
+        const dateObj = new Date(dateString);
+        if (Number.isNaN(dateObj.getTime())) return '';
+        const locale = lang === 'de' ? 'de-CH' : 'en-GB';
+        const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+        return dateObj.toLocaleDateString(locale, options);
+    }
+
     function populateDates(lang = currentLang) {
         const listEl = document.getElementById('event-dates-list');
         if (!listEl) return;
 
         const locale = lang === 'de' ? 'de-CH' : 'en-GB';
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        
-        listEl.innerHTML = ''; // Clear existing list
+
+        listEl.innerHTML = '';
         trainingDates.forEach(date => {
             const startDate = new Date(date.start);
-            const li = document.createElement('li');
             const summaryText = (translations[lang] && translations[lang][`summary_${date.summary.replace(/\s/g, '_')}`]) || date.summary;
-            li.textContent = `${startDate.toLocaleDateString(locale, options)} - ${summaryText}`;
+            const li = document.createElement('li');
+            if (!Number.isNaN(startDate.getTime())) {
+                li.textContent = `${startDate.toLocaleDateString(locale, options)} - ${summaryText}`;
+            } else {
+                li.textContent = `${formatDateSafe(date.start, lang)} - ${summaryText}`;
+            }
             listEl.appendChild(li);
         });
     }
@@ -171,60 +186,93 @@ document.addEventListener('DOMContentLoaded', async () => {
         link.click();
         document.body.removeChild(link);
     });
-    
-// --- Application Form ---
+
+    // --- Application Form ---
     const form = document.getElementById('kids-application-form');
     if (form) {
         const statusEl = document.getElementById('form-status');
-        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwyVkyk6U9u63vHRE066__Hm_B1jXm-ovxRDOe4yD82eoPyPubXi2C_YzDY0Hdz9ob2Qw/exec"; // <-- PUT THE URL FROM STEP 3 HERE
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbww4-cJHMdXsG-dEK-j_p53MU49IVOsShnvA-Y1vQNde2gnMMZKi5sgorDFzrQU37_9/exec";
 
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const formData = new FormData(form);
-            const dob = new Date(formData.get('child_dob'));
+        const getTranslation = (key, fallback = '') => {
+            const translationSet = translations[currentLang] || {};
+            return translationSet[key] || fallback;
+        };
+
+        const setStatus = (key, type = 'info', replacements = {}) => {
+            let message = getTranslation(key, key);
+            Object.entries(replacements).forEach(([placeholder, value]) => {
+                message = message.replace(new RegExp(`{${placeholder}}`, 'g'), value);
+            });
+            statusEl.textContent = message;
+            const colorClass = type === 'error' ? 'text-red-500' : type === 'success' ? 'text-green-500' : 'text-gray-400';
+            statusEl.className = `text-sm text-center ${colorClass} h-4`;
+        };
+
+        const calculateAge = (dobString) => {
+            if (!dobString) return null;
+            const dobDate = new Date(dobString);
+            if (Number.isNaN(dobDate.getTime())) return null;
             const today = new Date();
-            let age = today.getFullYear() - dob.getFullYear();
-            const m = today.getMonth() - dob.getMonth();
-            if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+            let age = today.getFullYear() - dobDate.getFullYear();
+            const monthDiff = today.getMonth() - dobDate.getMonth();
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dobDate.getDate())) {
                 age--;
             }
+            return age;
+        };
 
-            // Client-side validation (good for user experience)
-            if (age < 8 || age > 16) {
-                statusEl.textContent = translations[currentLang]?.form_age_error || 'Child must be between 08 and 16 years old.';
-                statusEl.className = 'text-sm text-center text-red-500 h-4';
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(form);
+            const age = calculateAge(formData.get('child_dob'));
+
+            if (age === null) {
+                setStatus('form_error_invalid_dob', 'error');
                 return;
             }
 
-            statusEl.textContent = translations[currentLang]?.form_submitting || 'Submitting...';
-            statusEl.className = 'text-sm text-center text-gray-400 h-4';
-            form.querySelector('button[type="submit"]').disabled = true; // Disable button
+            if (age < MIN_AGE || age > MAX_AGE) {
+                setStatus('form_error_age_out_of_range', 'error', { age, min: MIN_AGE, max: MAX_AGE });
+                return;
+            }
 
-            // --- Real Submission using fetch ---
-            fetch(WEB_APP_URL, {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.result === "success") {
-                    // Success!
-                    statusEl.textContent = translations[currentLang]?.form_success || 'Thank you for your application! We will be in touch.';
-                    statusEl.className = 'text-sm text-center text-green-500 h-4';
+            setStatus('form_submitting', 'info');
+            submitBtn.disabled = true;
+
+            formData.set('lang', currentLang);
+
+            try {
+                const response = await fetch(WEB_APP_URL, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    setStatus('form_success_submitted', 'success');
                     form.reset();
+                } else if (data.error === 'AGE_OUT_OF_RANGE') {
+                    setStatus('form_error_age_out_of_range', 'error', {
+                        age: data.age ?? age,
+                        min: data.minAge ?? MIN_AGE,
+                        max: data.maxAge ?? MAX_AGE
+                    });
+                } else if (data.error === 'INVALID_DOB') {
+                    setStatus('form_error_invalid_dob', 'error');
                 } else {
-                    // Handle error from Apps Script
-                    throw new Error(data.message || 'Unknown error');
+                    setStatus('form_error_generic', 'error');
                 }
-            })
-            .catch(error => {
-                console.error("Form submission error:", error);
-                statusEl.textContent = translations[currentLang]?.form_error || 'Submission failed. Please try again.';
-                statusEl.className = 'text-sm text-center text-red-500 h-4';
-            })
-            .finally(() => {
-                form.querySelector('button[type="submit"]').disabled = false; // Re-enable button
-            });
+            } catch (err) {
+                console.error('Form submission error:', err);
+                setStatus('form_error_generic', 'error');
+            } finally {
+                submitBtn.disabled = false;
+            }
         });
     }
+
+    loadTranslations();
+});
