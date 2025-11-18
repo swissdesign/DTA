@@ -184,7 +184,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (form) {
         const statusEl = document.getElementById('form-status');
         const submitBtn = form.querySelector('button[type="submit"]');
-        const WEB_APP_URL = form.dataset.scriptUrl || "https://script.google.com/macros/s/AKfycbx8Z0wyqOMyy-L3PA9rv3gbfjetNGDSuI6erxoHo88nhyfSHipf82OQ_xXbf_32orxW/exec";
+        const WEB_APP_URL = form.dataset.scriptUrl || "https://script.google.com/macros/s/AKfycby8SfDp8Ae9W3Na8Kqz3vkBRhGOPgaRq89ReefQwX8OI_9QZfweP6xHvHC7csbsKPeB/exec";
 
         const getTranslation = (key, fallback = '') => {
             const translationSet = translations[currentLang] || {};
