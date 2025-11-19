@@ -103,50 +103,50 @@ document.addEventListener('DOMContentLoaded', async () => {
   {
     start: '2026-01-07T19:30:00',
     end: '2026-01-07T21:00:00',
-    summary: 'DTA Turnen – Day 01 (Aula Bodenschulhaus, Andermatt)',
-    summaryKey: 'summary_training_day_01'
+    summary: 'Gymnastics - Day 01 (Aula Bodenschulhaus, Andermatt)',
+    summaryKey: 'summary_turnen_01'
   },
   {
     start: '2026-01-14T19:30:00',
     end: '2026-01-14T21:00:00',
-    summary: 'DTA Turnen – Day 02 (Aula Bodenschulhaus, Andermatt)',
-    summaryKey: 'summary_training_day_02'
+    summary: 'Gymnastics - Day 02 (Aula Bodenschulhaus, Andermatt)',
+    summaryKey: 'summary_turnen_02'
   },
   {
     start: '2026-01-21T19:30:00',
     end: '2026-01-21T21:00:00',
-    summary: 'DTA Turnen – Day 03 (Aula Bodenschulhaus, Andermatt)',
-    summaryKey: 'summary_training_day_03'
+    summary: 'Gymnastics - Day 03 (Aula Bodenschulhaus, Andermatt)',
+    summaryKey: 'summary_turnen_03'
   },
   {
     start: '2026-01-28T19:30:00',
     end: '2026-01-28T21:00:00',
-    summary: 'DTA Turnen – Day 04 (Aula Bodenschulhaus, Andermatt)',
-    summaryKey: 'summary_training_day_04'
+    summary: 'Gymnastics - Day 04 (Aula Bodenschulhaus, Andermatt)',
+    summaryKey: 'summary_turnen_04'
   },
   {
     start: '2026-02-04T19:30:00',
     end: '2026-02-04T21:00:00',
-    summary: 'DTA Turnen – Day 05 (Aula Bodenschulhaus, Andermatt)',
-    summaryKey: 'summary_training_day_05'
+    summary: 'Gymnastics - Day 05 (Aula Bodenschulhaus, Andermatt)',
+    summaryKey: 'summary_turnen_05'
   },
   {
     start: '2026-02-11T19:30:00',
     end: '2026-02-11T21:00:00',
-    summary: 'DTA Turnen – Day 06 (Aula Bodenschulhaus, Andermatt)',
-    summaryKey: 'summary_training_day_06'
+    summary: 'Gymnastics - Day 06 (Aula Bodenschulhaus, Andermatt)',
+    summaryKey: 'summary_turnen_06'
   },
   {
     start: '2026-02-18T19:30:00',
     end: '2026-02-18T21:00:00',
-    summary: 'DTA Turnen – Day 07 (Aula Bodenschulhaus, Andermatt)',
-    summaryKey: 'summary_training_day_07'
+    summary: 'Gymnastics - Day 07 (Aula Bodenschulhaus, Andermatt)',
+    summaryKey: 'summary_turnen_07'
   },
   {
     start: '2026-02-25T19:30:00',
     end: '2026-02-25T21:00:00',
-    summary: 'DTA Turnen – Day 08 (Aula Bodenschulhaus, Andermatt)',
-    summaryKey: 'summary_training_day_08'
+    summary: 'Gymnastics - Day 08 (Aula Bodenschulhaus, Andermatt)',
+    summaryKey: 'summary_turnen_08'
   }
 ];
 
