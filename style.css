@@ -273,6 +273,102 @@ main {
 /* Sensible max sizing */
 .partners-grid .partner-logo { max-width: 300px; max-height: 200px; }
 
+/* -----------------------------------------------
+ * ✦ DTA "Slick" Cookie Toast
+ * --------------------------------------------- */
+.cookie-toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 100%;
+    max-width: 380px;
+    background: rgba(17, 17, 17, 0.9);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    z-index: 9999;
+    transform: translateY(120%);
+    opacity: 0;
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cookie-toast.is-visible {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.cookie-content {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+    align-items: flex-start;
+}
+
+.cookie-icon {
+    font-size: 24px;
+    line-height: 1;
+}
+
+.cookie-btn {
+    width: 100%;
+    background-color: #f97316;
+    color: #fff;
+    border: none;
+    padding: 10px 0;
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.cookie-btn:hover {
+    background-color: #ea580c;
+}
+
+.cookie-btn:active {
+    transform: scale(0.98);
+}
+
+.cookie-toast .cookie-text h4,
+.cookie-toast .text-white {
+    color: #fff;
+    font-weight: 700;
+    margin: 0;
+}
+
+.cookie-toast .cookie-text p,
+.cookie-toast .text-gray-400 {
+    color: #9ca3af;
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.cookie-toast .cookie-text a {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.cookie-toast .cookie-text a:hover {
+    color: #ffffff;
+}
+
+@media (max-width: 640px) {
+    .cookie-toast {
+        left: 20px;
+        right: 20px;
+        bottom: 20px;
+        width: auto;
+        max-width: none;
+    }
+}
+
 /* --- Fullscreen Sticky Hero --- */
 #hero { height: 220vh; }
 .hero-sticky { position: sticky; top: 0; height: 100vh; width: 100vw; }

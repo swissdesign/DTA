@@ -304,6 +304,98 @@ function initHeroVideoScrub() {
         `).join('');
     }
 
+    function resolveLegalHref() {
+        try {
+            return new URL('../legal.html', window.location.href).href;
+        } catch (err) {
+            console.warn('Falling back to relative legal link due to URL parsing issue:', err);
+            return 'legal.html';
+        }
+    }
+
+    function buildCookieToast(legalHref) {
+        const toast = document.createElement('div');
+        toast.id = 'dta-cookie-toast';
+        toast.className = 'cookie-toast';
+        toast.setAttribute('aria-hidden', 'true');
+        toast.innerHTML = `
+            <div class="cookie-content">
+                <div class="cookie-icon" aria-hidden="true">🍪</div>
+                <div class="cookie-text">
+                    <h4 class="text-white font-bold" data-key="cookie_heading">We prefer fresh Powder.</h4>
+                    <p class="text-gray-400 text-sm mt-1">
+                        <span data-key="cookie_body">We don't use tracking cookies—just a few technical crumbs to keep the site running. No spying, just skiing.</span>
+                        <a class="underline hover:text-white transition-colors" data-cookie-legal-link data-key="cookie_link_text" href="${legalHref}">Read the legal stuff.</a>
+                    </p>
+                </div>
+            </div>
+            <button id="cookie-accept-btn" class="cookie-btn" type="button" data-key="cookie_button">Shred On</button>
+        `;
+        return toast;
+    }
+
+    function initCookieToast() {
+        if (!document.body) return;
+
+        const legalHref = resolveLegalHref();
+        let cookieToast = document.getElementById('dta-cookie-toast');
+
+        if (!cookieToast) {
+            cookieToast = buildCookieToast(legalHref);
+            document.body.appendChild(cookieToast);
+        } else {
+            const existingLink = cookieToast.querySelector('[data-cookie-legal-link]');
+            if (existingLink) existingLink.href = legalHref;
+        }
+
+        const acceptBtn = cookieToast.querySelector('#cookie-accept-btn');
+        if (!cookieToast || !acceptBtn) return;
+
+        const storageKey = 'dta_cookie_consent';
+        const safeGet = () => {
+            try {
+                return window.localStorage.getItem(storageKey);
+            } catch (err) {
+                console.warn('Cookie consent storage unavailable:', err);
+                return null;
+            }
+        };
+
+        const safeSet = () => {
+            try {
+                window.localStorage.setItem(storageKey, 'true');
+            } catch (err) {
+                console.warn('Cookie consent storage unavailable:', err);
+            }
+        };
+
+        const showToast = () => {
+            cookieToast.classList.add('is-visible');
+            cookieToast.setAttribute('aria-hidden', 'false');
+        };
+
+        const hideToast = () => {
+            cookieToast.classList.remove('is-visible');
+            cookieToast.setAttribute('aria-hidden', 'true');
+            setTimeout(() => {
+                cookieToast.style.display = 'none';
+            }, 600);
+        };
+
+        if (!safeGet()) {
+            setTimeout(() => {
+                if (!safeGet()) {
+                    showToast();
+                }
+            }, 1500);
+        }
+
+        acceptBtn.addEventListener('click', () => {
+            safeSet();
+            hideToast();
+        });
+    }
+
     function initJournalScroller() {
         const container = document.getElementById('journal-scroll-container');
         const scrollLeftBtn = document.getElementById('journal-scroll-left');
@@ -394,6 +486,7 @@ function initHeroVideoScrub() {
     initModal();
     initSponsorshipForm();
     initPartnersGrid();
+    initCookieToast();
     await loadTranslations();
 
 });
