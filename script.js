@@ -335,9 +335,9 @@ function initHeroVideoScrub() {
         const hideToast = () => {
             cookieToast.classList.remove('is-visible');
             cookieToast.setAttribute('aria-hidden', 'true');
-            setTimeout(() => {
+            cookieToast.addEventListener('transitionend', () => {
                 cookieToast.style.display = 'none';
-            }, 600);
+            }, { once: true });
         };
 
         if (!safeGet()) {
