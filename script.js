@@ -280,19 +280,59 @@ function initHeroVideoScrub() {
         });
     }
     
-    function initSponsorshipForm() {
-        const form = document.getElementById('sponsorship-form');
-        if (!form) return;
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const statusEl = document.getElementById('form-status');
-            statusEl.textContent = 'Sending...';
-            setTimeout(() => {
-                statusEl.textContent = 'Thank you! We will be in touch soon.';
+  function initSponsorshipForm() {
+    const form = document.getElementById('sponsorship-form');
+    if (!form) return;
+
+    const SCRIPT_URL = 'PASTE_YOUR_DEPLOYED_GOOGLE_SCRIPT_URL_HERE';
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const statusEl = document.getElementById('form-status');
+        const btn = form.querySelector('button[type="submit"]');
+        
+        // 1. Basic UI Loading State
+        const originalBtnText = btn.textContent;
+        btn.textContent = 'Sending...';
+        btn.disabled = true;
+        statusEl.textContent = '';
+        statusEl.className = 'text-sm text-gray-400 mt-2';
+
+        // 2. Prepare Data
+        const formData = new FormData(form);
+        // Append current language so the backend knows which email language to send
+        formData.append('lang', window.dtaCurrentLang || 'de');
+
+        // 3. Send to Google Script
+        fetch(SCRIPT_URL, {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                statusEl.textContent = (window.dtaCurrentLang === 'en') 
+                    ? 'Thank you! We have received your message.' 
+                    : 'Danke! Wir haben deine Nachricht erhalten.';
+                statusEl.className = 'text-sm text-green-400 mt-2';
                 form.reset();
-            }, 1000);
+            } else {
+                throw new Error('Server responded with error');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            statusEl.textContent = (window.dtaCurrentLang === 'en')
+                ? 'Something went wrong. Please try again or email us directly.'
+                : 'Etwas ist schief gelaufen. Bitte versuche es erneut oder schreibe uns direkt.';
+            statusEl.className = 'text-sm text-red-400 mt-2';
+        })
+        .finally(() => {
+            btn.textContent = originalBtnText;
+            btn.disabled = false;
         });
-    }
+    });
+}
 
     function initPartnersGrid() {
         const grid = document.getElementById('partners-grid');
