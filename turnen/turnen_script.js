@@ -256,7 +256,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (form) {
         const statusEl = document.getElementById('form-status');
         const submitBtn = form.querySelector('button[type="submit"]');
-        const WEB_APP_URL = form.dataset.scriptUrl || "https://script.google.com/macros/s/AKfycbzU0Hi34FEwDmmP-XgBPvqsYuYDkV6Ia2OCEAQ0VBVE9skf-TvAm2FxGzabTpHzDMvm/exec";
+        const WEB_APP_URL = form.dataset.scriptUrl || "https://script.google.com/macros/s/AKfycbwOC3jQYj6JoB8ctrw_va1CqhehfhqisoLiNSXBgLi0Uui42D8e3L2JwpkA0LtR5Koj0Q/exec";
 
         const getTranslation = (key, fallback = '') => {
             const translationSet = translations[currentLang] || {};
