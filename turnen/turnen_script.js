@@ -100,26 +100,57 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('lang-en-mobile')?.addEventListener('click', () => translatePage('en'));
 
     // --- Season Dates & ICS Download ---
-    const trainingDates = [
-        { start: '2025-12-20T09:00:00', end: '2025-12-20T16:00:00', summary: 'Einführungs WE Jr. DTA - Tag 01', summaryKey: 'summary_intro_weekend_day_1' },
-        { start: '2025-12-21T09:00:00', end: '2025-12-21T16:00:00', summary: 'Einführungs WE Jr. DTA - Tag 02', summaryKey: 'summary_intro_weekend_day_2' },
-        { start: '2026-01-07T13:00:00', end: '2026-01-07T16:00:00', summary: 'Jr. DTA Training - No. 001', summaryKey: 'summary_training_001' },
-        { start: '2026-01-14T13:00:00', end: '2026-01-14T16:00:00', summary: 'Jr. DTA Training - No. 002', summaryKey: 'summary_training_002' },
-        { start: '2026-01-21T13:00:00', end: '2026-01-21T16:00:00', summary: 'Jr. DTA Training - No. 003', summaryKey: 'summary_training_003' },
-        { start: '2026-01-28T13:00:00', end: '2026-01-28T16:00:00', summary: 'Jr. DTA Training - No. 004', summaryKey: 'summary_training_004' },
-        { start: '2026-02-04T13:00:00', end: '2026-02-04T16:00:00', summary: 'Jr. DTA Training - No. 005', summaryKey: 'summary_training_005' },
-        { start: '2026-02-11T13:00:00', end: '2026-02-11T16:00:00', summary: 'Jr. DTA Training - No. 006', summaryKey: 'summary_training_006' },
-        { start: '2026-02-18T13:00:00', end: '2026-02-18T16:00:00', summary: 'Jr. DTA Training - No. 007', summaryKey: 'summary_training_007' },
-        { start: '2026-02-25T13:00:00', end: '2026-02-25T16:00:00', summary: 'Jr. DTA Training - No. 008', summaryKey: 'summary_training_008' },
-        { start: '2026-03-04T13:00:00', end: '2026-03-04T16:00:00', summary: 'Jr. DTA Training - No. 009', summaryKey: 'summary_training_009' },
-        { start: '2026-03-11T13:00:00', end: '2026-03-11T16:00:00', summary: 'Jr. DTA Training - No. 010', summaryKey: 'summary_training_010' },
-        { start: '2026-03-18T13:00:00', end: '2026-03-18T16:00:00', summary: 'Jr. DTA Training - No. 011', summaryKey: 'summary_training_011' },
-        { start: '2026-03-25T09:00:00', end: '2026-03-25T16:00:00', summary: 'Jr. DTA Training - No. 012', summaryKey: 'summary_training_012' },
-        { start: '2026-04-01T13:00:00', end: '2026-04-01T16:00:00', summary: 'Jr. DTA Training - No. 013', summaryKey: 'summary_training_013' },
-        { start: '2026-04-08T13:00:00', end: '2026-04-08T16:00:00', summary: 'Jr. DTA Training - No. 014', summaryKey: 'summary_training_014' },
-        { start: '2026-04-15T13:00:00', end: '2026-04-15T16:00:00', summary: 'Jr. DTA Training - No. 015', summaryKey: 'summary_training_015' },
-        { start: '2026-04-18T07:00:00', end: '2026-04-18T13:00:00', summary: 'Jr. DTA Abschluss Skitour Saison 25/26', summaryKey: 'summary_end_of_season_tour' },
-    ];
+   const trainingDates = [
+  {
+    start: '2026-01-07T19:30:00',
+    end: '2026-01-07T21:00:00',
+    summary: 'DTA Turnen – Day 01 (Aula Bodenschulhaus, Andermatt)',
+    summaryKey: 'summary_training_day_01'
+  },
+  {
+    start: '2026-01-14T19:30:00',
+    end: '2026-01-14T21:00:00',
+    summary: 'DTA Turnen – Day 02 (Aula Bodenschulhaus, Andermatt)',
+    summaryKey: 'summary_training_day_02'
+  },
+  {
+    start: '2026-01-21T19:30:00',
+    end: '2026-01-21T21:00:00',
+    summary: 'DTA Turnen – Day 03 (Aula Bodenschulhaus, Andermatt)',
+    summaryKey: 'summary_training_day_03'
+  },
+  {
+    start: '2026-01-28T19:30:00',
+    end: '2026-01-28T21:00:00',
+    summary: 'DTA Turnen – Day 04 (Aula Bodenschulhaus, Andermatt)',
+    summaryKey: 'summary_training_day_04'
+  },
+  {
+    start: '2026-02-04T19:30:00',
+    end: '2026-02-04T21:00:00',
+    summary: 'DTA Turnen – Day 05 (Aula Bodenschulhaus, Andermatt)',
+    summaryKey: 'summary_training_day_05'
+  },
+  {
+    start: '2026-02-11T19:30:00',
+    end: '2026-02-11T21:00:00',
+    summary: 'DTA Turnen – Day 06 (Aula Bodenschulhaus, Andermatt)',
+    summaryKey: 'summary_training_day_06'
+  },
+  {
+    start: '2026-02-18T19:30:00',
+    end: '2026-02-18T21:00:00',
+    summary: 'DTA Turnen – Day 07 (Aula Bodenschulhaus, Andermatt)',
+    summaryKey: 'summary_training_day_07'
+  },
+  {
+    start: '2026-02-25T19:30:00',
+    end: '2026-02-25T21:00:00',
+    summary: 'DTA Turnen – Day 08 (Aula Bodenschulhaus, Andermatt)',
+    summaryKey: 'summary_training_day_08'
+  }
+];
+
 
     function populateDates(lang = currentLang) {
         const listEl = document.getElementById('event-dates-list');
