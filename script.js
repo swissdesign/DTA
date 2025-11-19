@@ -127,21 +127,49 @@ document.addEventListener('DOMContentLoaded', async function() {
         });
     }
 
+    let mobileMenuInitialized = false;
+
     function initMobileMenu() {
+        if (mobileMenuInitialized) return;
+
         const menuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
         if (!menuButton || !mobileMenu) return;
-        
+
+        mobileMenuInitialized = true;
+
         const navLinks = mobileMenu.querySelectorAll('.mobile-nav-link');
 
-        const toggleMenu = () => {
-            menuButton.classList.toggle('is-active');
-            mobileMenu.classList.toggle('translate-x-full');
-            document.body.classList.toggle('overflow-hidden');
+        const openMenu = () => {
+            menuButton.classList.add('is-active');
+            menuButton.setAttribute('aria-expanded', 'true');
+            mobileMenu.classList.remove('translate-x-full');
+            document.body.classList.add('overflow-hidden');
         };
 
+        const closeMenu = () => {
+            menuButton.classList.remove('is-active');
+            menuButton.setAttribute('aria-expanded', 'false');
+            mobileMenu.classList.add('translate-x-full');
+            document.body.classList.remove('overflow-hidden');
+        };
+
+        const toggleMenu = () => {
+            if (mobileMenu.classList.contains('translate-x-full')) {
+                openMenu();
+            } else {
+                closeMenu();
+            }
+        };
+
+        menuButton.setAttribute('aria-expanded', 'false');
         menuButton.addEventListener('click', toggleMenu);
-        navLinks.forEach(link => link.addEventListener('click', toggleMenu));
+        navLinks.forEach(link => link.addEventListener('click', closeMenu));
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) {
+                closeMenu();
+            }
+        });
     }
 
     

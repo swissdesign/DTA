@@ -1,41 +1,6 @@
 // DTA Turnen Program - Specific JS
 document.addEventListener('DOMContentLoaded', async () => {
-    // --- Preloader ---
-    const preloader = document.getElementById('preloader');
-    if (preloader) {
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                preloader.style.opacity = '0';
-                preloader.style.visibility = 'hidden';
-            }, 500); // Give a little delay for content to render
-        });
-    }
-
-    // --- Header Scroll Effect ---
-    const header = document.getElementById('main-header');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-    });
-
-    // --- Mobile Menu ---
-    const menuButton = document.getElementById('mobile-menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const mobileNavLinks = mobileMenu.querySelectorAll('.mobile-nav-link');
-
-    const toggleMenu = () => {
-        menuButton.classList.toggle('is-active');
-        mobileMenu.classList.toggle('translate-x-full');
-        document.body.classList.toggle('overflow-hidden');
-    };
-
-    menuButton.addEventListener('click', toggleMenu);
-    mobileNavLinks.forEach(link => link.addEventListener('click', toggleMenu));
-
-    // --- Translations & Constants ---
+    // --- Form & calendar-specific logic ---
     const MIN_AGE = 16;
     let translations = {};
     let currentLang = localStorage.getItem('dta_lang') || localStorage.getItem('dta-lang') || 'de';
