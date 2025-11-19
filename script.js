@@ -284,7 +284,7 @@ function initHeroVideoScrub() {
     const form = document.getElementById('sponsorship-form');
     if (!form) return;
 
-    const SCRIPT_URL = 'PASTE_YOUR_DEPLOYED_GOOGLE_SCRIPT_URL_HERE';
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxOTQxqrInGeyZVcL9Zr_6oPYJ2PlAoY-zvERsUtVMUddlT-MddeRqF1bNT99mq5Eg8/exec';
 
     form.addEventListener('submit', (e) => {
         e.preventDefault();
