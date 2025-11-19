@@ -36,8 +36,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     mobileNavLinks.forEach(link => link.addEventListener('click', toggleMenu));
 
     // --- Translations & Constants ---
-    const MIN_AGE = 8;
-    const MAX_AGE = 14;
+    const MIN_AGE = 10;
+    const MAX_AGE = 15;
     let translations = {};
     let currentLang = localStorage.getItem('dta_lang') || localStorage.getItem('dta-lang') || 'de';
 
