@@ -1,4 +1,4 @@
-// DTA Kids Program - Specific JS
+// DTA Turnen Program - Specific JS
 document.addEventListener('DOMContentLoaded', async () => {
     // --- Preloader ---
     const preloader = document.getElementById('preloader');
@@ -99,56 +99,97 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('lang-en-mobile')?.addEventListener('click', () => translatePage('en'));
 
     // --- Season Dates & ICS Download ---
-   const trainingDates = [
-  {
-    start: '2026-01-07T19:30:00',
-    end: '2026-01-07T21:00:00',
-    summary: 'Gymnastics - Day 01 (Aula Bodenschulhaus, Andermatt)',
-    summaryKey: 'summary_turnen_01'
-  },
-  {
-    start: '2026-01-14T19:30:00',
-    end: '2026-01-14T21:00:00',
-    summary: 'Gymnastics - Day 02 (Aula Bodenschulhaus, Andermatt)',
-    summaryKey: 'summary_turnen_02'
-  },
-  {
-    start: '2026-01-21T19:30:00',
-    end: '2026-01-21T21:00:00',
-    summary: 'Gymnastics - Day 03 (Aula Bodenschulhaus, Andermatt)',
-    summaryKey: 'summary_turnen_03'
-  },
-  {
-    start: '2026-01-28T19:30:00',
-    end: '2026-01-28T21:00:00',
-    summary: 'Gymnastics - Day 04 (Aula Bodenschulhaus, Andermatt)',
-    summaryKey: 'summary_turnen_04'
-  },
-  {
-    start: '2026-02-04T19:30:00',
-    end: '2026-02-04T21:00:00',
-    summary: 'Gymnastics - Day 05 (Aula Bodenschulhaus, Andermatt)',
-    summaryKey: 'summary_turnen_05'
-  },
-  {
-    start: '2026-02-11T19:30:00',
-    end: '2026-02-11T21:00:00',
-    summary: 'Gymnastics - Day 06 (Aula Bodenschulhaus, Andermatt)',
-    summaryKey: 'summary_turnen_06'
-  },
-  {
-    start: '2026-02-18T19:30:00',
-    end: '2026-02-18T21:00:00',
-    summary: 'Gymnastics - Day 07 (Aula Bodenschulhaus, Andermatt)',
-    summaryKey: 'summary_turnen_07'
-  },
-  {
-    start: '2026-02-25T19:30:00',
-    end: '2026-02-25T21:00:00',
-    summary: 'Gymnastics - Day 08 (Aula Bodenschulhaus, Andermatt)',
-    summaryKey: 'summary_turnen_08'
-  }
-];
+    const trainingDates = [
+        {
+            start: '2026-01-07T19:30:00',
+            end: '2026-01-07T21:00:00',
+            summaryKey: 'summary_turnen_01',
+            fallbackSummaries: {
+                en: 'Gymnastics - Day 01 (Aula Bodenschulhaus, Andermatt)',
+                de: 'Turnen - Tag 01 (Aula Bodenschulhaus, Andermatt)'
+            }
+        },
+        {
+            start: '2026-01-14T19:30:00',
+            end: '2026-01-14T21:00:00',
+            summaryKey: 'summary_turnen_02',
+            fallbackSummaries: {
+                en: 'Gymnastics - Day 02 (Aula Bodenschulhaus, Andermatt)',
+                de: 'Turnen - Tag 02 (Aula Bodenschulhaus, Andermatt)'
+            }
+        },
+        {
+            start: '2026-01-21T19:30:00',
+            end: '2026-01-21T21:00:00',
+            summaryKey: 'summary_turnen_03',
+            fallbackSummaries: {
+                en: 'Gymnastics - Day 03 (Aula Bodenschulhaus, Andermatt)',
+                de: 'Turnen - Tag 03 (Aula Bodenschulhaus, Andermatt)'
+            }
+        },
+        {
+            start: '2026-01-28T19:30:00',
+            end: '2026-01-28T21:00:00',
+            summaryKey: 'summary_turnen_04',
+            fallbackSummaries: {
+                en: 'Gymnastics - Day 04 (Aula Bodenschulhaus, Andermatt)',
+                de: 'Turnen - Tag 04 (Aula Bodenschulhaus, Andermatt)'
+            }
+        },
+        {
+            start: '2026-02-04T19:30:00',
+            end: '2026-02-04T21:00:00',
+            summaryKey: 'summary_turnen_05',
+            fallbackSummaries: {
+                en: 'Gymnastics - Day 05 (Aula Bodenschulhaus, Andermatt)',
+                de: 'Turnen - Tag 05 (Aula Bodenschulhaus, Andermatt)'
+            }
+        },
+        {
+            start: '2026-02-11T19:30:00',
+            end: '2026-02-11T21:00:00',
+            summaryKey: 'summary_turnen_06',
+            fallbackSummaries: {
+                en: 'Gymnastics - Day 06 (Aula Bodenschulhaus, Andermatt)',
+                de: 'Turnen - Tag 06 (Aula Bodenschulhaus, Andermatt)'
+            }
+        },
+        {
+            start: '2026-02-18T19:30:00',
+            end: '2026-02-18T21:00:00',
+            summaryKey: 'summary_turnen_07',
+            fallbackSummaries: {
+                en: 'Gymnastics - Day 07 (Aula Bodenschulhaus, Andermatt)',
+                de: 'Turnen - Tag 07 (Aula Bodenschulhaus, Andermatt)'
+            }
+        },
+        {
+            start: '2026-02-25T19:30:00',
+            end: '2026-02-25T21:00:00',
+            summaryKey: 'summary_turnen_08',
+            fallbackSummaries: {
+                en: 'Gymnastics - Day 08 (Aula Bodenschulhaus, Andermatt)',
+                de: 'Turnen - Tag 08 (Aula Bodenschulhaus, Andermatt)'
+            }
+        }
+    ];
+
+    const getEventSummary = (event, lang = currentLang) => {
+        const translationSet = translations[lang] || {};
+        if (translationSet[event.summaryKey]) {
+            return translationSet[event.summaryKey];
+        }
+        if (event.fallbackSummaries) {
+            if (event.fallbackSummaries[lang]) {
+                return event.fallbackSummaries[lang];
+            }
+            const fallbackValues = Object.values(event.fallbackSummaries);
+            if (fallbackValues.length) {
+                return fallbackValues[0];
+            }
+        }
+        return '';
+    };
 
 
     function populateDates(lang = currentLang) {
@@ -161,7 +202,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         listEl.innerHTML = '';
         trainingDates.forEach(date => {
             const startDate = new Date(date.start);
-            const summaryText = (translations[lang] && translations[lang][date.summaryKey]) || date.summary;
+            const summaryText = getEventSummary(date, lang);
             if (!Number.isNaN(startDate.getTime())) {
                 const li = document.createElement('li');
                 li.textContent = `${startDate.toLocaleDateString(locale, options)} - ${summaryText}`;
@@ -172,24 +213,25 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
-    function generateICS() {
+    function generateICS(lang = currentLang) {
         let icsContent = [
             'BEGIN:VCALENDAR',
             'VERSION:2.0',
-            'PRODID:-//DemoteamAndermatt//DTA Kids Calendar//EN',
+            'PRODID:-//DemoteamAndermatt//DTA Turnen Calendar//EN',
         ];
 
         trainingDates.forEach(event => {
             const startDate = new Date(event.start);
             const endDate = new Date(event.end);
             const uid = `${startDate.toISOString().replace(/[-:.]/g, '')}@demoteamandermatt.ch`;
+            const summaryText = getEventSummary(event, lang) || 'Turnen Training';
 
             icsContent.push('BEGIN:VEVENT');
             icsContent.push(`UID:${uid}`);
             icsContent.push(`DTSTAMP:${new Date().toISOString().replace(/[-:.]/g, '')}Z`);
             icsContent.push(`DTSTART:${startDate.toISOString().replace(/[-:.]/g, '')}Z`);
             icsContent.push(`DTEND:${endDate.toISOString().replace(/[-:.]/g, '')}Z`);
-            icsContent.push(`SUMMARY:${event.summary}`);
+            icsContent.push(`SUMMARY:${summaryText}`);
             icsContent.push('LOCATION:Andermatt Ski Area');
             icsContent.push('END:VEVENT');
         });
@@ -199,11 +241,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     document.getElementById('download-ics')?.addEventListener('click', () => {
-        const icsData = generateICS();
+        const icsData = generateICS(currentLang);
         const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8;' });
         const link = document.createElement("a");
         link.href = URL.createObjectURL(blob);
-        link.setAttribute("download", "DTA_Kids_Schedule_25-26.ics");
+        link.setAttribute("download", "DTA_Turnen_Schedule_25-26.ics");
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
