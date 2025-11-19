@@ -304,6 +304,56 @@ function initHeroVideoScrub() {
         `).join('');
     }
 
+    function initCookieToast() {
+        const cookieToast = document.getElementById('dta-cookie-toast');
+        const acceptBtn = document.getElementById('cookie-accept-btn');
+        if (!cookieToast || !acceptBtn) return;
+
+        const storageKey = 'dta_cookie_consent';
+        const safeGet = () => {
+            try {
+                return window.localStorage.getItem(storageKey);
+            } catch (err) {
+                console.warn('Cookie consent storage unavailable:', err);
+                return null;
+            }
+        };
+
+        const safeSet = () => {
+            try {
+                window.localStorage.setItem(storageKey, 'true');
+            } catch (err) {
+                console.warn('Cookie consent storage unavailable:', err);
+            }
+        };
+
+        const showToast = () => {
+            cookieToast.classList.add('is-visible');
+            cookieToast.setAttribute('aria-hidden', 'false');
+        };
+
+        const hideToast = () => {
+            cookieToast.classList.remove('is-visible');
+            cookieToast.setAttribute('aria-hidden', 'true');
+            setTimeout(() => {
+                cookieToast.style.display = 'none';
+            }, 600);
+        };
+
+        if (!safeGet()) {
+            setTimeout(() => {
+                if (!safeGet()) {
+                    showToast();
+                }
+            }, 1500);
+        }
+
+        acceptBtn.addEventListener('click', () => {
+            safeSet();
+            hideToast();
+        });
+    }
+
     function initJournalScroller() {
         const container = document.getElementById('journal-scroll-container');
         const scrollLeftBtn = document.getElementById('journal-scroll-left');
@@ -394,6 +444,7 @@ function initHeroVideoScrub() {
     initModal();
     initSponsorshipForm();
     initPartnersGrid();
+    initCookieToast();
     await loadTranslations();
 
 });
