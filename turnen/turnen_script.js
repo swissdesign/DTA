@@ -36,14 +36,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     mobileNavLinks.forEach(link => link.addEventListener('click', toggleMenu));
 
     // --- Translations & Constants ---
-    const MIN_AGE = 10;
-    const MAX_AGE = 15;
+    const MIN_AGE = 16;
     let translations = {};
     let currentLang = localStorage.getItem('dta_lang') || localStorage.getItem('dta-lang') || 'de';
 
     async function loadTranslations() {
         try {
-            const response = await fetch('kids_translations.json');
+            const response = await fetch('turnen_translations.json');
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -211,7 +210,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     // --- Application Form ---
-    const form = document.getElementById('kids-application-form');
+    const form = document.getElementById('turnen-application-form');
     if (form) {
         const statusEl = document.getElementById('form-status');
         const submitBtn = form.querySelector('button[type="submit"]');
@@ -250,15 +249,15 @@ document.addEventListener('DOMContentLoaded', async () => {
             e.preventDefault();
 
             const formData = new FormData(form);
-            const age = calculateAge(formData.get('child_dob'));
+            const age = calculateAge(formData.get('participant_dob'));
 
             if (age === null) {
                 setStatus('form_error_invalid_dob', 'error');
                 return;
             }
 
-            if (age < MIN_AGE || age > MAX_AGE) {
-                setStatus('form_error_age_out_of_range', 'error', { age, min: MIN_AGE, max: MAX_AGE });
+            if (age < MIN_AGE) {
+                setStatus('form_error_min_age', 'error');
                 return;
             }
 
@@ -279,11 +278,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     setStatus('form_success_submitted', 'success');
                     form.reset();
                 } else if (data.error === 'AGE_OUT_OF_RANGE') {
-                    setStatus('form_error_age_out_of_range', 'error', {
-                        age: data.age ?? age,
-                        min: data.minAge ?? MIN_AGE,
-                        max: data.maxAge ?? MAX_AGE
-                    });
+                    setStatus('form_error_min_age', 'error');
                 } else if (data.error === 'INVALID_DOB') {
                     setStatus('form_error_invalid_dob', 'error');
                 } else {

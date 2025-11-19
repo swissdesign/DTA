@@ -123,6 +123,7 @@
 <a class="px-2 py-1 hover:text-white text-gray-300 orange-first-letter" data-key="nav_crew" href="../index.html#crew">Crew</a>
 <a class="px-2 py-1 hover:text-white text-gray-300 orange-first-letter" data-key="nav_journal" href="../journal/journal.html">The Journal</a>
 <a class="px-2 py-1 hover:text-white text-gray-300 orange-first-letter" data-key="nav_kids" href="Kids.html">DTA Kidz</a>
+<a class="px-2 py-1 hover:text-white text-gray-300 orange-first-letter" data-key="nav_turnen" href="turnen.html">Turnen</a>
 <a class="px-2 py-1 hover:text-white text-gray-300 orange-first-letter" data-key="nav_sponsorship" href="../sponsoring/sponsoring.html">Sponsoring</a>
 <!-- Lang switch -->
 <div class="flex items-center gap-3">
@@ -145,6 +146,7 @@
 <a class="block text-lg mobile-nav-link orange-first-letter" data-key="nav_crew" href="../index.html#crew">Crew</a>
 <a class="block text-lg mobile-nav-link orange-first-letter" data-key="nav_journal" href="../journal/journal.html">The Journal</a>
 <a class="block text-lg mobile-nav-link orange-first-letter" data-key="nav_kids" href="Kids.html">DTA Kidz</a>
+<a class="block text-lg mobile-nav-link orange-first-letter" data-key="nav_turnen" href="turnen.html">Turnen</a>
 <a class="block text-lg mobile-nav-link orange-first-letter" data-key="nav_sponsorship" href="../sponsoring/sponsoring.html">Sponsoring</a>
 <div class="pt-4 flex items-center gap-3">
 <button class="uppercase text-sm" id="lang-de-mobile">DE</button>
@@ -237,38 +239,13 @@
 <p class="text-gray-300 mt-2 max-w-3xl" data-key="form_intro">
                 Die Sessions sind locker, ungezwungen und perfekt, um gemeinsam etwas zu machen, das nicht nur Bergbahn-Jogging oder Kaffeeschlange-Management ist. Melde dich kurz an, damit wir etwas besser planen kann. Merci!
             </p>
-<form class="mt-8 max-w-3xl space-y-4" data-script-url="https://script.google.com/macros/s/AKfycbzU0Hi34FEwDmmP-XgBPvqsYuYDkV6Ia2OCEAQ0VBVE9skf-TvAm2FxGzabTpHzDMvm/exec" id="kids-application-form">
-<!-- Child's Information -->
-<fieldset class="border border-white/10 rounded-lg p-4">
-<legend class="px-2 text-lg font-semibold" data-key="form_child_info_label">Angaben</legend>
-<div class="grid md:grid-cols-2 gap-4 mt-2">
-<input aria-label="Child's Full Name" class="w-full px-4 py-3 rounded bg-white/10 focus:ring-2 focus:ring-white/50 outline-none" data-key="form_child_name_placeholder" name="child_name" placeholder="" required="" type="text"/>
-<input aria-label="Child's AHV Number" class="w-full px-4 py-3 rounded bg-white/10 focus:ring-2 focus:ring-white/50 outline-none" data-key="form_child_ahv_placeholder" name="child_ahv" placeholder="" required="" type="text"/>
+<form class="mt-8 max-w-3xl space-y-4" data-script-url="https://script.google.com/macros/s/AKfycbzU0Hi34FEwDmmP-XgBPvqsYuYDkV6Ia2OCEAQ0VBVE9skf-TvAm2FxGzabTpHzDMvm/exec" id="turnen-application-form">
+<div class="grid md:grid-cols-2 gap-4">
+<input aria-label="Participant Full Name" class="w-full px-4 py-3 rounded bg-white/10 focus:ring-2 focus:ring-white/50 outline-none" data-key="form_participant_name_placeholder" name="participant_name" placeholder="" required="" type="text"/>
+<input aria-label="Participant Date of Birth" class="w-full px-4 py-3 rounded bg-white/10 focus:ring-2 focus:ring-white/50 outline-none" data-key="form_participant_dob_placeholder" name="participant_dob" placeholder="" required="" type="date"/>
+<input aria-label="Participant Email Address" class="w-full px-4 py-3 rounded bg-white/10 focus:ring-2 focus:ring-white/50 outline-none" data-key="form_participant_email_placeholder" name="participant_email" placeholder="" required="" type="email"/>
+<input aria-label="Participant Phone Number" class="w-full px-4 py-3 rounded bg-white/10 focus:ring-2 focus:ring-white/50 outline-none" data-key="form_participant_phone_placeholder" name="participant_phone" placeholder="" required="" type="tel"/>
 </div>
-<div class="mt-4">
-<input aria-label="Child's Date of Birth" class="w-full px-4 py-3 rounded bg-white/10 focus:ring-2 focus:ring-white/50 outline-none" data-key="form_child_dob_placeholder" name="child_dob" placeholder="" required="" type="date"/>
-</div>
-<div class="mt-4">
-<textarea aria-label="Allergies or important medical information" class="w-full px-4 py-3 rounded bg-white/10 focus:ring-2 focus:ring-white/50 outline-none" data-key="form_child_allergies_placeholder" name="child_allergies" placeholder="" rows="2"></textarea>
-</div>
-<div class="mt-4">
-<textarea aria-label="Why do you want to be part of the DTA Kids?" class="w-full px-4 py-3 rounded bg-white/10 focus:ring-2 focus:ring-white/50 outline-none" data-key="form_child_motivation_placeholder" name="child_motivation" placeholder="" required="" rows="3"></textarea>
-</div>
-</fieldset>
-<!-- Parent's Information -->
-<fieldset class="border border-white/10 rounded-lg p-4">
-<legend class="px-2 text-lg font-semibold" data-key="form_parent_info_label">Angaben zum Elternteil/Erziehungsberechtigten</legend>
-<div class="grid md:grid-cols-2 gap-4 mt-2">
-<input aria-label="Parent's Full Name" class="w-full px-4 py-3 rounded bg-white/10 focus:ring-2 focus:ring-white/50 outline-none" data-key="form_parent_name_placeholder" name="parent_name" placeholder="" required="" type="text"/>
-<input aria-label="Parent's Email Address" class="w-full px-4 py-3 rounded bg-white/10 focus:ring-2 focus:ring-white/50 outline-none" data-key="form_parent_email_placeholder" name="parent_email" placeholder="" required="" type="email"/>
-</div>
-<div class="mt-4">
-<input aria-label="Parent's Phone Number" class="w-full px-4 py-3 rounded bg-white/10 focus:ring-2 focus:ring-white/50 outline-none" data-key="form_parent_phone_placeholder" name="parent_phone" placeholder="" required="" type="tel"/>
-</div>
-<div class="mt-4">
-<textarea aria-label="Contact Address" class="w-full px-4 py-3 rounded bg-white/10 focus:ring-2 focus:ring-white/50 outline-none" data-key="form_parent_address_placeholder" name="parent_address" placeholder="" required="" rows="2"></textarea>
-</div>
-</fieldset>
 <button class="w-full px-5 py-4 rounded-lg bg-white/10 hover:bg-white/20 text-lg font-semibold" data-key="form_submit_button" type="submit">Bewerbung einreichen</button>
 <p class="text-sm text-center text-gray-400 h-4" id="form-status"></p>
 </form>
