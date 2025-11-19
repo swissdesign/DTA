@@ -21,20 +21,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
-    // --- Mobile Menu ---
-    const menuButton = document.getElementById('mobile-menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const mobileNavLinks = mobileMenu.querySelectorAll('.mobile-nav-link');
-
-    const toggleMenu = () => {
-        menuButton.classList.toggle('is-active');
-        mobileMenu.classList.toggle('translate-x-full');
-        document.body.classList.toggle('overflow-hidden');
-    };
-
-    menuButton.addEventListener('click', toggleMenu);
-    mobileNavLinks.forEach(link => link.addEventListener('click', toggleMenu));
-
     // --- Translations & Constants ---
     const MIN_AGE = 10;
     const MAX_AGE = 15;
