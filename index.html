@@ -221,12 +221,16 @@
 <div>
 <h3 class="text-2xl font-bold mb-2" data-key="sponsorship_partner_title">Contact us</h3>
 <form class="space-y-3" id="sponsorship-form">
-<input aria-label="Name" class="w-full px-4 py-3 rounded bg-white/10" data-key="form_name_placeholder" placeholder="" type="text"/>
-<input aria-label="Company" class="w-full px-4 py-3 rounded bg-white/10" data-key="form_company_placeholder" placeholder="" type="text"/>
-<input aria-label="Email Address" class="w-full px-4 py-3 rounded bg-white/10" data-key="form_email_placeholder" placeholder="" type="email"/>
-<textarea aria-label="Your Message" class="w-full px-4 py-3 rounded bg-white/10" data-key="form_message_placeholder" placeholder="" rows="4"></textarea>
-<button class="px-5 py-3 rounded bg-white/10 hover:bg-white/20 w-full" data-key="form_submit_button" type="submit">Send Inquiry</button>
-<p class="text-sm text-gray-400" id="form-status"></p>
+  <input name="contact_name" aria-label="Name" class="w-full px-4 py-3 rounded bg-white/10" data-key="form_name_placeholder" placeholder="" type="text" required/>
+  
+  <input name="contact_company" aria-label="Company" class="w-full px-4 py-3 rounded bg-white/10" data-key="form_company_placeholder" placeholder="" type="text"/>
+  
+  <input name="contact_email" aria-label="Email Address" class="w-full px-4 py-3 rounded bg-white/10" data-key="form_email_placeholder" placeholder="" type="email" required/>
+  
+  <textarea name="contact_message" aria-label="Your Message" class="w-full px-4 py-3 rounded bg-white/10" data-key="form_message_placeholder" placeholder="" rows="4" required></textarea>
+  
+  <button class="px-5 py-3 rounded bg-white/10 hover:bg-white/20 w-full" data-key="form_submit_button" type="submit">Send Inquiry</button>
+  <p class="text-sm text-gray-400" id="form-status"></p>
 </form>
 </div>
 </div>
