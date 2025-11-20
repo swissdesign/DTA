@@ -284,13 +284,14 @@ function initHeroVideoScrub() {
     const form = document.getElementById('sponsorship-form');
     if (!form) return;
 
+    // IMPORTANT: Ensure this SCRIPT_URL is correct for your deployed web app
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxOTQxqrInGeyZVcL9Zr_6oPYJ2PlAoY-zvERsUtVMUddlT-MddeRqF1bNT99mq5Eg8/exec';
 
     form.addEventListener('submit', (e) => {
         e.preventDefault();
         const statusEl = document.getElementById('form-status');
         const btn = form.querySelector('button[type="submit"]');
-        
+
         // 1. Basic UI Loading State
         const originalBtnText = btn.textContent;
         btn.textContent = 'Sending...';
@@ -298,15 +299,22 @@ function initHeroVideoScrub() {
         statusEl.textContent = '';
         statusEl.className = 'text-sm text-gray-400 mt-2';
 
-        // 2. Prepare Data
+        // 2. Prepare Data (Fix Applied Here)
         const formData = new FormData(form);
-        // Append current language so the backend knows which email language to send
+        // Append current language 
         formData.append('lang', window.dtaCurrentLang || 'de');
+        
+        // Convert FormData to URLSearchParams for robust GAS compatibility
+        const urlEncodedData = new URLSearchParams(formData);
 
         // 3. Send to Google Script
         fetch(SCRIPT_URL, {
             method: 'POST',
-            body: formData
+            // Set the Content-Type header explicitly for URLSearchParams
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: urlEncodedData // Use URL-encoded data as the body
         })
         .then(response => response.json())
         .then(data => {
