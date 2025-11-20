@@ -377,3 +377,35 @@ main {
   .hero-sticky { position: -webkit-sticky; }
 }
 #main-header { z-index: 50; }
+
+/* -----------------------------------------------
+ * ✦ Sponsorship Overrides
+ * --------------------------------------------- */
+
+.sponsoring-hero iframe {
+  filter: brightness(0.9) contrast(1.05) saturate(0.95);
+}
+
+.sponsoring-hero iframe::-webkit-media-controls {
+  display: none !important;
+}
+
+.sponsored-item h3 {
+    position: relative;
+    z-index: 20;
+}
+
+.sponsored-item:hover {
+    transform: none;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.sponsored-item {
+    cursor: default;
+    overflow: hidden;
+}
+
+.sponsored-overlay {
+    z-index: 10;
+    transition: all 0.3s ease-in-out;
+}
