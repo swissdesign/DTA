@@ -33,6 +33,7 @@
     "id": "travel_bag",
     "articleName": { "en": "Team Travel Bag", "de": "Team-Reisetasche" },
     "estimatedPrice": { "en": "CHF 140", "de": "CHF 140" },
-    "lifespan": { "en": "4 Seasons", "de": "4 Saisons" }
+    "lifespan": { "en": "4 Seasons", "de": "4 Saisons" },
+    "sponsoredBy": "Demo Sponsor AG"
   }
 ]

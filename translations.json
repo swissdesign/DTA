@@ -78,7 +78,9 @@
     "sponsoring_cta_body": "Choose the equipment that speaks to your brand and become part of our story. We provide tailored visibility and regular performance updates for every sponsor.",
     "sponsoring_cta_button": "Start the conversation",
     "sponsoring_grid_title": "Choose your impact",
-    "sponsoring_grid_subtitle": "Every tile represents a piece of essential team kit waiting for your support. Select the gear and we’ll take care of the rest."
+    "sponsoring_grid_subtitle": "Every tile represents a piece of essential team kit waiting for your support. Select the gear and we’ll take care of the rest.",
+    "taken_status": "TAKEN",
+    "sponsored_by_label": "Sponsored by"
   },
   "de": {
     "page_title": "Demo Team Andermatt",
@@ -160,6 +162,8 @@
     "sponsoring_cta_body": "Wähle die Ausrüstung, die zu deiner Marke passt, und werde Teil unserer Story. Wir bieten individuelle Sichtbarkeit und regelmässige Updates zu jeder Partnerschaft.",
     "sponsoring_cta_button": "Jetzt Kontakt aufnehmen",
     "sponsoring_grid_title": "Wähle deine Wirkung",
-    "sponsoring_grid_subtitle": "Jede Kachel steht für ein wichtiges Team-Equipment, das auf deine Unterstützung wartet. Entscheide dich für ein Teil – wir kümmern uns um den Rest."
+    "sponsoring_grid_subtitle": "Jede Kachel steht für ein wichtiges Team-Equipment, das auf deine Unterstützung wartet. Entscheide dich für ein Teil – wir kümmern uns um den Rest.",
+    "taken_status": "ÜBERNOMMEN",
+    "sponsored_by_label": "Gesponsert von"
   }
 }
