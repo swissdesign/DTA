@@ -115,7 +115,8 @@
         </button>
     </header>
 
-    <div class="fixed inset-y-0 right-0 w-72 bg-black/90 backdrop-blur-lg transform translate-x-full transition-transform md:hidden z-40" id="mobile-menu">
+    <div class="fixed inset-y-0 right-0 w-72 bg-black/90 backdrop-blur-lg transform translate-x-full transition-transform md:hidden z-40" id="mobile-menu" role="dialog" aria-modal="true" aria-labelledby="mobile-menu-heading">
+      <h2 id="mobile-menu-heading" class="sr-only">Main Menu</h2>
       <nav class="p-6 space-y-4">
         <a class="block text-lg mobile-nav-link orange-first-letter" data-key="nav_crew" href="../index.html#crew">Crew</a>
         <a class="block text-lg mobile-nav-link orange-first-letter" data-key="nav_journal" href="journal.html">The Journal</a>
