@@ -173,3 +173,8 @@ body.menu-open #menu-toggle path:nth-child(3) {
 /* Sensible max sizing */
 .partners-grid .partner-logo { max-width: 220px; max-height: 96px; }
 
+/* Fix: Override hamburger lines to be dark for the light background header (body.antialiased is a good selector anchor) */
+.antialiased header .hamburger-line {
+    background-color: #1a1a1a !important; /* Dark color for light header */
+}
+
