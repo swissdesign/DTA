@@ -175,6 +175,6 @@ body.menu-open #menu-toggle path:nth-child(3) {
 
 /* Fix: Override hamburger lines to be dark for the light background header (body.antialiased is a good selector anchor) */
 .antialiased header .hamburger-line {
-    background-color: #1a1a1a !important; /* Dark color for light header */
+    background-color: #1a1a1a; /* Dark color for light header */
 }
 
