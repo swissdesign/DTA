@@ -1,0 +1,372 @@
+{
+  "metadata": {
+    "organization": {
+      "name": "Schweizer Schneesportschule Andermatt",
+      "contact": {
+        "phone": "+41 58 200 69 94",
+        "email": "info@skischuleandermatt.ch",
+        "website": "https://www.skischuleandermatt.ch",
+        "locations": [
+          {
+            "name": "Main Office (Gleis 0)",
+            "address": "Bahnhofplatz 3, 6490 Andermatt (Underpass at Central Station)",
+            "functions": ["Booking", "Meeting Point Info", "Equipment Rental"]
+          },
+          {
+            "name": "Guest Services Reuss",
+            "address": "Bärengasse 1, Andermatt Reuss",
+            "functions": ["Info", "Booking"]
+          }
+        ]
+      }
+    },
+    "season_info": {
+      "season_label": "Winter 2025/26",
+      "currency": "CHF",
+      "high_season_periods": [
+        {
+          "label": "Christmas/New Year",
+          "start_date": "2025-12-20",
+          "end_date": "2026-01-04"
+        },
+        {
+          "label": "February Holidays",
+          "start_date": "2026-02-01",
+          "end_date": "2026-03-01"
+        }
+      ]
+    },
+    "policies": {
+      "ski_pass": "Ski passes are NOT included in lesson prices unless explicitly stated. Children aged 6+ require a valid pass (min. to Nätschen).",
+      "booking_deadline": "Online/Phone bookings recommended 24h in advance.",
+      "cancellation": "See terms at www.skischuleandermatt.ch/agb/"
+    }
+  },
+  "products": [
+    {
+      "id": "private_ski_telemark",
+      "name": "Privatunterricht Ski & Telemark",
+      "category": "private_lesson",
+      "activities": ["ski", "telemark"],
+      "target_audience": ["adults", "children", "beginners", "experts"],
+      "description": "Tailored private instruction for 1-2 persons. Flexible meeting points and customized learning pace.",
+      "meeting_point": "Valley Stations (Exclusive access lanes)",
+      "pricing_options": [
+        {
+          "id": "priv_ski_morning",
+          "label": "Half Day Morning (Vormittags)",
+          "duration": "2.5 hours",
+          "base_participants": 2,
+          "price_regular": 300.00,
+          "price_high_season": 330.00
+        },
+        {
+          "id": "priv_ski_afternoon",
+          "label": "Half Day Afternoon (Nachmittags)",
+          "duration": "2.5 hours",
+          "base_participants": 2,
+          "price_regular": 270.00,
+          "price_high_season": 297.00
+        },
+        {
+          "id": "priv_ski_fullday",
+          "label": "Full Day (Ganztags)",
+          "duration": "5 hours",
+          "base_participants": 2,
+          "price_regular": 480.00,
+          "price_high_season": 528.00
+        },
+        {
+          "id": "priv_ski_beginner_special",
+          "label": "Special Beginner Hour",
+          "duration": "1 hour",
+          "base_participants": 1,
+          "price_regular": 120.00,
+          "price_high_season": 132.00,
+          "notes": "For 1 person only, introductory lesson."
+        }
+      ],
+      "add_ons": [
+        {
+          "id": "extra_person_halfday",
+          "label": "Additional Person (Half Day)",
+          "price_regular": 20.00,
+          "price_high_season": 22.00
+        },
+        {
+          "id": "extra_person_fullday",
+          "label": "Additional Person (Full Day)",
+          "price_regular": 30.00,
+          "price_high_season": 33.00
+        },
+        {
+          "id": "extra_hour",
+          "label": "Additional Hour",
+          "price_regular": 90.00,
+          "price_high_season": 99.00
+        }
+      ]
+    },
+    {
+      "id": "private_snowboard",
+      "name": "Privatunterricht Snowboard",
+      "category": "private_lesson",
+      "activities": ["snowboard"],
+      "target_audience": ["adults", "children", "all_levels"],
+      "description": "Private snowboarding coaching for technique, park, or basics.",
+      "meeting_point": "Valley Stations",
+      "pricing_options": [
+        {
+          "id": "priv_sb_morning",
+          "label": "Half Day Morning",
+          "duration": "2.5 hours",
+          "base_participants": 2,
+          "price_regular": 300.00,
+          "price_high_season": 330.00
+        },
+        {
+          "id": "priv_sb_afternoon",
+          "label": "Half Day Afternoon",
+          "duration": "2.5 hours",
+          "base_participants": 2,
+          "price_regular": 270.00,
+          "price_high_season": 297.00
+        },
+        {
+          "id": "priv_sb_fullday",
+          "label": "Full Day",
+          "duration": "5 hours",
+          "base_participants": 2,
+          "price_regular": 480.00,
+          "price_high_season": 528.00
+        }
+      ],
+      "add_ons": [
+        {
+          "id": "extra_person_halfday",
+          "label": "Additional Person (Half Day)",
+          "price_regular": 20.00,
+          "price_high_season": 22.00
+        },
+        {
+          "id": "extra_person_fullday",
+          "label": "Additional Person (Full Day)",
+          "price_regular": 30.00,
+          "price_high_season": 33.00
+        },
+        {
+          "id": "extra_hour",
+          "label": "Additional Hour",
+          "price_regular": 90.00,
+          "price_high_season": 99.00
+        }
+      ]
+    },
+    {
+      "id": "kids_group_fullday",
+      "name": "Kinderunterricht mit Mittagsbetreuung (Full Day)",
+      "category": "group_lesson",
+      "activities": ["ski"],
+      "target_audience": ["children_4_to_16"],
+      "description": "All-day group lessons sorted by Swiss Snow League levels. Includes lunch supervision, food, and drinks.",
+      "schedule": {
+        "time": "10:00 - 15:00",
+        "start_days": ["Monday", "Tuesday", "Saturday", "Sunday"],
+        "meeting_point": "09:45 at Gütsch-Express Valley Station",
+        "special_events": "Ski race on Fridays"
+      },
+      "pricing_options": [
+        { "id": "kids_fd_1", "label": "1 Day", "price_regular": 165.00, "price_high_season": 165.00 },
+        { "id": "kids_fd_2", "label": "2 Days", "price_regular": 255.00, "price_high_season": 255.00 },
+        { "id": "kids_fd_3", "label": "3 Days", "price_regular": 345.00, "price_high_season": 345.00 },
+        { "id": "kids_fd_4", "label": "4 Days", "price_regular": 410.00, "price_high_season": 410.00 },
+        { "id": "kids_fd_5", "label": "5 Days", "price_regular": 450.00, "price_high_season": 450.00 }
+      ]
+    },
+    {
+      "id": "kids_group_halfday",
+      "name": "Halbtages-Kinderplausch (Half Day)",
+      "category": "group_lesson",
+      "activities": ["ski"],
+      "target_audience": ["young_children", "beginners", "kids_village_level"],
+      "description": "Morning lessons focusing on fun and basics. Levels: Kids Village & Blue Prince.",
+      "schedule": {
+        "time": "10:00 - 12:00",
+        "start_days": ["Monday", "Tuesday", "Saturday", "Sunday"],
+        "meeting_point": "09:45 at Gütsch-Express Valley Station",
+        "location": "Swiss Snow Kids Village (Nätschen)"
+      },
+      "pricing_options": [
+        { "id": "kids_hd_1", "label": "1 Half Day", "price_regular": 70.00, "price_high_season": 70.00 },
+        { "id": "kids_hd_2", "label": "2 Half Days", "price_regular": 135.00, "price_high_season": 135.00 },
+        { "id": "kids_hd_3", "label": "3 Half Days", "price_regular": 195.00, "price_high_season": 195.00 },
+        { "id": "kids_hd_4", "label": "4 Half Days", "price_regular": 250.00, "price_high_season": 250.00 },
+        { "id": "kids_hd_5", "label": "5 Half Days", "price_regular": 290.00, "price_high_season": 290.00 }
+      ],
+      "add_ons": [
+        {
+          "id": "lunch_supervision",
+          "label": "Mittagsbetreuung (until 13:00)",
+          "description": "Supervision + Lunch + Drink",
+          "price_regular": 25.00,
+          "price_high_season": 25.00,
+          "unit": "per_day"
+        }
+      ]
+    },
+    {
+      "id": "kids_snowboard_group",
+      "name": "Snowboard-Gruppenkurse",
+      "category": "group_lesson",
+      "activities": ["snowboard"],
+      "target_audience": ["children"],
+      "description": "Group snowboard lessons. Contest day on Fridays.",
+      "schedule": {
+        "time": "10:00 - 12:00",
+        "meeting_point": "12:45 at Swiss Snow Village, Nätschen (Note: Brochure text says course is 10-12, pickup 13-15, check exact logistics with office)",
+        "group_size": "3-6 children"
+      },
+      "pricing_options": [
+        { "id": "sb_kids_1", "label": "1 Half Day", "price_regular": 70.00, "price_high_season": 70.00 },
+        { "id": "sb_kids_5", "label": "5 Half Days", "price_regular": 290.00, "price_high_season": 290.00 }
+      ]
+    },
+    {
+      "id": "freeride_guiding",
+      "name": "Freeriding / Off-Piste",
+      "category": "private_guiding",
+      "activities": ["ski", "snowboard", "freeride"],
+      "target_audience": ["advanced", "expert", "adults"],
+      "description": "Guided off-piste tours, powder technique, and safety training.",
+      "pricing_options": [
+        {
+          "id": "freeride_half",
+          "label": "Half Day",
+          "duration": "2.5 hours",
+          "base_participants": 2,
+          "price_regular": 350.00,
+          "price_high_season": 385.00
+        },
+        {
+          "id": "freeride_full",
+          "label": "Full Day",
+          "duration": "5 hours",
+          "base_participants": 2,
+          "price_regular": 520.00,
+          "price_high_season": 560.00
+        }
+      ],
+      "add_ons": [
+        {
+          "id": "avalanche_gear",
+          "label": "Avalanche Equipment Rental",
+          "price_regular": 30.00,
+          "price_high_season": 30.00
+        }
+      ]
+    },
+    {
+      "id": "rookie_camp",
+      "name": "Rookie Camp 2026",
+      "category": "camp",
+      "activities": ["freeride"],
+      "target_audience": ["teens_12_to_16"],
+      "dates": {
+        "start": "2026-02-14",
+        "end": "2026-02-16"
+      },
+      "description": "3-day freeride camp. Technique, safety, avalanche awareness. Includes lunch.",
+      "schedule": {
+        "time": "09:00 - 15:00",
+        "meeting_point": "Imholz Sport Gemsstock"
+      },
+      "pricing_options": [
+        {
+          "id": "rookie_camp_fee",
+          "label": "Camp Fee (3 Days)",
+          "price_regular": 380.00,
+          "price_high_season": 380.00,
+          "includes": ["Instruction", "Lunch"],
+          "excludes": ["Ski Pass", "Equipment"]
+        }
+      ],
+      "add_ons": [
+        {
+          "id": "camp_equipment",
+          "label": "Equipment Rental (Imholz)",
+          "price_regular": 60.00,
+          "price_high_season": 60.00
+        }
+      ]
+    },
+    {
+      "id": "learn_to_ski_3_days",
+      "name": "Skifahren lernen in 3 Tagen (All Inclusive)",
+      "category": "package",
+      "activities": ["ski"],
+      "target_audience": ["beginners", "adults"],
+      "description": "Complete package to learn skiing on blue slopes in 3 days.",
+      "pricing_options": [
+        {
+          "id": "package_base",
+          "label": "1-2 Persons Package",
+          "price_regular": 1500.00,
+          "price_high_season": 1500.00,
+          "includes": ["3 Days Instruction (10-15h)", "Ski Ticket", "Equipment Rental"]
+        }
+      ],
+      "add_ons": [
+        {
+          "id": "package_extra_person",
+          "label": "Additional Person",
+          "price_regular": 450.00,
+          "price_high_season": 450.00
+        }
+      ]
+    },
+    {
+      "id": "season_pass_kids",
+      "name": "Saisonkarte Kindergruppen",
+      "category": "season_pass",
+      "activities": ["ski"],
+      "target_audience": ["children", "locals", "frequent_visitors"],
+      "description": "Unlimited group lessons for the entire season. Does not include ski pass or lunch.",
+      "pricing_options": [
+        {
+          "id": "season_pass_flat",
+          "label": "Season Pass",
+          "price_regular": 1900.00,
+          "price_high_season": 1900.00
+        }
+      ]
+    },
+    {
+      "id": "nordic_xc",
+      "name": "Langlauf / Cross Country",
+      "category": "private_lesson",
+      "activities": ["cross_country"],
+      "target_audience": ["adults"],
+      "description": "Classic or Skating technique lessons.",
+      "pricing_options": [
+        {
+          "id": "xc_private",
+          "label": "2 Hours Private",
+          "price_regular": 190.00,
+          "price_high_season": 210.00,
+          "base_participants": 1
+        },
+        {
+          "id": "xc_alpine_guetsch",
+          "label": "Alpine XC (Gütsch)",
+          "price_regular": 260.00,
+          "price_high_season": 260.00,
+          "includes": ["Ski Ticket for 1-2 persons"]
+        }
+      ],
+      "add_ons": [
+        { "id": "xc_rental", "label": "Equipment Rental", "price_regular": 50.00, "price_high_season": 50.00 },
+        { "id": "xc_trail_pass", "label": "Trail Pass", "price_regular": 14.00, "price_high_season": 14.00 }
+      ]
+    }
+  ]
+}
