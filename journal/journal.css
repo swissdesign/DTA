@@ -192,11 +192,7 @@ body.menu-open #menu-toggle path:nth-child(3) {
         grid-column: span 1;
     }
 
-    /* Apply varying column spans for visual dynamic effect.
-       Note: The JS that loads the cards (journal.js) must be updated to apply these classes
-       (e.g., .journal-grid-item.col-span-2) for a true dynamic effect.
-       Since we cannot modify the JS, we rely on the HTML structure here.
-    */
+    /* Apply varying column spans for a dynamic visual effect. */
     .journal-grid-item:nth-child(3n) { /* Apply wider span to every third item */
         grid-column: span 2; 
     }

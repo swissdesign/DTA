@@ -35,6 +35,7 @@ window.addEventListener('load', () => {
 document.addEventListener('DOMContentLoaded', async function() {
 
     let translations = {};
+    const translationsUrl = new URL('translations.json', window.location.origin);
     // Check localStorage for a saved language, otherwise default to 'de'.
     let currentLang = localStorage.getItem('dta_lang') || 'de';
 
@@ -62,7 +63,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     async function loadTranslations() {
         console.log("Fetching translations...");
         try {
-            const response = await fetch('translations.json');
+            const response = await fetch(translationsUrl);
             if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
             translations = await response.json();
             window.dtaTranslations = translations;
@@ -520,14 +521,21 @@ function initHeroVideoScrub() {
     }
 
     // --- EVENT LISTENERS for Language Buttons ---
-    document.getElementById('lang-de-desktop').addEventListener('click', () => setLanguage('de'));
-    document.getElementById('lang-en-desktop').addEventListener('click', () => setLanguage('en'));
-    document.getElementById('lang-de-mobile').addEventListener('click', () => setLanguage('de'));
-    document.getElementById('lang-en-mobile').addEventListener('click', () => setLanguage('en'));
-    
+    [
+        ['lang-de-desktop', 'de'],
+        ['lang-en-desktop', 'en'],
+        ['lang-de-mobile', 'de'],
+        ['lang-en-mobile', 'en'],
+    ].forEach(([id, lang]) => {
+        const btn = document.getElementById(id);
+        if (btn) btn.addEventListener('click', () => setLanguage(lang));
+    });
+
     // --- INITIALIZATION CALLS ---
-    initHeaderScroll();
-    initMobileMenu();
+    if (!window.dtaHeaderInitialized) {
+        initHeaderScroll();
+        initMobileMenu();
+    }
     initHeroVideoScrub();
     initCrewGrid();
     initJournalScroller();
