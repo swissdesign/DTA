@@ -44,12 +44,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalStatus = document.getElementById('sponsorship-modal-status');
   const modalCta = document.getElementById('sponsorship-modal-cta');
   const modalSecondary = document.getElementById('sponsorship-modal-secondary');
+  const modalClose = document.getElementById('sponsorship-modal-close');
   const modalCloseButtons = [
-    document.getElementById('sponsorship-modal-close'),
-    document.getElementById('sponsorship-modal-secondary')
+    modalClose,
+    modalSecondary
   ];
 
-  const modalReady = [modal, modalTitle, modalDescription, modalPrice, modalSponsor, modalStatus, modalCta, modalSecondary].every(Boolean);
+  const modalReady = [modal, modalTitle, modalDescription, modalPrice, modalSponsor, modalStatus, modalCta, modalSecondary, modalClose].every(Boolean);
 
   if (!modalReady) {
     console.error('Sponsorship modal elements not found. Disabling modal functionality.');
