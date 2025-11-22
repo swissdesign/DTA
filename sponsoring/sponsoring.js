@@ -23,7 +23,29 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   let items = [];
+  let partnerLogos = {};
   let currentLang = localStorage.getItem('dta_lang') || 'de';
+
+  const loadPartnerLogos = () =>
+    fetch('../assets/images/partners/partners.json')
+      .then(response => {
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return response.json();
+      })
+      .then(data => {
+        if (Array.isArray(data)) {
+          partnerLogos = data.reduce((acc, partner) => {
+            if (partner.id && partner.svg) {
+              acc[partner.id] = partner.svg;
+            }
+            return acc;
+          }, {});
+        }
+      })
+      .catch(error => {
+        console.error('Could not load partner logos:', error);
+        partnerLogos = {};
+      });
 
   const renderGrid = (lang) => {
     const dictionary = LABELS[lang] || LABELS.en;
@@ -46,16 +68,22 @@ document.addEventListener('DOMContentLoaded', () => {
       const priceValue = item.estimatedPrice?.[lang] || item.estimatedPrice?.en || '';
       const lifespanValue = item.lifespan?.[lang] || item.lifespan?.en || '';
       const isSponsored = !!item.sponsoredBy;
+      const sponsorSvg = isSponsored ? (partnerLogos[item.sponsoredBy] || '') : '';
       
       let contentHtml;
       let articleClass = isSponsored ? 'sponsored-item relative' : '';
 
       if (isSponsored) {
         contentHtml = `
-          <div class="absolute inset-0 bg-red-800/70 backdrop-blur-sm rounded-xl flex flex-col items-center justify-center p-6 text-center sponsored-overlay">
-            <p class="text-sm uppercase tracking-widest text-red-100">${takenStatus}</p>
-            <h4 class="text-xl font-bold mt-2 text-white">${sponsoredLabel}</h4>
-            <p class="text-lg font-semibold text-white">${item.sponsoredBy}</p>
+          <div class="absolute inset-0 bg-black/50 rounded-xl flex flex-col items-center justify-center p-6 text-center sponsored-overlay">
+            <div class="relative w-full h-full flex flex-col items-center justify-center p-4">
+                <span class="absolute inset-0 w-full h-full p-6 opacity-10 flex items-center justify-center pointer-events-none partner-logo-overlay">
+                  ${sponsorSvg}
+                </span>
+                <p class="text-sm uppercase tracking-widest text-red-300 relative z-10">${takenStatus}</p>
+                <h4 class="text-xl font-bold mt-2 text-white relative z-10">${sponsoredLabel}</h4>
+                <p class="text-lg font-semibold text-white relative z-10">${item.sponsoredBy}</p>
+            </div>
           </div>
         `;
       } else {
@@ -83,19 +111,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }).join('');
   };
 
-  fetch('sponsorship_items.json')
-    .then(response => {
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      return response.json();
-    })
-    .then(data => {
-      items = Array.isArray(data) ? data : [];
+  const loadItems = () =>
+    fetch('sponsorship_items.json')
+      .then(response => {
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return response.json();
+      })
+      .then(data => {
+        items = Array.isArray(data) ? data : [];
+      })
+      .catch(error => {
+        console.error('Could not load sponsorship items:', error);
+        const dictionary = LABELS[currentLang] || LABELS.en;
+        grid.innerHTML = `<p class="text-red-400">${dictionary.error}</p>`;
+        throw error;
+      });
+
+  Promise.all([loadPartnerLogos(), loadItems()])
+    .then(() => {
       renderGrid(currentLang);
     })
     .catch(error => {
-      console.error('Could not load sponsorship items:', error);
-      const dictionary = LABELS[currentLang] || LABELS.en;
-      grid.innerHTML = `<p class="text-red-400">${dictionary.error}</p>`;
+      console.error('Initialization error:', error);
     });
 
   document.addEventListener('dta:language-changed', (event) => {
