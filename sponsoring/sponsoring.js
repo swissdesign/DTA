@@ -224,18 +224,18 @@ document.addEventListener('DOMContentLoaded', () => {
     renderGrid(currentLang);
   });
 
-  function attachItemClickHandlers() {
-    const cards = grid.querySelectorAll('[data-item-id]');
-    cards.forEach(card => {
-      card.addEventListener('click', () => {
+  if (modalReady) {
+    // Use event delegation for sponsorship item clicks
+    grid.addEventListener('click', (event) => {
+      const card = event.target.closest('[data-item-id]');
+      if (card) {
         const itemId = card.getAttribute('data-item-id');
         const selectedItem = itemsById[itemId];
         showSponsorshipModal(selectedItem);
-      });
+      }
     });
-  }
 
-  if (modalReady) {
+    // Listeners for closing the modal
     modalCloseButtons.forEach(button => {
       button.addEventListener('click', hideSponsorshipModal);
     });
