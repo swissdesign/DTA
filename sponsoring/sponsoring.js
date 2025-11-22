@@ -196,7 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderGrid(currentLang);
   });
 
-  function attachItemClickHandlers() {
+  const attachItemClickHandlers = () => {
     const cards = grid.querySelectorAll('[data-item-id]');
     cards.forEach(card => {
       card.addEventListener('click', () => {
@@ -205,7 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
         showSponsorshipModal(selectedItem);
       });
     });
-  }
+  };
 
   modalCloseButtons.forEach(button => {
     if (button) button.addEventListener('click', hideSponsorshipModal);
