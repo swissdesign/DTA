@@ -96,12 +96,12 @@
   </header>
 
   <main class="flex-1 pb-24">
-    <section class="relative overflow-hidden -mx-6 md:mx-0 min-h-[70vh] flex items-center justify-center mb-12 sponsoring-hero">
-      <div class="absolute inset-0">
-        <div class="w-full h-full">
+    <section class="relative h-screen flex items-center justify-center text-center overflow-hidden sponsoring-hero -mx-6 md:mx-0 mb-12">
+      <div class="absolute inset-0 video-background" aria-hidden="true">
+        <div class="video-foreground">
           <iframe
-            class="w-full h-full object-cover"
-            src="https://www.youtube.com/embed/58mTlSM0R-g?autoplay=1&mute=1&playsinline=1&loop=1&playlist=58mTlSM0R-g"
+            class="video-iframe"
+            src="https://www.youtube.com/embed/58mTlSM0R-g?autoplay=1&mute=1&loop=1&playlist=58mTlSM0R-g&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&disablekb=1&playsinline=1"
             allow="autoplay; encrypted-media; picture-in-picture"
             allowfullscreen
             title="Demo Team Andermatt Sponsorship Video"
@@ -110,7 +110,7 @@
         <div class="absolute inset-0 bg-gradient-to-b from-pitch-black/85 via-pitch-black/45 to-pitch-black/90 md:from-pitch-black/70 md:via-pitch-black/25 md:to-pitch-black/75"></div>
       </div>
 
-      <div class="relative w-full">
+      <div class="relative w-full z-10">
         <div class="text-center w-full max-w-4xl mx-auto px-6 py-14 sm:py-16 md:py-20 lg:py-24">
           <div class="space-y-4 sm:space-y-5 md:space-y-6 text-white">
             <h1 class="text-4xl sm:text-5xl md:text-7xl font-black drop-shadow-xl uppercase tracking-wider" data-key="sponsoring_title">Sponsoring Opportunities</h1>
@@ -158,5 +158,48 @@
 
   <script src="../script.js"></script>
   <script src="sponsoring.js"></script>
+
+  <div class="modal fixed inset-0 bg-black/70 opacity-0 pointer-events-none transition flex items-center justify-center" id="sponsorship-modal">
+    <div class="modal-content relative bg-neutral-900 rounded-xl max-w-2xl w-full p-6 shadow-2xl" role="dialog" aria-modal="true" aria-labelledby="sponsorship-modal-title">
+      <button aria-label="Close modal" class="absolute top-3 right-3 text-gray-400 hover:text-white" id="sponsorship-modal-close" type="button">✕</button>
+      <div class="space-y-4" id="sponsorship-modal-body">
+        <div class="space-y-2">
+          <p class="text-sm uppercase tracking-[0.2em] text-orange-400" id="sponsorship-modal-status"></p>
+          <h3 class="text-3xl font-bold" id="sponsorship-modal-title"></h3>
+          <p class="text-gray-300" id="sponsorship-modal-description"></p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm bg-white/5 border border-white/10 rounded-lg p-4">
+          <div>
+            <p class="uppercase text-gray-400" data-key="sponsoring_modal_price_label">Estimated Price</p>
+            <p class="text-white font-semibold" id="sponsorship-modal-price"></p>
+          </div>
+          <div>
+            <p class="uppercase text-gray-400" data-key="sponsored_by_label">Sponsored by</p>
+            <p class="text-white font-semibold" id="sponsorship-modal-sponsor"></p>
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <a
+            id="sponsorship-modal-cta"
+            class="inline-flex items-center justify-center px-6 py-3 rounded-full bg-orange-500 text-white uppercase tracking-widest text-sm hover:bg-orange-400 transition-colors"
+            href="https://forms.gle/5S5oQgm5rS7TNfEM9"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-key="ctaAvailable"
+          >
+            Start the conversation
+          </a>
+          <button
+            id="sponsorship-modal-secondary"
+            class="px-6 py-3 rounded-full border border-white/20 text-white hover:border-white/40 transition-colors"
+            type="button"
+            data-key="sponsoring_modal_close_button"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
