@@ -99,17 +99,17 @@ function escapeHtml(str) {
 
 function sendParentEmail(data, age) {
   const isEn = data.lang === 'en';
-  const subject = isEn ? 'Your application for the DTA Kids Team' : 'Deine Anmeldung fuers DTA Kids Team';
+  const subject = isEn ? 'Your application for the jr.DTA Team' : 'Deine Anmeldung fuers jr.DTA Team';
   const greeting = isEn ? 'Hi' : 'Hallo';
   const bodyIntro = isEn
-    ? 'We have received your registration for the DTA Kids Team. Below you can review the details you submitted.'
-    : 'Wir haben deine Anmeldung für das DTA Kids Team erhalten. Unten findest du eine Zusammenfassung deiner Angaben.';
+    ? 'We have received your registration for the jr.DTA Team. Below you can review the details you submitted.'
+    : 'Wir haben deine Anmeldung für das jr.DTA Team erhalten. Unten findest du eine Zusammenfassung deiner Angaben.';
   const followUp = isEn
     ? 'We will contact you soon with more details about training times, gear, and next steps.'
     : 'Wir melden uns bald mit weiteren Details zu Trainingszeiten, Ausrüstung und den nächsten Schritten.';
   const footer = isEn
-    ? 'You are receiving this email because you submitted the DTA Kids application form.'
-    : 'Du erhältst diese E-Mail, weil du das DTA Kids Anmeldeformular ausgefüllt hast.';
+    ? 'You are receiving this email because you submitted the jr.DTA application form.'
+    : 'Du erhältst diese E-Mail, weil du das jr.DTA Anmeldeformular ausgefüllt hast.';
   const ctaLabel = isEn ? 'Visit Demo Team Andermatt' : 'Zur Demo Team Andermatt Website';
 
   const htmlBody = `

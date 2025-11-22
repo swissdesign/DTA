@@ -1,4 +1,4 @@
-// DTA Kids Program - Specific JS
+// jr.DTA Program - Specific JS
 document.addEventListener('DOMContentLoaded', async () => {
     // --- Preloader ---
     const preloader = document.getElementById('preloader');
@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         let icsContent = [
             'BEGIN:VCALENDAR',
             'VERSION:2.0',
-            'PRODID:-//DemoteamAndermatt//DTA Kids Calendar//EN',
+            'PRODID:-//DemoteamAndermatt//jr.DTA Calendar//EN',
         ];
 
         trainingDates.forEach(event => {
