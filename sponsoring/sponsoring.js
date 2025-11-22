@@ -52,7 +52,17 @@ document.addEventListener('DOMContentLoaded', () => {
     modalSecondary
   ];
 
-  const modalReady = [modal, modalTitle, modalDescription, modalPrice, modalSponsor, modalStatus, modalCta, modalSecondary, modalClose].every(Boolean);
+  const modalReady = [
+    modal,
+    modalTitle,
+    modalDescription,
+    modalPrice,
+    modalSponsor,
+    modalStatus,
+    modalCta,
+    modalSecondary,
+    modalClose
+  ].every(Boolean);
 
   if (!modalReady) {
     console.error('Sponsorship modal elements not found. Disabling modal functionality.');
