@@ -3,37 +3,61 @@
     "id": "team_jacket",
     "articleName": { "en": "Team Jacket", "de": "Teamjacke" },
     "estimatedPrice": { "en": "CHF 350", "de": "CHF 350" },
-    "lifespan": { "en": "2-3 Seasons", "de": "2-3 Saisons" }
+    "lifespan": { "en": "2-3 Seasons", "de": "2-3 Saisons" },
+    "fullDescription": {
+      "en": "Weatherproof shell tailored for long training blocks and competition travel. Includes team branding and sponsor placement.",
+      "de": "Wetterfeste Jacke für lange Trainingsblöcke und Wettkampfreisen mit Teambranding und Platz für Sponsorensichtbarkeit."
+    }
   },
   {
     "id": "race_suit",
     "articleName": { "en": "Race Suit", "de": "Rennanzug" },
     "estimatedPrice": { "en": "CHF 520", "de": "CHF 520" },
-    "lifespan": { "en": "2 Seasons", "de": "2 Saisons" }
+    "lifespan": { "en": "2 Seasons", "de": "2 Saisons" },
+    "fullDescription": {
+      "en": "High-performance suit for precision runs and on-snow demos. Built for speed, safety, and clear brand visibility.",
+      "de": "Hochleistungs-Rennanzug für präzise Läufe und Demos auf Schnee. Entwickelt für Tempo, Sicherheit und klare Sichtbarkeit Ihrer Marke."
+    }
   },
   {
     "id": "mid_layer",
     "articleName": { "en": "Insulated Midlayer", "de": "Isolations-Midlayer" },
     "estimatedPrice": { "en": "CHF 180", "de": "CHF 180" },
-    "lifespan": { "en": "3 Seasons", "de": "3 Saisons" }
+    "lifespan": { "en": "3 Seasons", "de": "3 Saisons" },
+    "fullDescription": {
+      "en": "Lightweight warmth for warmups, video reviews, and podium moments. Keeps athletes sharp between runs.",
+      "de": "Leichte Wärme für Warm-ups, Videoanalysen und Podiumsmomente. Hält die Athlet:innen zwischen den Läufen fokussiert."
+    }
   },
   {
     "id": "training_pants",
     "articleName": { "en": "Training Pants", "de": "Traininghose" },
     "estimatedPrice": { "en": "CHF 210", "de": "CHF 210" },
-    "lifespan": { "en": "2 Seasons", "de": "2 Saisons" }
+    "lifespan": { "en": "2 Seasons", "de": "2 Saisons" },
+    "fullDescription": {
+      "en": "Durable outerwear for drills, coach feedback, and lift rides. Reinforced panels stand up to edge contact.",
+      "de": "Robuste Hose für Trainings, Feedbackrunden und Liftfahrten. Verstärkte Zonen halten scharfen Kanten stand."
+    }
   },
   {
     "id": "warmup_parka",
     "articleName": { "en": "Warm-Up Parka", "de": "Warm-up Parka" },
     "estimatedPrice": { "en": "CHF 290", "de": "CHF 290" },
-    "lifespan": { "en": "3-4 Seasons", "de": "3-4 Saisons" }
+    "lifespan": { "en": "3-4 Seasons", "de": "3-4 Saisons" },
+    "fullDescription": {
+      "en": "Long cut parka that keeps athletes warm between heats and during storm cycles. Prime billboard for your brand.",
+      "de": "Langer Parka, der zwischen den Durchgängen und bei Schneesturm warmhält. Perfekte Werbefläche für Ihre Marke."
+    }
   },
   {
     "id": "travel_bag",
     "articleName": { "en": "Team Travel Bag", "de": "Team-Reisetasche" },
     "estimatedPrice": { "en": "CHF 140", "de": "CHF 140" },
     "lifespan": { "en": "4 Seasons", "de": "4 Saisons" },
+    "fullDescription": {
+      "en": "Heavy-duty gear hauler sized for international trips. Shows off sponsor branding every time the team is on the move.",
+      "de": "Strapazierfähige Reisetasche für internationale Einsätze. Trägt Ihr Sponsoring überall dort, wo das Team unterwegs ist."
+    },
     "sponsoredBy": "kowap"
   }
 ]
