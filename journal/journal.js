@@ -121,34 +121,58 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- Dynamic Journal Grid Loading (index page) ---
   const journalGrid = document.getElementById('journal-grid');
+  const cardTemplate = document.getElementById('journal-card-template');
+
+  const buildJournalCard = (entry, index) => {
+    if (!cardTemplate?.content) return null;
+
+    const fragment = cardTemplate.content.cloneNode(true);
+    const link = fragment.querySelector('a');
+    if (!link) return null;
+
+    link.href = entryHref(entry.file);
+    link.classList.remove('md:flex-row', 'md:flex-row-reverse');
+    link.classList.add(index % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row');
+
+    const image = fragment.querySelector('[data-el="image"]');
+    if (image) {
+      image.src = entryImageSrc(entry.image);
+      image.alt = entry.title || 'Journal image';
+      image.addEventListener('error', () => {
+        image.src = 'https://placehold.co/800x500/EEE/31343C?text=Image+Not+Found';
+      }, { once: true });
+    }
+
+    const dateEl = fragment.querySelector('[data-el="date"]');
+    if (dateEl) dateEl.textContent = entry.date || '';
+
+    const titleEl = fragment.querySelector('[data-el="title"]');
+    if (titleEl) titleEl.textContent = entry.title || '';
+
+    const captionEl = fragment.querySelector('[data-el="caption"]');
+    if (captionEl) captionEl.textContent = entry.caption || '';
+
+    return fragment;
+  };
+
   async function loadJournalEntries() {
     if (!journalGrid) return;
+    if (!cardTemplate) {
+      console.warn('[journal] card template missing');
+      return;
+    }
     try {
       const entries = await getManifest();
 
       journalGrid.innerHTML = '';
       entries.forEach((entry, index) => {
-        const card = document.createElement('div');
-        card.className = 'journal-grid-item';
-        card.style.animationDelay = `${index * 100}ms`;
-        card.innerHTML = `
-          <div class="journal-card">
-            <a href="${entryHref(entry.file)}" class="block">
-              <img src="${entryImageSrc(entry.image)}" alt="${entry.title}" class="journal-card-image"
-                   onerror="this.onerror=null;this.src='https://placehold.co/600x400/EEE/31343C?text=Image+Not+Found';">
-              <div class="journal-card-content">
-                <p class="journal-card-date">${entry.date}</p>
-                <h2 class="journal-card-title">${entry.title}</h2>
-                <p class="journal-card-caption">${entry.caption}</p>
-              </div>
-            </a>
-          </div>`;
-        journalGrid.appendChild(card);
+        const card = buildJournalCard(entry, index);
+        if (card) journalGrid.appendChild(card);
       });
     } catch (error) {
       console.error('Could not load journal entries:', error);
       journalGrid.innerHTML =
-        '<p class="text-center col-span-full text-gray-500">Could not load journal entries at this time.</p>';
+        '<p class="text-center text-gray-500">Could not load journal entries at this time.</p>';
     }
   }
   loadJournalEntries(); // only does work if #journal-grid exists
