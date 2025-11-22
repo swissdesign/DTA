@@ -9,6 +9,11 @@ document.addEventListener('DOMContentLoaded', () => {
       lifespan: 'Approximate Lifespan',
       taken: 'TAKEN',
       sponsored: 'Sponsored by',
+      available: 'Available to sponsor',
+      ctaAvailable: 'Start the conversation',
+      ctaSponsored: 'Contact us for alternatives',
+      sponsoring_modal_close_aria_label: 'Close modal',
+      sponsoring_modal_close_button: 'Close',
       empty: 'No sponsorship items available at the moment.',
       error: 'Unable to load sponsorship opportunities at this time.'
     },
@@ -17,14 +22,80 @@ document.addEventListener('DOMContentLoaded', () => {
       lifespan: 'Voraussichtliche Lebensdauer',
       taken: 'ÜBERNOMMEN',
       sponsored: 'Gesponsert von',
+      available: 'Verfügbar für Sponsoring',
+      ctaAvailable: 'Jetzt Kontakt aufnehmen',
+      ctaSponsored: 'Kontakt für Alternativen',
+      sponsoring_modal_close_aria_label: 'Modal schließen',
+      sponsoring_modal_close_button: 'Schließen',
       empty: 'Aktuell sind keine Sponsoring-Elemente verfügbar.',
       error: 'Sponsoring-Möglichkeiten konnten gerade nicht geladen werden.'
     }
   };
 
   let items = [];
+  let itemsById = {};
   let partnerLogos = {};
   let currentLang = localStorage.getItem('dta_lang') || 'de';
+  const contactFormUrl = document.querySelector('[data-key="sponsoring_cta_button"]')?.href || 'https://forms.gle/5S5oQgm5rS7TNfEM9';
+
+  const modal = document.getElementById('sponsorship-modal');
+  const modalTitle = document.getElementById('sponsorship-modal-title');
+  const modalDescription = document.getElementById('sponsorship-modal-description');
+  const modalPrice = document.getElementById('sponsorship-modal-price');
+  const modalSponsor = document.getElementById('sponsorship-modal-sponsor');
+  const modalStatus = document.getElementById('sponsorship-modal-status');
+  const modalCta = document.getElementById('sponsorship-modal-cta');
+  const modalSecondary = document.getElementById('sponsorship-modal-secondary');
+  const modalCloseButtons = [
+    document.getElementById('sponsorship-modal-close'),
+    document.getElementById('sponsorship-modal-secondary')
+  ];
+
+  const modalReady = [modal, modalTitle, modalDescription, modalPrice, modalSponsor, modalStatus, modalCta, modalSecondary].every(Boolean);
+
+  if (!modalReady) {
+    console.error('Sponsorship modal elements not found. Disabling modal functionality.');
+  }
+
+  const getDictionary = (lang) => LABELS[lang] || LABELS.en;
+
+  const hideSponsorshipModal = () => {
+    if (!modalReady) return;
+    modal.classList.remove('active');
+    modal.classList.add('opacity-0', 'pointer-events-none');
+  };
+
+  const showSponsorshipModal = (item) => {
+    if (!modalReady || !item) return;
+    const dictionary = getDictionary(currentLang);
+    const name = item.articleName?.[currentLang] || item.articleName?.en || '';
+    const priceValue = item.estimatedPrice?.[currentLang] || item.estimatedPrice?.en || '';
+    const description = item.fullDescription?.[currentLang] || item.fullDescription?.en || '';
+    const closeAriaLabel = dictionary.sponsoring_modal_close_aria_label || dictionary.sponsoring_modal_close_button;
+
+    modalTitle.textContent = name;
+    modalDescription.textContent = description;
+    modalPrice.textContent = priceValue;
+
+    if (item.sponsoredBy) {
+      modalSponsor.textContent = item.sponsoredBy;
+      modalStatus.textContent = dictionary.taken;
+      modalCta.textContent = dictionary.ctaSponsored;
+    } else {
+      modalSponsor.textContent = dictionary.available;
+      modalStatus.textContent = dictionary.available;
+      modalCta.textContent = dictionary.ctaAvailable;
+    }
+
+    modalCta.href = contactFormUrl;
+    modalSecondary.textContent = dictionary.sponsoring_modal_close_button;
+    modalCloseButtons.forEach(button => {
+      if (button) button.setAttribute('aria-label', closeAriaLabel);
+    });
+
+    modal.classList.add('active');
+    modal.classList.remove('opacity-0', 'pointer-events-none');
+  };
 
   const loadPartnerLogos = () =>
     fetch('../assets/images/partners/partners.json')
@@ -103,12 +174,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
       return `
-        <article class="bg-white/5 border border-white/10 rounded-xl p-6 backdrop-blur-sm transition-transform duration-300 hover:-translate-y-1 hover:border-white/30 ${articleClass}">
+        <article class="bg-white/5 border border-white/10 rounded-xl p-6 backdrop-blur-sm transition-transform duration-300 hover:-translate-y-1 hover:border-white/30 ${articleClass}" data-item-id="${item.id}">
           <h3 class="text-2xl font-semibold mb-4 orange-first-letter">${name}</h3>
           ${contentHtml}
         </article>
       `;
     }).join('');
+
+    attachItemClickHandlers();
   };
 
   const loadItems = () =>
@@ -119,6 +192,10 @@ document.addEventListener('DOMContentLoaded', () => {
       })
       .then(data => {
         items = Array.isArray(data) ? data : [];
+        itemsById = items.reduce((acc, item) => {
+          if (item.id) acc[item.id] = item;
+          return acc;
+        }, {});
       })
       .catch(error => {
         console.error('Could not load sponsorship items:', error);
@@ -139,4 +216,29 @@ document.addEventListener('DOMContentLoaded', () => {
     currentLang = event.detail?.lang || 'de';
     renderGrid(currentLang);
   });
+
+  function attachItemClickHandlers() {
+    const cards = grid.querySelectorAll('[data-item-id]');
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        const itemId = card.getAttribute('data-item-id');
+        const selectedItem = itemsById[itemId];
+        showSponsorshipModal(selectedItem);
+      });
+    });
+  }
+
+  if (modalReady) {
+    modalCloseButtons.forEach(button => {
+      if (button) button.addEventListener('click', hideSponsorshipModal);
+    });
+
+    modal.addEventListener('click', (event) => {
+      if (event.target === modal) hideSponsorshipModal();
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') hideSponsorshipModal();
+    });
+  }
 });
