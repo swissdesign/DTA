@@ -35,6 +35,7 @@ window.addEventListener('load', () => {
 document.addEventListener('DOMContentLoaded', async function() {
 
     let translations = {};
+    const translationsUrl = new URL('translations.json', window.location.origin);
     // Check localStorage for a saved language, otherwise default to 'de'.
     let currentLang = localStorage.getItem('dta_lang') || 'de';
 
@@ -57,12 +58,58 @@ document.addEventListener('DOMContentLoaded', async function() {
         // Example: { name: "Partner One", logo: "path/to/logo.svg", url: "#" }
     ];
 
+    function initLegacyHeader() {
+        if (window.dtaHeaderInitialized) return;
+
+        const headerElement = document.getElementById('main-header');
+        const menuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (headerElement) {
+            const updateHeaderOnScroll = () => {
+                headerElement.classList.toggle('header-scrolled', window.scrollY > 50);
+            };
+
+            updateHeaderOnScroll();
+            window.addEventListener('scroll', updateHeaderOnScroll);
+        }
+
+        if (menuButton && mobileMenu) {
+            const navLinks = mobileMenu.querySelectorAll('.mobile-nav-link');
+            const closeMenu = () => {
+                menuButton.classList.remove('is-active');
+                menuButton.setAttribute('aria-expanded', 'false');
+                mobileMenu.classList.add('translate-x-full');
+                document.body.classList.remove('overflow-hidden');
+            };
+
+            const toggleMenu = () => {
+                const isOpening = mobileMenu.classList.contains('translate-x-full');
+                menuButton.classList.toggle('is-active', isOpening);
+                menuButton.setAttribute('aria-expanded', String(isOpening));
+                mobileMenu.classList.toggle('translate-x-full');
+                document.body.classList.toggle('overflow-hidden', isOpening);
+            };
+
+            menuButton.setAttribute('aria-expanded', 'false');
+            menuButton.addEventListener('click', toggleMenu);
+            navLinks.forEach(link => link.addEventListener('click', closeMenu));
+            window.addEventListener('resize', () => {
+                if (window.innerWidth >= 768) closeMenu();
+            });
+        }
+
+        if (headerElement || (menuButton && mobileMenu)) {
+            window.dtaHeaderInitialized = true;
+        }
+    }
+
 
     // --- TRANSLATION & CONTENT ---
     async function loadTranslations() {
         console.log("Fetching translations...");
         try {
-            const response = await fetch('translations.json');
+            const response = await fetch(translationsUrl);
             if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
             translations = await response.json();
             window.dtaTranslations = translations;
@@ -114,60 +161,6 @@ document.addEventListener('DOMContentLoaded', async function() {
                 deBtn.classList.toggle('text-gray-400', currentLang !== 'de');
                 enBtn.classList.toggle('font-bold', currentLang === 'en');
                 enBtn.classList.toggle('text-gray-400', currentLang !== 'en');
-            }
-        });
-    }
-
-    // --- UI INITIALIZATION ---
-    function initHeaderScroll() {
-        const header = document.getElementById('main-header');
-        if (!header) return;
-        window.addEventListener('scroll', () => {
-            header.classList.toggle('header-scrolled', window.scrollY > 50);
-        });
-    }
-
-    let mobileMenuInitialized = false;
-
-    function initMobileMenu() {
-        if (mobileMenuInitialized) return;
-
-        const menuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        if (!menuButton || !mobileMenu) return;
-
-        mobileMenuInitialized = true;
-
-        const navLinks = mobileMenu.querySelectorAll('.mobile-nav-link');
-
-        const openMenu = () => {
-            menuButton.classList.add('is-active');
-            menuButton.setAttribute('aria-expanded', 'true');
-            mobileMenu.classList.remove('translate-x-full');
-            document.body.classList.add('overflow-hidden');
-        };
-
-        const closeMenu = () => {
-            menuButton.classList.remove('is-active');
-            menuButton.setAttribute('aria-expanded', 'false');
-            mobileMenu.classList.add('translate-x-full');
-            document.body.classList.remove('overflow-hidden');
-        };
-
-        const toggleMenu = () => {
-            if (mobileMenu.classList.contains('translate-x-full')) {
-                openMenu();
-            } else {
-                closeMenu();
-            }
-        };
-
-        menuButton.setAttribute('aria-expanded', 'false');
-        menuButton.addEventListener('click', toggleMenu);
-        navLinks.forEach(link => link.addEventListener('click', closeMenu));
-        window.addEventListener('resize', () => {
-            if (window.innerWidth >= 768) {
-                closeMenu();
             }
         });
     }
@@ -520,14 +513,18 @@ function initHeroVideoScrub() {
     }
 
     // --- EVENT LISTENERS for Language Buttons ---
-    document.getElementById('lang-de-desktop').addEventListener('click', () => setLanguage('de'));
-    document.getElementById('lang-en-desktop').addEventListener('click', () => setLanguage('en'));
-    document.getElementById('lang-de-mobile').addEventListener('click', () => setLanguage('de'));
-    document.getElementById('lang-en-mobile').addEventListener('click', () => setLanguage('en'));
-    
+    [
+        ['lang-de-desktop', 'de'],
+        ['lang-en-desktop', 'en'],
+        ['lang-de-mobile', 'de'],
+        ['lang-en-mobile', 'en'],
+    ].forEach(([id, lang]) => {
+        const btn = document.getElementById(id);
+        if (btn) btn.addEventListener('click', () => setLanguage(lang));
+    });
+
     // --- INITIALIZATION CALLS ---
-    initHeaderScroll();
-    initMobileMenu();
+    initLegacyHeader();
     initHeroVideoScrub();
     initCrewGrid();
     initJournalScroller();
