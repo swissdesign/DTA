@@ -128,27 +128,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
       journalGrid.innerHTML = '';
       entries.forEach((entry, index) => {
-        const card = document.createElement('div');
-        card.className = 'journal-grid-item';
-        card.style.animationDelay = `${index * 100}ms`;
-        card.innerHTML = `
-          <div class="journal-card">
-            <a href="${entryHref(entry.file)}" class="block">
-              <img src="${entryImageSrc(entry.image)}" alt="${entry.title}" class="journal-card-image"
-                   onerror="this.onerror=null;this.src='https://placehold.co/600x400/EEE/31343C?text=Image+Not+Found';">
-              <div class="journal-card-content">
-                <p class="journal-card-date">${entry.date}</p>
-                <h2 class="journal-card-title">${entry.title}</h2>
-                <p class="journal-card-caption">${entry.caption}</p>
-              </div>
-            </a>
+        const isReversed = index % 2 === 1;
+        const link = document.createElement('a');
+        link.href = entryHref(entry.file);
+        link.className = `group flex flex-col ${isReversed ? 'md:flex-row-reverse' : 'md:flex-row'} gap-6 md:gap-10 items-center`;
+        link.innerHTML = `
+          <div class="w-full md:w-1/2 overflow-hidden rounded-2xl shadow-lg bg-white">
+            <img src="${entryImageSrc(entry.image)}" alt="${entry.title}" class="w-full h-full object-cover aspect-[16/10] md:aspect-[4/3] group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null;this.src='https://placehold.co/800x500/EEE/31343C?text=Image+Not+Found';">
+          </div>
+          <div class="w-full md:w-1/2 flex flex-col gap-3 text-left">
+            <p class="text-xs uppercase tracking-[0.15em] text-gray-500">${entry.date}</p>
+            <h2 class="text-2xl md:text-3xl font-semibold text-gray-900">${entry.title}</h2>
+            <p class="text-gray-700 leading-relaxed">${entry.caption}</p>
+            <span class="inline-flex items-center gap-2 text-orange-500 font-medium">Read more
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </span>
           </div>`;
-        journalGrid.appendChild(card);
+        journalGrid.appendChild(link);
       });
     } catch (error) {
       console.error('Could not load journal entries:', error);
       journalGrid.innerHTML =
-        '<p class="text-center col-span-full text-gray-500">Could not load journal entries at this time.</p>';
+        '<p class="text-center text-gray-500">Could not load journal entries at this time.</p>';
     }
   }
   loadJournalEntries(); // only does work if #journal-grid exists

@@ -4,6 +4,8 @@
   const base = script?.dataset.base || '.';
   const targetId = script?.dataset.target || 'site-header';
   const target = document.getElementById(targetId);
+  const headerTheme = (script?.dataset.headerTheme || 'dark').toLowerCase();
+  const isLightTheme = headerTheme === 'light';
 
   if (!target) {
     console.warn(`[header] Target element "${targetId}" not found.`);
@@ -16,21 +18,47 @@
     return `${normalizedBase}/${cleanRelative}`.replace(/\/{2,}/g, '/');
   };
 
+  const themeClass = isLightTheme ? 'header-theme-light' : 'header-theme-dark';
   const textColorClass = script?.dataset.textColor || '';
+  const desktopLinkClass = isLightTheme
+    ? 'px-2 py-1 hover:text-gray-700 text-gray-900 orange-first-letter'
+    : 'px-2 py-1 hover:text-gray-300 text-white orange-first-letter';
+  const mobileLinkClass = isLightTheme
+    ? 'block text-lg mobile-nav-link orange-first-letter text-gray-900'
+    : 'block text-lg mobile-nav-link orange-first-letter text-white';
+  const mobileMenuBgClass = isLightTheme
+    ? 'bg-white/95 text-gray-900'
+    : 'bg-black/90';
+
+  const themeStyleId = 'shared-header-theme-styles';
+  if (!document.getElementById(themeStyleId)) {
+    const style = document.createElement('style');
+    style.id = themeStyleId;
+    style.textContent = `
+      .header-theme-light { color: #111111; }
+      .header-theme-light a { color: inherit; }
+      .header-theme-light .hamburger-line { background-color: #111111; }
+      .header-theme-light #mobile-menu { color: #111111; }
+      .header-theme-light.header-scrolled { background-color: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); }
+      .header-theme-dark { color: #f1f1f1; }
+      .header-theme-dark .hamburger-line { background-color: #f1f1f1; }
+    `;
+    document.head.appendChild(style);
+  }
 
   const headerMarkup = `
-  <header class="fixed top-0 left-0 w-full z-50 transition-all-300 bg-transparent ${textColorClass}" id="main-header">
+  <header class="fixed top-0 left-0 w-full z-50 transition-all-300 bg-transparent ${textColorClass} ${themeClass}" id="main-header">
     <div class="container mx-auto px-6 py-4 flex justify-between items-center">
       <a class="z-50 block" href="${path('index.html')}" aria-label="Back to homepage">
         <span id="header-logo" class="block w-[100px] h-[100px]" aria-hidden="true"></span>
       </a>
 
       <nav class="hidden md:flex items-center space-x-6">
-        <a class="px-2 py-1 hover:text-gray-600 orange-first-letter" data-key="nav_crew" href="${path('index.html#crew')}">Crew</a>
-        <a class="px-2 py-1 hover:text-gray-600 orange-first-letter" data-key="nav_journal" href="${path('journal/journal.html')}">The Journal</a>
-        <a class="px-2 py-1 hover:text-gray-600 orange-first-letter" data-key="nav_kids" href="${path('kids_program/Kids.html')}">jr.DTA</a>
-        <a class="px-2 py-1 hover:text-gray-600 orange-first-letter" data-key="nav_turnen" href="${path('turnen/turnen.html')}">Turnen</a>
-        <a class="px-2 py-1 hover:text-gray-600 orange-first-letter" data-key="nav_sponsorship" href="${path('sponsoring/sponsoring.html')}">Sponsoring</a>
+        <a class="${desktopLinkClass}" data-key="nav_crew" href="${path('index.html#crew')}">Crew</a>
+        <a class="${desktopLinkClass}" data-key="nav_journal" href="${path('journal/journal.html')}">The Journal</a>
+        <a class="${desktopLinkClass}" data-key="nav_kids" href="${path('kids_program/jrDTA.html')}">jr.DTA</a>
+        <a class="${desktopLinkClass}" data-key="nav_turnen" href="${path('turnen/turnen.html')}">Turnen</a>
+        <a class="${desktopLinkClass}" data-key="nav_sponsorship" href="${path('sponsoring/sponsoring.html')}">Sponsoring</a>
         <div class="flex items-center gap-3">
           <button class="uppercase text-sm" id="lang-de-desktop" type="button">DE</button>
           <span class="opacity-50">/</span>
@@ -44,15 +72,15 @@
         <span class="hamburger-line"></span>
       </button>
     </div>
-    <div class="fixed inset-y-0 right-0 w-72 bg-black/90 backdrop-blur-lg transform translate-x-full transition-transform md:hidden z-40" id="mobile-menu" role="dialog" aria-modal="true" aria-labelledby="mobile-menu-heading">
+    <div class="fixed inset-y-0 right-0 w-72 ${mobileMenuBgClass} backdrop-blur-lg transform translate-x-full transition-transform md:hidden z-40" id="mobile-menu" role="dialog" aria-modal="true" aria-labelledby="mobile-menu-heading">
       <h2 id="mobile-menu-heading" class="sr-only">Main Menu</h2>
       <nav class="p-6 space-y-4">
-        <a class="block text-lg mobile-nav-link orange-first-letter text-white" data-key="nav_crew" href="${path('index.html#crew')}">Crew</a>
-        <a class="block text-lg mobile-nav-link orange-first-letter text-white" data-key="nav_journal" href="${path('journal/journal.html')}">The Journal</a>
-        <a class="block text-lg mobile-nav-link orange-first-letter text-white" data-key="nav_kids" href="${path('kids_program/Kids.html')}">jr.DTA</a>
-        <a class="block text-lg mobile-nav-link orange-first-letter text-white" data-key="nav_turnen" href="${path('turnen/turnen.html')}">Turnen</a>
-        <a class="block text-lg mobile-nav-link orange-first-letter" data-key="nav_sponsorship" href="${path('sponsoring/sponsoring.html')}">Sponsoring</a>
-        <div class="pt-4 flex items-center gap-3 text-white">
+        <a class="${mobileLinkClass}" data-key="nav_crew" href="${path('index.html#crew')}">Crew</a>
+        <a class="${mobileLinkClass}" data-key="nav_journal" href="${path('journal/journal.html')}">The Journal</a>
+        <a class="${mobileLinkClass}" data-key="nav_kids" href="${path('kids_program/jrDTA.html')}">jr.DTA</a>
+        <a class="${mobileLinkClass}" data-key="nav_turnen" href="${path('turnen/turnen.html')}">Turnen</a>
+        <a class="${mobileLinkClass}" data-key="nav_sponsorship" href="${path('sponsoring/sponsoring.html')}">Sponsoring</a>
+        <div class="pt-4 flex items-center gap-3 ${isLightTheme ? 'text-gray-900' : 'text-white'}">
           <button class="uppercase text-sm" id="lang-de-mobile" type="button">DE</button>
           <span class="opacity-50">/</span>
           <button class="uppercase text-sm" id="lang-en-mobile" type="button">EN</button>
