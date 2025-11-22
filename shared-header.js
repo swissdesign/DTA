@@ -1,6 +1,6 @@
 // Shared header renderer for Demo Team Andermatt
 (function() {
-  const script = document.currentScript;
+  const script = document.querySelector('script[src$="shared-header.js"]');
   const base = script?.dataset.base || '.';
   const targetId = script?.dataset.target || 'site-header';
   const target = document.getElementById(targetId);
