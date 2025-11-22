@@ -81,7 +81,11 @@
           svgEl.removeAttribute('height');
         }
       })
-      .catch(err => console.warn(`[header] Failed to load logo from ${logoPath}:`, err));
+      .catch(err => {
+        console.warn(`[header] Failed to load logo from ${logoPath}:`, err);
+        logoContainer.textContent = 'DTA'; // Fallback text
+        logoContainer.classList.add('flex', 'items-center', 'justify-center', 'text-2xl', 'font-bold');
+      });
   }
 
   const headerElement = document.getElementById('main-header');
