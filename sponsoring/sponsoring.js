@@ -66,9 +66,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const showSponsorshipModal = (item) => {
     if (!modalReady || !item) return;
     const dictionary = getDictionary(currentLang);
-    const name = item.articleName?.[currentLang] || item.articleName?.en || '';
-    const priceValue = item.estimatedPrice?.[currentLang] || item.estimatedPrice?.en || '';
-    const description = item.fullDescription?.[currentLang] || item.fullDescription?.en || '';
+    const name = getLocalizedValue(item.articleName, currentLang);
+    const priceValue = getLocalizedValue(item.estimatedPrice, currentLang);
+    const description = getLocalizedValue(item.fullDescription, currentLang);
 
     modalTitle.textContent = name;
     modalDescription.textContent = description;
