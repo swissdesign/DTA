@@ -65,11 +65,12 @@ document.addEventListener('DOMContentLoaded', () => {
     modalPrice.textContent = priceValue;
 
     if (item.sponsoredBy) {
+      modalSponsor.parentElement.style.display = 'block';
       modalSponsor.textContent = item.sponsoredBy;
       modalStatus.textContent = dictionary.taken;
       modalCta.textContent = dictionary.ctaSponsored;
     } else {
-      modalSponsor.textContent = dictionary.available;
+      modalSponsor.parentElement.style.display = 'none';
       modalStatus.textContent = dictionary.available;
       modalCta.textContent = dictionary.ctaAvailable;
     }
